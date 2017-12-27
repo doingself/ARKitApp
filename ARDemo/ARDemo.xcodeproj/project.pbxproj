@@ -15,6 +15,9 @@
 		1940D21A1FF34B570018914F /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1940D2191FF34B570018914F /* TabViewController.swift */; };
 		1940D21C1FF34BC80018914F /* OneARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1940D21B1FF34BC80018914F /* OneARViewController.swift */; };
 		1940D2481FF369480018914F /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 1940D2471FF369480018914F /* art.scnassets */; };
+		1940D24A1FF378F60018914F /* TwoARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1940D2491FF378F60018914F /* TwoARViewController.swift */; };
+		197F5B911FF38EC800F693B7 /* ThreeARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197F5B901FF38EC800F693B7 /* ThreeARViewController.swift */; };
+		197F5B931FF39BDF00F693B7 /* FourARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197F5B921FF39BDF00F693B7 /* FourARViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +34,9 @@
 		1940D23F1FF367620018914F /* ARKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ARKit.framework; path = System/Library/Frameworks/ARKit.framework; sourceTree = SDKROOT; };
 		1940D2401FF367730018914F /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = System/Library/Frameworks/SceneKit.framework; sourceTree = SDKROOT; };
 		1940D2471FF369480018914F /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
+		1940D2491FF378F60018914F /* TwoARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoARViewController.swift; sourceTree = "<group>"; };
+		197F5B901FF38EC800F693B7 /* ThreeARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeARViewController.swift; sourceTree = "<group>"; };
+		197F5B921FF39BDF00F693B7 /* FourARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourARViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +72,9 @@
 			children = (
 				1940D2071FF34AF10018914F /* AppDelegate.swift */,
 				1940D2191FF34B570018914F /* TabViewController.swift */,
+				197F5B921FF39BDF00F693B7 /* FourARViewController.swift */,
+				197F5B901FF38EC800F693B7 /* ThreeARViewController.swift */,
+				1940D2491FF378F60018914F /* TwoARViewController.swift */,
 				1940D21B1FF34BC80018914F /* OneARViewController.swift */,
 				1940D2471FF369480018914F /* art.scnassets */,
 				1940D2091FF34AF10018914F /* ViewController.swift */,
@@ -160,9 +169,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				197F5B911FF38EC800F693B7 /* ThreeARViewController.swift in Sources */,
+				1940D24A1FF378F60018914F /* TwoARViewController.swift in Sources */,
 				1940D21C1FF34BC80018914F /* OneARViewController.swift in Sources */,
 				1940D21A1FF34B570018914F /* TabViewController.swift in Sources */,
 				1940D20A1FF34AF10018914F /* ViewController.swift in Sources */,
+				197F5B931FF39BDF00F693B7 /* FourARViewController.swift in Sources */,
 				1940D2081FF34AF10018914F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

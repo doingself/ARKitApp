@@ -13,7 +13,7 @@ class TabViewController: UIViewController {
     private var tabView: UITableView!
     private let cellIdentifices = "cell"
     private lazy var datas: [String] = {
-        let arr = ["点击屏幕添加飞机"]
+        let arr = ["点击屏幕添加飞机", "检测平面,添加飞机", "物体跟随相机移动", "类似地球公转"]
         return arr
     }()
     
@@ -74,6 +74,12 @@ extension TabViewController: UITableViewDelegate{
         case 0:
             v = OneARViewController()
         case 1:
+            v = TwoARViewController()
+        case 2:
+            v = ThreeARViewController()
+        case 3:
+            v = FourARViewController()
+        case 4:
             v = ViewController()
         default:
             break

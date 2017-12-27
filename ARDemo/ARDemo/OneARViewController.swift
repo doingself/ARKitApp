@@ -11,12 +11,11 @@ import ARKit
 
 class OneARViewController: UIViewController {
 
-    // ar 视图
+    // AR 场景视图
     private var arSCNView: ARSCNView!
-    
     private var arSession: ARSession!
     private var arConfiguration: ARWorldTrackingConfiguration!
-    private var node: SCNNode!
+    private var planeNode: SCNNode!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +35,7 @@ class OneARViewController: UIViewController {
         
         arSCNView = ARSCNView(frame: self.view.bounds)
         arSCNView.session = arSession
+        // 自动刷新灯光
         arSCNView.automaticallyUpdatesLighting = true
         
     }
@@ -57,6 +57,9 @@ class OneARViewController: UIViewController {
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard planeNode == nil else{
+            return
+        }
         
         // 使用场景加载scn文件 scn格式文件是一个基于3D建模的文件，使用3DMax软件可以创建
         let scene: SCNScene = SCNScene(named: "art.scnassets/ship.scn")!
@@ -70,5 +73,7 @@ class OneARViewController: UIViewController {
         
         // 将飞机节点添加到当前屏幕中
         self.arSCNView.scene.rootNode.addChildNode(node)
+        
+        planeNode = node
     }
 }
