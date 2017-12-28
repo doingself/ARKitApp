@@ -35,8 +35,10 @@ class OneARViewController: UIViewController {
         
         arSCNView = ARSCNView(frame: self.view.bounds)
         arSCNView.session = arSession
-        // 自动刷新灯光
+        // 自动刷新灯光。默认值为 true
         arSCNView.automaticallyUpdatesLighting = true
+        // 自动照亮没有光源的场景。默认值为 false
+        arSCNView.autoenablesDefaultLighting = true
         
     }
 
@@ -54,6 +56,8 @@ class OneARViewController: UIViewController {
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        
+        self.arSession.pause()
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -62,7 +66,7 @@ class OneARViewController: UIViewController {
         }
         
         // 使用场景加载scn文件 scn格式文件是一个基于3D建模的文件，使用3DMax软件可以创建
-        let scene: SCNScene = SCNScene(named: "art.scnassets/ship.scn")!
+        let scene: SCNScene = SCNScene(named: "art.scnassets/ship/ship.scn")!
         
         // 所有的场景有且只有一个根节点，其他所有节点都是根节点的子节点
         let node: SCNNode = scene.rootNode.childNodes[0]

@@ -38,6 +38,7 @@ class TwoARViewController: UIViewController {
         arSCNView.session = arSession
         // 自动刷新灯光
         arSCNView.automaticallyUpdatesLighting = true
+        arSCNView.autoenablesDefaultLighting = true
         
     }
     
@@ -55,6 +56,8 @@ class TwoARViewController: UIViewController {
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        
+        self.arSession.pause()
     }
     
     //override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
@@ -84,17 +87,21 @@ extension TwoARViewController: ARSCNViewDelegate{
 //        print("ARSCNViewDelegate 根据锚点获取节点")
 //        return nil
 //    }
-    // 添加节点时候调用（当开启平地捕捉模式之后，如果捕捉到平地，ARKit会自动添加一个平地节点）
+    // 添加节点时候调用
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         print("ARSCNViewDelegate 添加节点")
         
-        //添加一个3D平面模型，ARKit只有捕捉能力，锚点只是一个空间位置，要想更加清楚看到这个空间，我们需要给空间添加一个平地的3D模型来渲染他
-        
-        // 捕捉到的平地锚点
+        // 当 ARKit 检测到一个平面时，ARKit 会为该平面自动添加一个 ARPlaneAnchor，这个 ARPlaneAnchor 就表示了一个平面。
+        // ARPlaneAnchor.Alignment: 表示该平面的方向，目前只有 horizontal 一个可能值，表示这个平面是水平面。ARKit 目前无法检测出垂直平面。
+        // ARPlaneAnchor.center: 表示该平面的本地坐标系的中心点。检测到的平面都有一个三维坐标系，center 所代表的就是坐标系的原点
+        // ARPlaneAnchor.extent: 表示该平面的大小范围。
         if let planeAnchor = anchor as? ARPlaneAnchor{
+            
+            // 添加一个3D平面模型，ARKit只有捕捉能力，锚点只是一个空间位置，要想更加清楚看到这个空间，我们需要给空间添加一个平地的3D模型来渲染他
+            
             // 创建一个3D物体模型 系统捕捉到的平地是一个不规则大小的长方形
             // 参数分别是长宽高和圆角
-            let planeBox: SCNBox = SCNBox(width: CGFloat(planeAnchor.extent.x) * 0.3, height: 0, length: CGFloat(planeAnchor.extent.x) * 0.3, chamferRadius: 0)
+            let planeBox: SCNBox = SCNBox(width: CGFloat(planeAnchor.extent.x) * 0.3, height: 0.1, length: CGFloat(planeAnchor.extent.x) * 0.3, chamferRadius: 0)
             // 使用Material渲染3D模型 默认白色
             planeBox.firstMaterial?.diffuse.contents = UIColor.red
             
@@ -108,7 +115,7 @@ extension TwoARViewController: ARSCNViewDelegate{
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1, execute: {
                 
                 // 使用场景加载scn文件 scn格式文件是一个基于3D建模的文件，使用3DMax软件可以创建
-                let scene: SCNScene = SCNScene(named: "art.scnassets/ship.scn")!
+                let scene: SCNScene = SCNScene(named: "art.scnassets/ship/ship.scn")!
                 
                 // 所有的场景有且只有一个根节点，其他所有节点都是根节点的子节点
                 let shipNode: SCNNode = scene.rootNode.childNodes[0]
