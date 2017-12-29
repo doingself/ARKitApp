@@ -103,5 +103,12 @@ class OneARViewController: UIViewController {
         
         // 将飞机节点添加到当前屏幕中
         self.arSCNView.scene.rootNode.addChildNode(node)
+        
+        
+        let rotate = SCNAction.rotateBy(x: 0, y: 0, z: 85, duration: 1)
+        let moveSequence = SCNAction.sequence([rotate])
+        let moveLoop = SCNAction.repeatForever(moveSequence)
+        node.runAction(moveLoop, forKey: "ship")
+        
     }
 }
