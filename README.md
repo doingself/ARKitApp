@@ -71,7 +71,7 @@ scnView.frame = vc.view.bounds
 + ARFrame 中包含有世界追踪过程获取的所有信息
  + camera: 含有摄像机的位置、旋转以及拍照参数等信息
  + ahchors: 代表了追踪的点或面
-  + transform 是一个 4x4 的矩阵，矩阵中包含了 anchor 偏移、旋转和缩放信息。
+  + transform 是一个 4x4 的矩阵，矩阵中包含了 anchor 偏移、旋转和缩放信息等位置信息。(一个平面的坐标信息为 ARPlaneAnchor.transform.columns.3.x/y/z)
 + ARCamera 
  + transform: 表示摄像头相对于起始时的位置和旋转信息
 + ARSCNView 帮我们做了如下几件事情：

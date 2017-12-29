@@ -1,21 +1,15 @@
 //
-//  TwoARViewController.swift
+//  FiveARViewController.swift
 //  ARDemo
 //
-//  Created by 623971951 on 2017/12/27.
+//  Created by 623971951 on 2017/12/28.
 //  Copyright © 2017年 syc. All rights reserved.
 //
 
 import UIKit
-
 import ARKit
 
-import Photos
-
-// ReplayKit不需要太大电量损耗和性能损耗就可以产出高清的视频记录。ReplayKit支持使用A7芯片以上，操作系统为iOS 9或更高版本的设备。
-import ReplayKit
-
-class TwoARViewController: UIViewController {
+class FiveARViewController: UIViewController {
     
     // AR 场景视图
     private var arSCNView: ARSCNView!
@@ -26,7 +20,7 @@ class TwoARViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        self.navigationItem.title = "检查平面"
+        self.navigationItem.title = "检测平面,添加飞机 点击屏幕添加3D 模型  gesture"
         self.view.backgroundColor = UIColor.white
         
         
@@ -49,16 +43,42 @@ class TwoARViewController: UIViewController {
         
         // 显示 追踪 特征
         arSCNView.debugOptions = [ARSCNDebugOptions.showFeaturePoints, ARSCNDebugOptions.showWorldOrigin]
+        // 显示统计数据 fps
+        arSCNView.showsStatistics = true
         
+        // tap
         arSCNView.isUserInteractionEnabled = true
-        // tap gesture
-        arSCNView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.tapGesture(sender:))))
-        // long press gesture
-        let long = UILongPressGestureRecognizer(target: self, action: #selector(self.longPressGesture(sender:)))
-        long.minimumPressDuration = 0.5
-        long.allowableMovement = 100
-        long.delegate = self
-        arSCNView.addGestureRecognizer(long)
+        arSCNView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.viewTap(sender:))))
+    }
+    
+    @objc func viewTap(sender: UIGestureRecognizer){
+        
+        let tapPoint = sender.location(in: self.view)
+        // 获取屏幕空间坐标并传递给 ARSCNView 实例的 hitTest 方法
+        // 如果射线与某个平面几何体相交，就会返回该平面，以离摄像头的距离升序排序
+        let result: [ARHitTestResult] = arSCNView.hitTest(tapPoint, types: ARHitTestResult.ResultType.existingPlaneUsingExtent)
+        
+        // 如果命中多次，用距离最近的平面
+        if let hitResult: ARHitTestResult = result.first{
+            // physicsBody 会让 SceneKit 用物理引擎控制该几何体
+            let physicsBody = SCNPhysicsBody(type: SCNPhysicsBodyType.dynamic, shape: nil)
+            physicsBody.mass = 2
+            physicsBody.categoryBitMask = 1
+            
+            // 创建一个3D物体模型
+            let box = SCNBox(width: 0.2, height: 0.2, length: 0.2, chamferRadius: 0)
+            // 使用Material渲染3D模型 默认白色
+            box.firstMaterial?.diffuse.contents = UIColor.blue
+            
+            // 创建一个基于3D物体模型的节点
+            let node = SCNNode(geometry: box)
+            // physicsBody 会让 SceneKit 用物理引擎控制该几何体
+            node.physicsBody = physicsBody
+            // 把几何体插在用户点击的点再稍高一点的位置，以便使用物理引擎来掉落到平面上
+            node.position = SCNVector3(x: hitResult.worldTransform.columns.3.x, y: hitResult.worldTransform.columns.3.y + 0.5, z: hitResult.worldTransform.columns.3.z)
+            
+            arSCNView.scene.rootNode.addChildNode(node)
+        }
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -81,30 +101,12 @@ class TwoARViewController: UIViewController {
     //override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
 }
 
-extension TwoARViewController: ARSessionDelegate{
-    // MARK: AR Session 代理
-    func session(_ session: ARSession, didUpdate frame: ARFrame) {
-        //print("ARSessionDelegate 相机移动 frame = \(frame)")
-    }
-    func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
-        print("ARSessionDelegate 添加锚点 anchors = \(anchors)")
-        
-    }
-    func session(_ session: ARSession, didUpdate anchors: [ARAnchor]) {
-        print("ARSessionDelegate 更新锚点 anchors = \(anchors)")
-        
-    }
-    func session(_ session: ARSession, didRemove anchors: [ARAnchor]) {
-        print("ARSessionDelegate 移除锚点 anchors = \(anchors)")
-    }
-}
-
-extension TwoARViewController: ARSCNViewDelegate{
+extension FiveARViewController: ARSCNViewDelegate{
     // MARK: AR SCNView 代理
-//    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
-//        print("ARSCNViewDelegate 根据锚点获取节点")
-//        return nil
-//    }
+    //    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
+    //        print("ARSCNViewDelegate 根据锚点获取节点")
+    //        return nil
+    //    }
     // 添加节点时候调用
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         print("ARSCNViewDelegate 添加节点")
@@ -115,18 +117,18 @@ extension TwoARViewController: ARSCNViewDelegate{
         // ARPlaneAnchor.extent: 表示该平面的大小范围。
         if let planeAnchor = anchor as? ARPlaneAnchor{
             
-            let plane = SCNPlane(width: CGFloat(planeAnchor.extent.x), height: CGFloat(planeAnchor.extent.z))
-            let img = UIImage(named: "grass.jpg")
-            let material = SCNMaterial()
-            material.diffuse.contents = img
-            material.isDoubleSided = true
-            plane.materials = [material]
+            // 添加一个3D平面模型，ARKit只有捕捉能力，锚点只是一个空间位置，要想更加清楚看到这个空间，我们需要给空间添加一个平地的3D模型来渲染他
+            
+            // 创建一个3D物体模型 系统捕捉到的平地是一个不规则大小的长方形
+            // 参数分别是长宽高和圆角
+            let planeBox: SCNBox = SCNBox(width: CGFloat(planeAnchor.extent.x) * 1, height: 0.01, length: CGFloat(planeAnchor.extent.x) * 1, chamferRadius: 0)
+            // 使用Material渲染3D模型 默认白色
+            planeBox.firstMaterial?.diffuse.contents = UIColor.red
             
             // 创建一个基于3D物体模型的节点
-            let planeNode: SCNNode = SCNNode(geometry: plane)
+            let planeNode: SCNNode = SCNNode(geometry: planeBox)
             // 设置节点的位置为捕捉到的平地的锚点的中心位置  SceneKit框架中节点的位置position是一个基于3D坐标系的矢量坐标SCNVector3Make
             planeNode.position = SCNVector3(planeAnchor.center.x, 0, planeAnchor.center.z)
-            planeNode.transform = SCNMatrix4MakeRotation(-Float.pi/2, 1, 0, 0)
             node.addChildNode(planeNode)
             
             // 当捕捉到平地时，1s之后开始在平地上添加一个3D模型
@@ -159,75 +161,21 @@ extension TwoARViewController: ARSCNViewDelegate{
     }
 }
 
-extension TwoARViewController: UIGestureRecognizerDelegate{
-    // MARK: gesture 代理
-    
-    
-    // MARK: gesture 事件
-    @objc func tapGesture(sender: Any?){
-        let block = {
-            // 保存截图到相册
-            UIImageWriteToSavedPhotosAlbum(self.arSCNView.snapshot(), nil, nil, nil)
-            DispatchQueue.main.async(execute: {
-                let v = UIView(frame: self.arSCNView.bounds)
-                v.backgroundColor = UIColor.white
-                self.arSCNView.addSubview(v)
-                UIView.animate(withDuration: 0.25, animations: {
-                    v.alpha = 0.0
-                }, completion: { (suc) in
-                    v.removeFromSuperview()
-                })
-            })
-        }
-        switch PHPhotoLibrary.authorizationStatus() {
-        case PHAuthorizationStatus.authorized:
-            block()
-        case PHAuthorizationStatus.notDetermined:
-            PHPhotoLibrary.requestAuthorization({ (status) in
-                if status == PHAuthorizationStatus.authorized{
-                    block()
-                }
-            })
-        default:
-            break
-        }
+extension FiveARViewController: ARSessionDelegate{
+    // MARK: AR Session 代理
+    func session(_ session: ARSession, didUpdate frame: ARFrame) {
+        //print("ARSessionDelegate 相机移动 frame = \(frame)")
     }
-    @objc func longPressGesture(sender: UIGestureRecognizer){
-        if sender.state == UIGestureRecognizerState.began{
-            if RPScreenRecorder.shared().isAvailable{
-                // 是否开启设备的麦克风
-                RPScreenRecorder.shared().isMicrophoneEnabled = true
-                RPScreenRecorder.shared().startRecording(handler: { (err: Error?) in
-                    if let e = err {
-                        print("err = \(e)")
-                    }
-                })
-            }
-        }else if sender.state == UIGestureRecognizerState.ended{
-            if RPScreenRecorder.shared().isRecording {
-                RPScreenRecorder.shared().stopRecording(handler: { (previewVC: RPPreviewViewController?, err: Error?) in
-                    if let e = err {
-                        print("err = \(e)")
-                    }
-                    guard let preview = previewVC else{
-                        return
-                    }
-                    let needSave = true
-                    if needSave {
-                        // 回看
-                        DispatchQueue.main.async(execute: {
-                            self.present(preview, animated: true, completion: {
-                                
-                            })
-                        })
-                    }else{
-                        // 丢弃记录
-                        RPScreenRecorder.shared().discardRecording {
-                            // ......
-                        }
-                    }
-                })
-            }
-        }
+    func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
+        print("ARSessionDelegate 添加锚点 anchors = \(anchors)")
+        
+    }
+    func session(_ session: ARSession, didUpdate anchors: [ARAnchor]) {
+        print("ARSessionDelegate 更新锚点 anchors = \(anchors)")
+        
+    }
+    func session(_ session: ARSession, didRemove anchors: [ARAnchor]) {
+        print("ARSessionDelegate 移除锚点 anchors = \(anchors)")
     }
 }
+
