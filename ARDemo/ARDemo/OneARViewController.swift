@@ -63,52 +63,55 @@ class OneARViewController: UIViewController {
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard planeNode == nil else{
-            return
+        if planeNode == nil {
+            // 创建
+            addShip1()
+            addShip2()
+        }else{
+            // 旋转
+            SCNTransaction.begin()
+            SCNTransaction.animationDuration = 0.25
+            for node in planeNode.childNodes {
+                let rotation = SCNMatrix4MakeRotation(0.3, 0, 1, 0)
+                // 旋转
+                node.transform = SCNMatrix4Mult(node.transform, rotation)
+                //node.position // 移动
+            }
+            SCNTransaction.commit()
         }
-        
+    }
+    func addShip1(){
         // 使用场景加载scn文件 scn格式文件是一个基于3D建模的文件，使用3DMax软件可以创建
         let scene: SCNScene = SCNScene(named: "art.scnassets/ship/ship.scn")!
-        
         // 所有的场景有且只有一个根节点，其他所有节点都是根节点的子节点
         let node: SCNNode = scene.rootNode.childNodes[0]
         //设置节点的位置
         node.position = SCNVector3(x: -0.5, y: -0.5, z: -1)
         //缩放
         node.scale = SCNVector3(x: 0.5, y: 0.5, z: 0.5)
-        
         // 将飞机节点添加到当前屏幕中
         self.arSCNView.scene.rootNode.addChildNode(node)
-        
-        planeNode = node
-        
-        addShip2()
     }
     func addShip2(){
         // 使用场景加载scn文件 scn格式文件是一个基于3D建模的文件，使用3DMax软件可以创建
-        let scene: SCNScene = SCNScene(named: "art.scnassets/ship/ship.scn")!
-        
+        let scene: SCNScene = SCNScene(named: "art.scnassets/spitfire/spitfiremodelplane.scn")!
         // 所有的场景有且只有一个根节点，其他所有节点都是根节点的子节点
-        let node: SCNNode = scene.rootNode.childNodes[0]
+        let node: SCNNode = scene.rootNode
         //设置节点的位置
         node.position = SCNVector3(x: 0.5, y: 0.5, z: -1)
         //缩放
-        node.scale = SCNVector3(x: 0.5, y: 0.5, z: 0.5)
-        
-        // ARSCNView 有一个实例变量 pointOfView，这是一个 SCNNode，提供了虚拟摄像机的位置和方向
-        if let pointOfViewRatation = arSCNView.pointOfView?.rotation {
-            //物体绕 y 轴旋转（水平面上）与虚拟摄像机相同的角度即可：
-            node.rotation = SCNVector4(x: 0, y: pointOfViewRatation.y, z: 0, w: pointOfViewRatation.w)
-        }
-        
+        node.scale = SCNVector3(x: 0.2, y: 0.2, z: 0.2)
         // 将飞机节点添加到当前屏幕中
         self.arSCNView.scene.rootNode.addChildNode(node)
         
+        // 螺旋桨 动画
+        if let engineNode = node.childNode(withName: "engine", recursively: false){
+            let rotate = SCNAction.rotateBy(x: 0, y: 0, z: 85, duration: 0.5)
+            let moveSequence = SCNAction.sequence([rotate])
+            let moveLoop = SCNAction.repeatForever(moveSequence)
+            engineNode.runAction(moveLoop, forKey: "engine")
+        }
         
-        let rotate = SCNAction.rotateBy(x: 0, y: 0, z: 85, duration: 1)
-        let moveSequence = SCNAction.sequence([rotate])
-        let moveLoop = SCNAction.repeatForever(moveSequence)
-        node.runAction(moveLoop, forKey: "ship")
-        
+        planeNode = node
     }
 }
