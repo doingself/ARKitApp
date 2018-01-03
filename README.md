@@ -82,7 +82,40 @@ scnView.frame = vc.view.bounds
 	+ 不断更新 SceneKit 中的相机位置和角度。
 	+ 将 SceneKit 中的坐标系结合到 AR world 的坐标系中，不断渲染 SceneKit 场景到真实世界的画面中。
 
+### Hit Test Result
 
++ ARHitTestResultTypeFeaturePoint 根据距离最近的特征点检测出来的连续表面。
++ ARHitTestResultTypeEstimatedHorizontalPlane 非精准方式计算出来与重力垂直的平面。
++ ARHitTestResultTypeExistingPlane 已经检测出来的平面，检测时忽略平面本身大小，把它看做一个无穷大的平面。
++ ARHitTestResultTypeExistingPlaneUsingExtent 已经检测出来的平面，检测时考虑平面本身的大小。
+
+### 模型
+
+SceneKit可直接加载展示的文件格式有.dae、.scn、和.obj
+
+从 [turbosquid](https://www.turbosquid.com/) 下载 obj 模型, 在 Xcode 编辑(修改图片颜色等), 导出 dae
+
+主要通过调整设置SCNNode这个场景图结构元素的Material类型的几何外表着色属性。需要调整的主要就两个地方，一个是lighting Model，另一个是SCNMaterialProperty类型的属性像diffuse、emission、normal等
+
++ diffuse 管理物体材料的照明扩散反应。
++ ambient 一个对象，管理环境照明材料的响应。
++ specular 管理物体材料的照明反射响应。
++ normal 一个对象，定义了表面的名义定位在每个点用于照明。
++ reflective 一个对象定义的表面上的每个点的反射色。
++ emission 一个对象定义所发出的每个点上的表面的颜色。
++ transparent 确定材料中的每个点的不透明物体。
++ multiply 一个对象，规定乘以材料中的像素在其他所有的阴影是完整的颜色值。
++ ambientOcclusion 一个对象，将影响材料的环境光颜色值乘以提供。
++ selfIllumination 一个对象，提供颜色值代表表面的全局光照。
++ metalness 一个对象，提供彩色值来确定金属材料的表面看起来如何。
++ roughness 一个对象，确定表面外观平整度提供了颜色值。
+
+lighting Model有五种样式，分别是：
++ SCNLightingModelPhong 明暗结合环境，扩散，和镜面反射特性，在高光使用Phong公式计算。
++ SCNLightingModelBlinn 明暗结合环境，扩散，和镜面反射特性，在高光使用Blinn-Phong公式计算。
++ SCNLightingModelLambert 明暗结合环境属性和扩散。
++ SCNLightingModelConstant 均匀的明暗只结合环境照明。
++ SCNLightingModelPhysicallyBased 基于物理的灯光和材质的现实抽象底纹。
 
 
 #### 参考
@@ -91,3 +124,4 @@ scnView.frame = vc.view.bounds
 + [坤小 ARKit 系列](http://blog.csdn.net/u013263917/article/details/72903174)
 + https://www.jianshu.com/p/7faa4a3af589
 + https://www.jianshu.com/p/16b11e50396c
++ 关于模型设置 https://www.jianshu.com/p/6a761a834ab9

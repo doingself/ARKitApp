@@ -13,7 +13,7 @@ class TabViewController: UIViewController {
     private var tabView: UITableView!
     private let cellIdentifices = "cell"
     private lazy var datas: [String] = {
-        let arr = ["点击屏幕添加飞机 touchesBegan", "检测平面,添加飞机 tap拍照, long录制", "物体跟随相机移动", "类似地球公转", "检测平面,添加飞机 点击屏幕添加3D 模型  gesture","手势 tap/pan 拖拽模型","手势拖拽/缩放"]
+        let arr = ["点击屏幕添加飞机 touchesBegan", "检测平面,添加飞机 tap拍照, long录制", "物体跟随相机移动", "类似地球公转", "检测平面,添加飞机 点击屏幕添加3D 模型  gesture","手势 tap/pan 拖拽模型 HitTestResult","手势 pan拖拽/pinch缩放 SCNBox ARCamera","手势 tap/pan/pinch"]
         return arr
     }()
     
@@ -85,6 +85,8 @@ extension TabViewController: UITableViewDelegate{
             v = SixARViewController()
         case 6:
             v = SevenARViewController()
+        case 7:
+            v = EightARViewController()
         default:
             break
         }
