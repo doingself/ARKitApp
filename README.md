@@ -31,6 +31,7 @@ ARKit虽然是iOS11新出的框架，但并不是所有的iOS11系统都可以�
 ## ARKit
 
 ARKit 本身并不提供创建虚拟世界的引擎，而是使用其他 3D/2D 引擎进行创建虚拟世界。iOS 系统上可使用的引擎主要有：
+
 + Apple 3D Framework - SceneKit.
 + Apple 2D Framework - SpriteKit.
 + Apple GPU-accelerated 3D graphics Engine - Metal.
@@ -69,17 +70,17 @@ scnView.frame = vc.view.bounds
 + ARWorldTrackingSessionConfiguration 提供 6DOF 追踪 (平移 * 3 + 旋转 * 3)。
  自由度(DOF,Degree Of Freedom)表示描述系统状态的独立参数的个数。
 + ARFrame 中包含有世界追踪过程获取的所有信息
- + camera: 含有摄像机的位置、旋转以及拍照参数等信息
- + ahchors: 代表了追踪的点或面
-  + transform 是一个 4x4 的矩阵，矩阵中包含了 anchor 偏移、旋转和缩放信息等位置信息。(一个平面的坐标信息为 ARPlaneAnchor.transform.columns.3.x/y/z)
+	+ camera: 含有摄像机的位置、旋转以及拍照参数等信息
+	+ ahchors: 代表了追踪的点或面
+ 		+ transform 是一个 4x4 的矩阵，矩阵中包含了 anchor 偏移、旋转和缩放信息等位置信息。(一个平面的坐标信息为 ARPlaneAnchor.transform.columns.3.x/y/z)
 + ARCamera 
- + transform: 表示摄像头相对于起始时的位置和旋转信息
+	+ transform: 表示摄像头相对于起始时的位置和旋转信息
 + ARSCNView 帮我们做了如下几件事情：
- + 将摄像机捕捉到的真实世界的视频作为背景。
- + 处理光照估计信息，不断更新画面的光照强度。
- + 将 SCNNode 与 ARAnchor 绑定，也就是说当添加一个 SCNNode 时，ARSCNView 会同时添加一个 ARAnchor 到 ARKit 中。
- + 不断更新 SceneKit 中的相机位置和角度。
- + 将 SceneKit 中的坐标系结合到 AR world 的坐标系中，不断渲染 SceneKit 场景到真实世界的画面中。
+	+ 将摄像机捕捉到的真实世界的视频作为背景。
+	+ 处理光照估计信息，不断更新画面的光照强度。
+	+ 将 SCNNode 与 ARAnchor 绑定，也就是说当添加一个 SCNNode 时，ARSCNView 会同时添加一个 ARAnchor 到 ARKit 中。
+	+ 不断更新 SceneKit 中的相机位置和角度。
+	+ 将 SceneKit 中的坐标系结合到 AR world 的坐标系中，不断渲染 SceneKit 场景到真实世界的画面中。
 
 
 
@@ -89,4 +90,4 @@ scnView.frame = vc.view.bounds
 + https://github.com/GeekLiB/AR-Source
 + [坤小 ARKit 系列](http://blog.csdn.net/u013263917/article/details/72903174)
 + https://www.jianshu.com/p/7faa4a3af589
-
++ https://www.jianshu.com/p/16b11e50396c

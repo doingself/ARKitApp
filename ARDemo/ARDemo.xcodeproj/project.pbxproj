@@ -19,6 +19,7 @@
 		1955765B1FF4CBD800655B88 /* FiveARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1955765A1FF4CBD800655B88 /* FiveARViewController.swift */; };
 		197F5B911FF38EC800F693B7 /* ThreeARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197F5B901FF38EC800F693B7 /* ThreeARViewController.swift */; };
 		197F5B931FF39BDF00F693B7 /* FourARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197F5B921FF39BDF00F693B7 /* FourARViewController.swift */; };
+		19B68B251FFC7A350027EDFC /* SevenARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B68B241FFC7A350027EDFC /* SevenARViewController.swift */; };
 		19CB6EB91FFB2FAC00CEF2F8 /* SixARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CB6EB81FFB2FAC00CEF2F8 /* SixARViewController.swift */; };
 		19F0662F1FF613CB00AB3750 /* grass.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 19F0662E1FF613CB00AB3750 /* grass.jpg */; };
 /* End PBXBuildFile section */
@@ -41,6 +42,7 @@
 		1955765A1FF4CBD800655B88 /* FiveARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveARViewController.swift; sourceTree = "<group>"; };
 		197F5B901FF38EC800F693B7 /* ThreeARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeARViewController.swift; sourceTree = "<group>"; };
 		197F5B921FF39BDF00F693B7 /* FourARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourARViewController.swift; sourceTree = "<group>"; };
+		19B68B241FFC7A350027EDFC /* SevenARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SevenARViewController.swift; sourceTree = "<group>"; };
 		19CB6EB81FFB2FAC00CEF2F8 /* SixARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SixARViewController.swift; sourceTree = "<group>"; };
 		19F0662E1FF613CB00AB3750 /* grass.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = grass.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -78,6 +80,7 @@
 			children = (
 				1940D2071FF34AF10018914F /* AppDelegate.swift */,
 				1940D2191FF34B570018914F /* TabViewController.swift */,
+				19B68B241FFC7A350027EDFC /* SevenARViewController.swift */,
 				19CB6EB81FFB2FAC00CEF2F8 /* SixARViewController.swift */,
 				1955765A1FF4CBD800655B88 /* FiveARViewController.swift */,
 				197F5B921FF39BDF00F693B7 /* FourARViewController.swift */,
@@ -188,6 +191,7 @@
 				197F5B931FF39BDF00F693B7 /* FourARViewController.swift in Sources */,
 				19CB6EB91FFB2FAC00CEF2F8 /* SixARViewController.swift in Sources */,
 				1940D2081FF34AF10018914F /* AppDelegate.swift in Sources */,
+				19B68B251FFC7A350027EDFC /* SevenARViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
