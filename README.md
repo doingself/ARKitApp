@@ -1,9 +1,17 @@
 # ARDemo
 
-+ 点击屏幕添加飞机 (touchesBegan)
-+ 检测平面, 添加飞机 (ARSCNViewDelegate)
-+ 飞机跟随相机移动 (ARSessionDelegate)
-+ 飞机绕相机旋转, 类似地球公转 (CABasicAnimation)
++ 点击屏幕添加飞机 touchesBegan
++ 检测平面,添加飞机 tap拍照, long录制
++ 物体跟随相机移动
++ 类似地球公转",          
++ 检测平面,添加飞机 点击屏幕添加3D 模型  gesture
++ 手势 tap/pan 拖拽模型 HitTestResult
++ 手势 pan拖拽/pinch缩放 SCNBox ARCamera
++ 手势 tap/pan/pinch
++ 摆放家具
+
+
+
 
 
 VR(虚拟现实) 是做梦, AR(增强现实) 是见鬼; VR是说谎, AR是吹牛.
@@ -67,22 +75,30 @@ scnView.frame = vc.view.bounds
 ### ARKit
 
 
++ ARSession 一个管理增强现实所需的设备摄像头和动作处理的共享的对象。从设备的动作感应硬件读取数据、控制设备内置摄像头和对捕捉到的摄像图像进行分析。任何一个用ARKit实现的AR场景都需要一个单独的ARSession对象。如果使用了ARSCNView或者ARSKView对象来创建了AR场景的话，一个ARSession实例已经包含在这个View之中了。如果通过别的渲染器来建立AR内容，就需要手动创建并维持一个ARSession对象。
++ ARSessionConfiguration 一个仅用来追踪设备方向的基础设置。所有的AR configuration都是用来建立现实世界和虚拟3D坐标空间的对应关系的。用三自由度（3DOF，也就是三个旋转坐标：roll（绕x轴）、pitch（绕y轴）和yaw（绕z轴））。
 + ARWorldTrackingSessionConfiguration 提供 6DOF 追踪 (平移 * 3 + 旋转 * 3)。
  自由度(DOF,Degree Of Freedom)表示描述系统状态的独立参数的个数。
-+ ARFrame 中包含有世界追踪过程获取的所有信息
-	+ camera: 含有摄像机的位置、旋转以及拍照参数等信息
-	+ ahchors: 代表了追踪的点或面
- 		+ transform 是一个 4x4 的矩阵，矩阵中包含了 anchor 偏移、旋转和缩放信息等位置信息。(一个平面的坐标信息为 ARPlaneAnchor.transform.columns.3.x/y/z)
-+ ARCamera 
++ ARAnchor 一个物体在3D空间的位置和方向
+ 	+ transform 是一个 4x4 的矩阵，矩阵中包含了 anchor 偏移、旋转和缩放信息等位置信息。(一个平面的坐标信息为 ARPlaneAnchor.transform.columns.3.x/y/z)
+	+ ARPlaneAnchor 继承自ARAnchor，是在AR session中监测到的现实平面的位置和方向。
++ ARHitTestResult 主要用于虚拟增强现实技术（AR技术）中现实世界与3D场景中虚拟物体的交互。 比如我们在相机中移动。拖拽3D虚拟物体
++ ARFrame AR相机的位置和方向以及追踪相机的时间，还可以捕捉相机的帧图片, ARFrame用于捕捉相机的移动，其他虚拟物体用ARAnchor
++ ARCamera 表示AR session中一个被捕获的视图帧相关的相机位置和视图特征的信息
 	+ transform: 表示摄像头相对于起始时的位置和旋转信息
-+ ARSCNView 帮我们做了如下几件事情：
-	+ 将摄像机捕捉到的真实世界的视频作为背景。
-	+ 处理光照估计信息，不断更新画面的光照强度。
-	+ 将 SCNNode 与 ARAnchor 绑定，也就是说当添加一个 SCNNode 时，ARSCNView 会同时添加一个 ARAnchor 到 ARKit 中。
-	+ 不断更新 SceneKit 中的相机位置和角度。
-	+ 将 SceneKit 中的坐标系结合到 AR world 的坐标系中，不断渲染 SceneKit 场景到真实世界的画面中。
++ ARLightEstimate——与被捕捉的视图帧相关的分析场景的灯光数据。
+
+
++ ARSceneView 一个用来展示增强相机视图和3D SceneKit内容的AR体验的页面。
+	1. 将摄像机捕捉到的真实世界的视频作为背景。
+	2. 处理光照估计信息，不断更新画面的光照强度。
+	3. 将 SCNNode 与 ARAnchor 绑定，也就是说当添加一个 SCNNode 时，ARSCNView 会同时添加一个 ARAnchor 到 ARKit 中。
+	4. 不断更新 SceneKit 中的相机位置和角度。
+	5. 将 SceneKit 中的坐标系结合到 AR world 的坐标系中，不断渲染 SceneKit 场景到真实世界的画面中。
 
 ### Hit Test Result
+
+ARHitTestResult 主要用于虚拟增强现实技术（AR技术）中现实世界与3D场景中虚拟物体的交互。 比如我们在相机中移动。拖拽3D虚拟物体
 
 + ARHitTestResultTypeFeaturePoint 根据距离最近的特征点检测出来的连续表面。
 + ARHitTestResultTypeEstimatedHorizontalPlane 非精准方式计算出来与重力垂直的平面。
@@ -122,6 +138,13 @@ lighting Model有五种样式，分别是：
 
 + https://github.com/GeekLiB/AR-Source
 + [坤小 ARKit 系列](http://blog.csdn.net/u013263917/article/details/72903174)
++ https://www.jianshu.com/p/176e355555fe
 + https://www.jianshu.com/p/7faa4a3af589
 + https://www.jianshu.com/p/16b11e50396c
 + 关于模型设置 https://www.jianshu.com/p/6a761a834ab9
+
+
+
+# TODO
+
+摆放家具, 旋转算法
