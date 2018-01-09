@@ -25,6 +25,8 @@ class TabViewController: UIViewController {
             
             "手势 tap/pan/pinch",
             "摆放家具",
+            
+            "基于 Apple Demo 实现摆放家具"
         ]
         return arr
     }()
@@ -101,6 +103,10 @@ extension TabViewController: UITableViewDelegate{
             v = EightARViewController()
         case 8:
             v = NineARViewController()
+        case 9:
+            // AudioinARKit = 茶杯 始终在平面中央, 检测到地面后固定
+            // InteractiveContentwithARKit = 变色龙 变色+拖拽
+            v = TenARViewController()
         default:
             break
         }

@@ -142,9 +142,9 @@ lighting Model有五种样式，分别是：
 + https://www.jianshu.com/p/7faa4a3af589
 + https://www.jianshu.com/p/16b11e50396c
 + 关于模型设置 https://www.jianshu.com/p/6a761a834ab9
-
++ 拖拽, 旋转 https://www.jianshu.com/p/16b11e50396c
 
 
 # TODO
 
-摆放家具, 旋转算法
++ ~~摆放家具, 旋转算法~~

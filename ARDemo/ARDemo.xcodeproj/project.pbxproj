@@ -23,6 +23,11 @@
 		19B68B251FFC7A350027EDFC /* SevenARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B68B241FFC7A350027EDFC /* SevenARViewController.swift */; };
 		19B68B271FFCCC360027EDFC /* EightARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B68B261FFCCC360027EDFC /* EightARViewController.swift */; };
 		19CB6EB91FFB2FAC00CEF2F8 /* SixARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CB6EB81FFB2FAC00CEF2F8 /* SixARViewController.swift */; };
+		19E1FD6120036BC700F6165F /* TenARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E1FD6020036BC700F6165F /* TenARViewController.swift */; };
+		19E1FD6620036C2600F6165F /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E1FD6320036C2500F6165F /* Utilities.swift */; };
+		19E1FD6720036C2600F6165F /* ARSCNView+HitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E1FD6420036C2600F6165F /* ARSCNView+HitTests.swift */; };
+		19E1FD6820036C2600F6165F /* PreviewNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E1FD6520036C2600F6165F /* PreviewNode.swift */; };
+		19E1FD6A20036C9800F6165F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E1FD6920036C9800F6165F /* Extensions.swift */; };
 		19F0662F1FF613CB00AB3750 /* grass.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 19F0662E1FF613CB00AB3750 /* grass.jpg */; };
 /* End PBXBuildFile section */
 
@@ -48,6 +53,11 @@
 		19B68B241FFC7A350027EDFC /* SevenARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SevenARViewController.swift; sourceTree = "<group>"; };
 		19B68B261FFCCC360027EDFC /* EightARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EightARViewController.swift; sourceTree = "<group>"; };
 		19CB6EB81FFB2FAC00CEF2F8 /* SixARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SixARViewController.swift; sourceTree = "<group>"; };
+		19E1FD6020036BC700F6165F /* TenARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenARViewController.swift; sourceTree = "<group>"; };
+		19E1FD6320036C2500F6165F /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		19E1FD6420036C2600F6165F /* ARSCNView+HitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ARSCNView+HitTests.swift"; sourceTree = "<group>"; };
+		19E1FD6520036C2600F6165F /* PreviewNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewNode.swift; sourceTree = "<group>"; };
+		19E1FD6920036C9800F6165F /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		19F0662E1FF613CB00AB3750 /* grass.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = grass.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -84,6 +94,7 @@
 			children = (
 				1940D2071FF34AF10018914F /* AppDelegate.swift */,
 				1940D2191FF34B570018914F /* TabViewController.swift */,
+				19E1FD6220036BD600F6165F /* AppleCupDemo */,
 				19483E4C1FFDBAB800ED72F9 /* NineARViewController.swift */,
 				19B68B261FFCCC360027EDFC /* EightARViewController.swift */,
 				19B68B241FFC7A350027EDFC /* SevenARViewController.swift */,
@@ -112,6 +123,18 @@
 				1940D23E1FF3675D0018914F /* UIKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		19E1FD6220036BD600F6165F /* AppleCupDemo */ = {
+			isa = PBXGroup;
+			children = (
+				19E1FD6420036C2600F6165F /* ARSCNView+HitTests.swift */,
+				19E1FD6520036C2600F6165F /* PreviewNode.swift */,
+				19E1FD6320036C2500F6165F /* Utilities.swift */,
+				19E1FD6920036C9800F6165F /* Extensions.swift */,
+				19E1FD6020036BC700F6165F /* TenARViewController.swift */,
+			);
+			path = AppleCupDemo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -189,6 +212,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				197F5B911FF38EC800F693B7 /* ThreeARViewController.swift in Sources */,
+				19E1FD6720036C2600F6165F /* ARSCNView+HitTests.swift in Sources */,
+				19E1FD6120036BC700F6165F /* TenARViewController.swift in Sources */,
+				19E1FD6620036C2600F6165F /* Utilities.swift in Sources */,
+				19E1FD6820036C2600F6165F /* PreviewNode.swift in Sources */,
 				1940D24A1FF378F60018914F /* TwoARViewController.swift in Sources */,
 				1940D21C1FF34BC80018914F /* OneARViewController.swift in Sources */,
 				1955765B1FF4CBD800655B88 /* FiveARViewController.swift in Sources */,
@@ -198,6 +225,7 @@
 				197F5B931FF39BDF00F693B7 /* FourARViewController.swift in Sources */,
 				19CB6EB91FFB2FAC00CEF2F8 /* SixARViewController.swift in Sources */,
 				19483E4D1FFDBAB800ED72F9 /* NineARViewController.swift in Sources */,
+				19E1FD6A20036C9800F6165F /* Extensions.swift in Sources */,
 				1940D2081FF34AF10018914F /* AppDelegate.swift in Sources */,
 				19B68B251FFC7A350027EDFC /* SevenARViewController.swift in Sources */,
 			);
