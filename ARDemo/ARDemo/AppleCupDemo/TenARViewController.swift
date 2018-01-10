@@ -87,12 +87,24 @@ class TenARViewController: UIViewController {
         screenCenter = CGPoint(x: size.width/2, y: size.height/2)
     }
     
-    func sessionRun(){
+    private func sessionRun(){
         let configure = ARWorldTrackingConfiguration()
         configure.planeDetection = .horizontal
         sceneView.session.run(configure, options: [])
     }
-    
+    private func refreshStyle(node: SCNNode, isSelect: Bool){
+        let material = SCNMaterial()
+        if isSelect {
+            material.diffuse.contents = UIColor.red
+        }else{
+            material.diffuse.contents = nil
+        }
+        node.geometry?.materials  = [material]
+        
+        for n in node.childNodes{
+            self.refreshStyle(node: n, isSelect: isSelect)
+        }
+    }
     @objc func panGesture(sender: UIGestureRecognizer){
         
         // 滑动的距离
@@ -102,9 +114,6 @@ class TenARViewController: UIViewController {
         
         let locationPoint = sender.location(in: sceneView)
         
-        if pan.state != .changed {
-            selectModel = false
-        }
         if pan.state == .began {
             // 点击到的 node
             let sceneHitTestResult = sceneView.hitTest(locationPoint, options: nil)
@@ -120,6 +129,14 @@ class TenARViewController: UIViewController {
         
         if selectModel {
             // 拖拽
+            if pan.state == .began{
+                refreshStyle(node: previewNode!, isSelect: true)
+            }else if pan.state != .changed{
+                // 拖拽 结束/失败/取消
+                selectModel = false
+                refreshStyle(node: previewNode!, isSelect: false)
+            }
+            
             let arHitTestResult = sceneView.hitTest(locationPoint, types: .existingPlane)
             if let hit = arHitTestResult.first{
                 // 检测到平面, 才可以拖拽
