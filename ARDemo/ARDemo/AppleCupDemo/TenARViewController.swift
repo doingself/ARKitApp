@@ -92,18 +92,42 @@ class TenARViewController: UIViewController {
         configure.planeDetection = .horizontal
         sceneView.session.run(configure, options: [])
     }
-    private func refreshStyle(node: SCNNode, isSelect: Bool){
-        let material = SCNMaterial()
-        if isSelect {
-            material.diffuse.contents = UIColor.red
-        }else{
-            material.diffuse.contents = nil
+    private lazy var geoMaterDiffContArr = [Any?]()
+    private func refreshStyle(node: SCNNode, isSelect: Bool, i: Int = 0) -> Int{
+        
+        var k = i
+        if let materials = node.geometry?.materials{
+            for j in 0 ..< materials.count {
+                let material = materials[j]
+                if isSelect{
+                    geoMaterDiffContArr.append(material.diffuse.contents)
+                    material.diffuse.contents = UIColor.red
+                }else{
+                    if let filePath = geoMaterDiffContArr[j+k] as? String{
+                        // FIXME: Failed loading : <C3DImage 0x1c02f2200 src:file:/../../...png [0.000000x0.000000]>
+//                        material.diffuse.contents = UIImage(named: filePath)
+//                        material.diffuse.contents = UIImage(named: "art.scnassets/" + filePath)
+//                        let fileName = (filePath as NSString).lastPathComponent //.replacingOccurrences(of: ".png", with: "")
+//                        material.diffuse.contents = UIImage(named: fileName)
+                        //
+                        material.diffuse.contents = UIImage(named: "grass.jpg")
+                    }else{
+                        material.diffuse.contents = geoMaterDiffContArr[j+k]
+                    }
+                    //material.diffuse.contents = geoMaterDiffContArr[j+k]
+                }
+            }
+            k += materials.count
+            if isSelect == false && k == geoMaterDiffContArr.count {
+                geoMaterDiffContArr.removeAll()
+            }
         }
-        node.geometry?.materials  = [material]
         
         for n in node.childNodes{
-            self.refreshStyle(node: n, isSelect: isSelect)
+            k = self.refreshStyle(node: n, isSelect: isSelect, i: k)
         }
+        
+        return k
     }
     @objc func panGesture(sender: UIGestureRecognizer){
         

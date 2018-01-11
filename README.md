@@ -149,3 +149,4 @@ lighting Model有五种样式，分别是：
 
 + ~~摆放家具, 旋转算法~~
 + ~~选中模型, 开始拖拽时改变模型样式, 结束拖拽恢复原始样式~~
++ 恢复模型 `node.geometry?.materials` `material.diffuse.contents` 提示 `loading : <C3DImage ...>`
