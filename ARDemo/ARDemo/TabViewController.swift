@@ -27,7 +27,8 @@ class TabViewController: UIViewController {
             "摆放家具",
             
             "基于 Apple Demo 实现摆放家具",
-            "基于 Apple Demo 实现摆放家具 + 复位/截图"
+            "基于 Apple Demo 实现摆放家具 + 复位/截图",
+            "基于 Apple Demo 实现家具摆放 + 复位/截图 + 摄像"
         ]
         return arr
     }()
@@ -113,6 +114,10 @@ extension TabViewController: UITableViewDelegate{
             // InteractiveContentwithARKit = 变色龙 变色+拖拽
             // 复位/截图
             v = ElevenARViewController()
+        case 11:
+            //"基于 Apple Demo 实现家具摆放 + 复位/截图 + 摄像"
+            v = TwelveARViewController()
+            
         default:
             break
         }

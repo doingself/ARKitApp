@@ -1,8 +1,8 @@
 //
-//  ElevenARViewController.swift
+//  TwelveARViewController.swift
 //  ARDemo
 //
-//  Created by 623971951 on 2018/1/11.
+//  Created by 623971951 on 2018/1/15.
 //  Copyright © 2018年 syc. All rights reserved.
 //
 
@@ -13,8 +13,7 @@ import Photos
 // ReplayKit不需要太大电量损耗和性能损耗就可以产出高清的视频记录。ReplayKit支持使用A7芯片以上，操作系统为iOS 9或更高版本的设备。
 import ReplayKit
 
-// 基于 ten 改进
-class ElevenARViewController: UIViewController {
+class TwelveARViewController: UIViewController {
     
     private var sceneView: ARSCNView!
     private var previewNode: PreviewNode?
@@ -28,20 +27,30 @@ class ElevenARViewController: UIViewController {
     private var selectModel = false
     // 拖拽
     private var pinchBeginNodeScaleX: Float = 0.0
+
+    // 是否正在录像
+    private var isRecord = false
+    private var recordBtn: UIButton!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        self.navigationItem.title = "基于 Apple Demo 实现家具摆放 + 复位/截图"
+        self.navigationItem.title = "基于 Apple Demo 实现家具摆放 + 复位/截图 + 摄像"
         self.view.backgroundColor = UIColor.white
         
         let save = UIBarButtonItem(title: "保存", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.saveBarBtnItemAction(sender:)))
         let reset = UIBarButtonItem(title: "复位", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.resetBarBtnItemAction(sender:)))
         swit = UISwitch()
         let switBtn = UIBarButtonItem(customView: swit)
-        self.navigationItem.rightBarButtonItems = [save,reset,switBtn]
+        // 录像
+        recordBtn = UIButton(type: UIButtonType.system)
+        recordBtn.setTitle("开始", for: UIControlState.normal)
+        recordBtn.setTitle("结束", for: UIControlState.selected)
+        recordBtn.addTarget(self, action: #selector(self.recordBtnAction(sender:)), for: UIControlEvents.touchUpInside)
+        let recordBarBtnItem = UIBarButtonItem(customView: recordBtn)
+        self.navigationItem.rightBarButtonItems = [save,reset,switBtn, recordBarBtnItem]
         
         // pan 拖拽
         let pan = UIPanGestureRecognizer(target: self, action: #selector(self.panGesture(sender:)))
@@ -106,7 +115,18 @@ class ElevenARViewController: UIViewController {
     }
     
     // MARK: action
-    
+    @objc func recordBtnAction(sender: Any?){
+        isRecord = !isRecord
+        recordBtn.isSelected = isRecord
+        
+        if isRecord{
+            // 开始录像
+            
+        }else{
+            // 结束录像, 保存
+            
+        }
+    }
     @objc func saveBarBtnItemAction(sender: Any?){
         let block = {
             // 保存截图到相册
@@ -143,10 +163,10 @@ class ElevenARViewController: UIViewController {
                 }else{
                     if let filePath = geoMaterDiffContArr[j+k] as? String{
                         // FIXME: Failed loading : <C3DImage 0x1c02f2200 src:file:/../../...png [0.000000x0.000000]>
-//                        material.diffuse.contents = UIImage(named: filePath)
-//                        material.diffuse.contents = UIImage(named: "art.scnassets/" + filePath)
-//                        let fileName = (filePath as NSString).lastPathComponent //.replacingOccurrences(of: ".png", with: "")
-//                        material.diffuse.contents = UIImage(named: fileName)
+                        //                        material.diffuse.contents = UIImage(named: filePath)
+                        //                        material.diffuse.contents = UIImage(named: "art.scnassets/" + filePath)
+                        //                        let fileName = (filePath as NSString).lastPathComponent //.replacingOccurrences(of: ".png", with: "")
+                        //                        material.diffuse.contents = UIImage(named: fileName)
                         
                         material.diffuse.contents = UIImage(named: "grass.jpg")
                     }else{
@@ -272,7 +292,7 @@ class ElevenARViewController: UIViewController {
     }
 }
 
-extension ElevenARViewController: ARSCNViewDelegate{
+extension TwelveARViewController: ARSCNViewDelegate{
     // MARK: SCN Scene Renderer Delegate 代理
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         guard hasPlaneOrGesture == false else { return }

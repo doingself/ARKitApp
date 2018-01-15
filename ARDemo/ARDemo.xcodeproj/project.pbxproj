@@ -18,6 +18,7 @@
 		1940D24A1FF378F60018914F /* TwoARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1940D2491FF378F60018914F /* TwoARViewController.swift */; };
 		19483E4D1FFDBAB800ED72F9 /* NineARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19483E4C1FFDBAB800ED72F9 /* NineARViewController.swift */; };
 		1955765B1FF4CBD800655B88 /* FiveARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1955765A1FF4CBD800655B88 /* FiveARViewController.swift */; };
+		196B0AC2200C860E00B144EF /* TwelveARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196B0AC1200C860E00B144EF /* TwelveARViewController.swift */; };
 		197F5B911FF38EC800F693B7 /* ThreeARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197F5B901FF38EC800F693B7 /* ThreeARViewController.swift */; };
 		197F5B931FF39BDF00F693B7 /* FourARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197F5B921FF39BDF00F693B7 /* FourARViewController.swift */; };
 		19B68B251FFC7A350027EDFC /* SevenARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B68B241FFC7A350027EDFC /* SevenARViewController.swift */; };
@@ -49,6 +50,7 @@
 		1940D2491FF378F60018914F /* TwoARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoARViewController.swift; sourceTree = "<group>"; };
 		19483E4C1FFDBAB800ED72F9 /* NineARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NineARViewController.swift; sourceTree = "<group>"; };
 		1955765A1FF4CBD800655B88 /* FiveARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveARViewController.swift; sourceTree = "<group>"; };
+		196B0AC1200C860E00B144EF /* TwelveARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwelveARViewController.swift; sourceTree = "<group>"; };
 		197F5B901FF38EC800F693B7 /* ThreeARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeARViewController.swift; sourceTree = "<group>"; };
 		197F5B921FF39BDF00F693B7 /* FourARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourARViewController.swift; sourceTree = "<group>"; };
 		19B68B241FFC7A350027EDFC /* SevenARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SevenARViewController.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 				19E1FD6920036C9800F6165F /* Extensions.swift */,
 				19E1FD6020036BC700F6165F /* TenARViewController.swift */,
 				19E65CAA200746DC00E7B4BC /* ElevenARViewController.swift */,
+				196B0AC1200C860E00B144EF /* TwelveARViewController.swift */,
 			);
 			path = AppleCupDemo;
 			sourceTree = "<group>";
@@ -226,6 +229,7 @@
 				1940D21A1FF34B570018914F /* TabViewController.swift in Sources */,
 				1940D20A1FF34AF10018914F /* ViewController.swift in Sources */,
 				19B68B271FFCCC360027EDFC /* EightARViewController.swift in Sources */,
+				196B0AC2200C860E00B144EF /* TwelveARViewController.swift in Sources */,
 				197F5B931FF39BDF00F693B7 /* FourARViewController.swift in Sources */,
 				19CB6EB91FFB2FAC00CEF2F8 /* SixARViewController.swift in Sources */,
 				19483E4D1FFDBAB800ED72F9 /* NineARViewController.swift in Sources */,
