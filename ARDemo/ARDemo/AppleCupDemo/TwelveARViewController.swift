@@ -28,9 +28,8 @@ class TwelveARViewController: UIViewController {
     // 拖拽
     private var pinchBeginNodeScaleX: Float = 0.0
 
-    // 是否正在录像
-    private var isRecord = false
-    private var recordBtn: UIButton!
+    // 录像
+    private var videoRecodeBtn: UIButton!
     
     
     override func viewDidLoad() {
@@ -45,11 +44,11 @@ class TwelveARViewController: UIViewController {
         swit = UISwitch()
         let switBtn = UIBarButtonItem(customView: swit)
         // 录像
-        recordBtn = UIButton(type: UIButtonType.system)
-        recordBtn.setTitle("开始", for: UIControlState.normal)
-        recordBtn.setTitle("结束", for: UIControlState.selected)
-        recordBtn.addTarget(self, action: #selector(self.recordBtnAction(sender:)), for: UIControlEvents.touchUpInside)
-        let recordBarBtnItem = UIBarButtonItem(customView: recordBtn)
+        videoRecodeBtn = UIButton(type: UIButtonType.system)
+        videoRecodeBtn.setTitle("开始", for: UIControlState.normal)
+        videoRecodeBtn.setTitle("结束", for: UIControlState.selected)
+        videoRecodeBtn.addTarget(self, action: #selector(self.recordBtnAction(sender:)), for: UIControlEvents.touchUpInside)
+        let recordBarBtnItem = UIBarButtonItem(customView: videoRecodeBtn)
         self.navigationItem.rightBarButtonItems = [save,reset,switBtn, recordBarBtnItem]
         
         // pan 拖拽
@@ -116,21 +115,72 @@ class TwelveARViewController: UIViewController {
     
     // MARK: action
     @objc func recordBtnAction(sender: Any?){
-        isRecord = !isRecord
-        recordBtn.isSelected = isRecord
         
-        if isRecord{
+        // 是否支持录像
+        guard RPScreenRecorder.shared().isAvailable else {
+            return
+        }
+        
+        videoRecodeBtn.isSelected = !videoRecodeBtn.isSelected
+        
+        if videoRecodeBtn.isSelected {
             // 开始录像
-            
+            if RPScreenRecorder.shared().isRecording == false{
+                let recorder = RPScreenRecorder.shared()
+                recorder.delegate = self
+                recorder.startRecording(handler: { (err: Error?) in
+                    if let e = err{
+                        print(" start err = \(e)")
+                    }
+                })
+            }
         }else{
             // 结束录像, 保存
-            
+            if RPScreenRecorder.shared().isRecording == true{
+                
+                RPScreenRecorder.shared().stopRecording(handler: { (previewVC: RPPreviewViewController?, err: Error?) in
+                    
+                    if let e = err{
+                        print(" start err = \(e)")
+                    }
+
+                    guard let preview = previewVC else {
+                        print("Preview controller is not available.")
+                        return
+                    }
+                    print("stop vc = \(previewVC!)")
+                    
+                    let alert = UIAlertController(title: "Recording Finished", message: "Would you like to edit or delete your recording?", preferredStyle: .alert)
+                    
+                    let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: { (action: UIAlertAction) in
+                        RPScreenRecorder.shared().discardRecording(handler: {
+                            print("RPScreenRecorder.shared().discardRecording")
+                        })
+                    })
+                    
+                    let editAction = UIAlertAction(title: "Edit", style: .default, handler: { (action: UIAlertAction) -> Void in
+                        preview.previewControllerDelegate = self
+                        /*
+                         2018-01-17 15:48:24.291547+0800 ARDemo[3122:1306086] *** Terminating app due to uncaught exception 'NSGenericException', reason: 'UIPopoverPresentationController (<UIPopoverPresentationController: 0x110694600>) should have a non-nil sourceView or barButtonItem set before the presentation occurs.'
+                         *** First throw call stack:
+                         (0x182a82364 0x181cc8528 0x18cbaafec 0x18c2b1c18 0x18c2af6dc 0x18c1d1b3c 0x18c1c4ef0 0x18bf5654c 0x182a29edc 0x182a27894 0x182a27e50 0x182947e58 0x1847f4f84 0x18bfc767c 0x100ef12dc 0x18246456c)
+                         libc++abi.dylib: terminating with uncaught exception of type NSException
+                         */
+                        self.present(preview, animated: true, completion: nil)
+                    })
+                    
+                    alert.addAction(editAction)
+                    alert.addAction(deleteAction)
+                    self.present(alert, animated: true, completion: nil)
+                })
+            }
         }
     }
     @objc func saveBarBtnItemAction(sender: Any?){
         let block = {
             // 保存截图到相册
-            UIImageWriteToSavedPhotosAlbum(self.sceneView.snapshot(), nil, nil, nil)
+            let img = self.sceneView.snapshot()
+            UIImageWriteToSavedPhotosAlbum(img, nil, nil, nil)
         }
         switch PHPhotoLibrary.authorizationStatus() {
         case PHAuthorizationStatus.authorized:
@@ -318,3 +368,22 @@ extension TwelveARViewController: ARSCNViewDelegate{
         sessionRun()
     }
 }
+extension TwelveARViewController: RPScreenRecorderDelegate{
+    // MARK: replay kit rp screen recorder delegate 代理
+    func screenRecorder(_ screenRecorder: RPScreenRecorder, didStopRecordingWith previewViewController: RPPreviewViewController?, error: Error?) {
+        print("screenRecorder did stop recording")
+    }
+}
+extension TwelveARViewController: RPPreviewViewControllerDelegate{
+    // MARK: replay kit rp preview view controller delegate 代理
+    func previewControllerDidFinish(_ previewController: RPPreviewViewController) {
+        print("previewControllerDidFinish")
+        previewController.dismiss(animated: true) {
+            print("previewControllerDidFinish dismiss blok")
+        }
+    }
+    func previewController(_ previewController: RPPreviewViewController, didFinishWithActivityTypes activityTypes: Set<String>) {
+        print("previewController didFinishWithActivityTypes")
+    }
+}
+
