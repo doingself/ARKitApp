@@ -26,6 +26,7 @@
 		1940D2481FF369480018914F /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 1940D2471FF369480018914F /* art.scnassets */; };
 		1940D24A1FF378F60018914F /* TwoARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1940D2491FF378F60018914F /* TwoARViewController.swift */; };
 		19483E4D1FFDBAB800ED72F9 /* NineARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19483E4C1FFDBAB800ED72F9 /* NineARViewController.swift */; };
+		194A10752011D8B900D83E8A /* Inceptionv3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 194A10742011D8B900D83E8A /* Inceptionv3.mlmodel */; };
 		1955765B1FF4CBD800655B88 /* FiveARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1955765A1FF4CBD800655B88 /* FiveARViewController.swift */; };
 		196B0AC2200C860E00B144EF /* TwelveARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196B0AC1200C860E00B144EF /* TwelveARViewController.swift */; };
 		197F5B911FF38EC800F693B7 /* ThreeARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197F5B901FF38EC800F693B7 /* ThreeARViewController.swift */; };
@@ -67,6 +68,7 @@
 		1940D2471FF369480018914F /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		1940D2491FF378F60018914F /* TwoARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoARViewController.swift; sourceTree = "<group>"; };
 		19483E4C1FFDBAB800ED72F9 /* NineARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NineARViewController.swift; sourceTree = "<group>"; };
+		194A10742011D8B900D83E8A /* Inceptionv3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Inceptionv3.mlmodel; sourceTree = "<group>"; };
 		1955765A1FF4CBD800655B88 /* FiveARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveARViewController.swift; sourceTree = "<group>"; };
 		196B0AC1200C860E00B144EF /* TwelveARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwelveARViewController.swift; sourceTree = "<group>"; };
 		197F5B901FF38EC800F693B7 /* ThreeARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeARViewController.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 			children = (
 				1903118D20109AEB0001C25D /* MLDemoViewController.swift */,
 				1903119020109FC60001C25D /* MobileNet.mlmodel */,
+				194A10742011D8B900D83E8A /* Inceptionv3.mlmodel */,
 			);
 			path = CoreML;
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 				19031186201073150001C25D /* LocationService.swift in Sources */,
 				1903119120109FC60001C25D /* MobileNet.mlmodel in Sources */,
 				19E65CAB200746DC00E7B4BC /* ElevenARViewController.swift in Sources */,
+				194A10752011D8B900D83E8A /* Inceptionv3.mlmodel in Sources */,
 				1940D21C1FF34BC80018914F /* OneARViewController.swift in Sources */,
 				1955765B1FF4CBD800655B88 /* FiveARViewController.swift in Sources */,
 				1940D21A1FF34B570018914F /* TabViewController.swift in Sources */,

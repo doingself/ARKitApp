@@ -156,6 +156,7 @@ ML是Machine Learning的简写，也就是机器学习的意思。Core ML其实�
 + CoreML https://www.jianshu.com/p/1c1d41d002f8
 + CoreML https://www.jianshu.com/p/872b3fc5c0b4
 + CoreML https://github.com/hanleyweng/CoreML-in-ARKit
++ CoreML https://github.com/hollance/MobileNet-CoreML
 
 
 # TODO

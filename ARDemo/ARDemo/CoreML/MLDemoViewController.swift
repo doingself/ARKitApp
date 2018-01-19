@@ -18,12 +18,7 @@ import SceneKit
 
 import ARKit
 
-/*
- 去苹果官方下载一个已经训练好的模型 下载地址 https://developer.apple.com/machine-learning/
- 下载完会得到一个 *.mlmodel 文件, 拖入工程
- */
 class MLDemoViewController: UIViewController {
-    
     
     // SCENE
     private var sceneView: ARSCNView!
@@ -39,7 +34,7 @@ class MLDemoViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        self.navigationItem.title = "core ml"
+        self.navigationItem.title = "Core ML + ARSCNView"
         self.view.backgroundColor = UIColor.white
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapGesture(sender:)))
@@ -57,10 +52,23 @@ class MLDemoViewController: UIViewController {
         sceneView.showsStatistics = true
         sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin, ARSCNDebugOptions.showFeaturePoints]
         
-        let mlmodel = MobileNet()
+        debugTextView = UITextView(frame: self.view.bounds)
+        debugTextView.frame.size.height = 200
+        debugTextView.isEditable = false
+        debugTextView.alpha = 0.5
+        self.view.addSubview(debugTextView)
+        
+        /*
+         去苹果官方下载一个已经训练好的模型 下载地址 https://developer.apple.com/machine-learning/
+         下载完会得到一个 *.mlmodel 文件, 拖入工程
+         */
+        //let mlmodel = MobileNet()
+        let mlmodel = Inceptionv3()
         let coremlmodel = try! VNCoreMLModel(for: mlmodel.model)
-        let coremlrequest = VNCoreMLRequest(model: coremlmodel, completionHandler: self.classificationCompleteHandler)
+        let coremlrequest = VNCoreMLRequest(model: coremlmodel, completionHandler: classificationCompleteHandler)
         coremlrequest.imageCropAndScaleOption = VNImageCropAndScaleOption.centerCrop
+        
+        visionRequests = [coremlrequest]
         
         loopCoreMLUpdate()
     }
@@ -182,15 +190,13 @@ class MLDemoViewController: UIViewController {
         DispatchQueue.main.async {
             // Print Classifications
             print(classifications)
-            print("--")
             
             // Display Debug Text on screen
-            var debugText:String = ""
-            debugText += classifications
+            let debugText:String = classifications
             self.debugTextView.text = debugText
             
             // Store the latest prediction
-            var objectName:String = "…"
+            var objectName:String = "......"
             objectName = classifications.components(separatedBy: "-")[0]
             objectName = objectName.components(separatedBy: ",")[0]
             self.latestPrediction = objectName
