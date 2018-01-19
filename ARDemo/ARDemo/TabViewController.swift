@@ -32,7 +32,8 @@ class TabViewController: UIViewController {
             
             "根据 location 移动模型",
             
-            "Core ML"
+            "Core ML + ARSCNView",
+            "Core ML + ImagePicker"
         ]
         return arr
     }()
@@ -127,8 +128,12 @@ extension TabViewController: UITableViewDelegate{
             v = ThirteenARViewController()
 
         case 13:
-            // core ml
+            //"Core ML + ARSCNView",
             v = MLDemoViewController()
+            
+        case 14:
+            //"Core ML + ImagePicker"
+            v = ML_ImgViewController()
             
         default:
             break
