@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		19021BF7200F36C200B8DF4E /* ReplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19021BF6200F36C200B8DF4E /* ReplayKit.framework */; };
+		19021BF9200F48B900B8DF4E /* ThirteenARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19021BF8200F48B900B8DF4E /* ThirteenARViewController.swift */; };
+		19021BFE200F494400B8DF4E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19021BFD200F494400B8DF4E /* CoreLocation.framework */; };
+		19031186201073150001C25D /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19031185201073150001C25D /* LocationService.swift */; };
+		1903118820107A8A0001C25D /* MatrixHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1903118720107A8A0001C25D /* MatrixHelper.swift */; };
+		1903118A20109AB60001C25D /* CoreML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1903118920109AB60001C25D /* CoreML.framework */; };
+		1903118C20109AC50001C25D /* Vision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1903118B20109AC50001C25D /* Vision.framework */; };
+		1903118E20109AEB0001C25D /* MLDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1903118D20109AEB0001C25D /* MLDemoViewController.swift */; };
+		1903119120109FC60001C25D /* MobileNet.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 1903119020109FC60001C25D /* MobileNet.mlmodel */; };
 		1940D2081FF34AF10018914F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1940D2071FF34AF10018914F /* AppDelegate.swift */; };
 		1940D20A1FF34AF10018914F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1940D2091FF34AF10018914F /* ViewController.swift */; };
 		1940D20D1FF34AF20018914F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1940D20B1FF34AF20018914F /* Main.storyboard */; };
@@ -36,6 +44,14 @@
 
 /* Begin PBXFileReference section */
 		19021BF6200F36C200B8DF4E /* ReplayKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReplayKit.framework; path = System/Library/Frameworks/ReplayKit.framework; sourceTree = SDKROOT; };
+		19021BF8200F48B900B8DF4E /* ThirteenARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirteenARViewController.swift; sourceTree = "<group>"; };
+		19021BFD200F494400B8DF4E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		19031185201073150001C25D /* LocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
+		1903118720107A8A0001C25D /* MatrixHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatrixHelper.swift; sourceTree = "<group>"; };
+		1903118920109AB60001C25D /* CoreML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreML.framework; path = System/Library/Frameworks/CoreML.framework; sourceTree = SDKROOT; };
+		1903118B20109AC50001C25D /* Vision.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Vision.framework; path = System/Library/Frameworks/Vision.framework; sourceTree = SDKROOT; };
+		1903118D20109AEB0001C25D /* MLDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLDemoViewController.swift; sourceTree = "<group>"; };
+		1903119020109FC60001C25D /* MobileNet.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MobileNet.mlmodel; sourceTree = "<group>"; };
 		1940D2041FF34AF10018914F /* ARDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1940D2071FF34AF10018914F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1940D2091FF34AF10018914F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -72,6 +88,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1903118C20109AC50001C25D /* Vision.framework in Frameworks */,
+				1903118A20109AB60001C25D /* CoreML.framework in Frameworks */,
+				19021BFE200F494400B8DF4E /* CoreLocation.framework in Frameworks */,
 				19021BF7200F36C200B8DF4E /* ReplayKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -79,6 +98,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		19021BFA200F48D500B8DF4E /* ARKitSpitfireDemo */ = {
+			isa = PBXGroup;
+			children = (
+				19031185201073150001C25D /* LocationService.swift */,
+				1903118720107A8A0001C25D /* MatrixHelper.swift */,
+				19021BF8200F48B900B8DF4E /* ThirteenARViewController.swift */,
+			);
+			path = ARKitSpitfireDemo;
+			sourceTree = "<group>";
+		};
+		1903118F20109FA60001C25D /* CoreML */ = {
+			isa = PBXGroup;
+			children = (
+				1903118D20109AEB0001C25D /* MLDemoViewController.swift */,
+				1903119020109FC60001C25D /* MobileNet.mlmodel */,
+			);
+			path = CoreML;
+			sourceTree = "<group>";
+		};
 		1940D1FB1FF34AF10018914F = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +139,8 @@
 			children = (
 				1940D2071FF34AF10018914F /* AppDelegate.swift */,
 				1940D2191FF34B570018914F /* TabViewController.swift */,
+				1903118F20109FA60001C25D /* CoreML */,
+				19021BFA200F48D500B8DF4E /* ARKitSpitfireDemo */,
 				19E1FD6220036BD600F6165F /* AppleCupDemo */,
 				19483E4C1FFDBAB800ED72F9 /* NineARViewController.swift */,
 				19B68B261FFCCC360027EDFC /* EightARViewController.swift */,
@@ -125,6 +165,9 @@
 		1940D23D1FF3675D0018914F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1903118B20109AC50001C25D /* Vision.framework */,
+				1903118920109AB60001C25D /* CoreML.framework */,
+				19021BFD200F494400B8DF4E /* CoreLocation.framework */,
 				19021BF6200F36C200B8DF4E /* ReplayKit.framework */,
 				1940D2401FF367730018914F /* SceneKit.framework */,
 				1940D23F1FF367620018914F /* ARKit.framework */,
@@ -227,18 +270,23 @@
 				19E1FD6620036C2600F6165F /* Utilities.swift in Sources */,
 				19E1FD6820036C2600F6165F /* PreviewNode.swift in Sources */,
 				1940D24A1FF378F60018914F /* TwoARViewController.swift in Sources */,
+				19021BF9200F48B900B8DF4E /* ThirteenARViewController.swift in Sources */,
+				19031186201073150001C25D /* LocationService.swift in Sources */,
+				1903119120109FC60001C25D /* MobileNet.mlmodel in Sources */,
 				19E65CAB200746DC00E7B4BC /* ElevenARViewController.swift in Sources */,
 				1940D21C1FF34BC80018914F /* OneARViewController.swift in Sources */,
 				1955765B1FF4CBD800655B88 /* FiveARViewController.swift in Sources */,
 				1940D21A1FF34B570018914F /* TabViewController.swift in Sources */,
 				1940D20A1FF34AF10018914F /* ViewController.swift in Sources */,
 				19B68B271FFCCC360027EDFC /* EightARViewController.swift in Sources */,
+				1903118E20109AEB0001C25D /* MLDemoViewController.swift in Sources */,
 				196B0AC2200C860E00B144EF /* TwelveARViewController.swift in Sources */,
 				197F5B931FF39BDF00F693B7 /* FourARViewController.swift in Sources */,
 				19CB6EB91FFB2FAC00CEF2F8 /* SixARViewController.swift in Sources */,
 				19483E4D1FFDBAB800ED72F9 /* NineARViewController.swift in Sources */,
 				19E1FD6A20036C9800F6165F /* Extensions.swift in Sources */,
 				1940D2081FF34AF10018914F /* AppDelegate.swift in Sources */,
+				1903118820107A8A0001C25D /* MatrixHelper.swift in Sources */,
 				19B68B251FFC7A350027EDFC /* SevenARViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

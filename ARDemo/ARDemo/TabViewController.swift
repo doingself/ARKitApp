@@ -28,7 +28,11 @@ class TabViewController: UIViewController {
             
             "基于 Apple Demo 实现摆放家具",
             "基于 Apple Demo 实现摆放家具 + 复位/截图",
-            "基于 Apple Demo 实现家具摆放 + 复位/截图 + 摄像"
+            "基于 Apple Demo 实现家具摆放 + 复位/截图 + 摄像",
+            
+            "根据 location 移动模型",
+            
+            "Core ML"
         ]
         return arr
     }()
@@ -117,6 +121,14 @@ extension TabViewController: UITableViewDelegate{
         case 11:
             //"基于 Apple Demo 实现家具摆放 + 复位/截图 + 摄像"
             v = TwelveARViewController()
+            
+        case 12:
+            // 根据 location 移动模型
+            v = ThirteenARViewController()
+
+        case 13:
+            // core ml
+            v = MLDemoViewController()
             
         default:
             break

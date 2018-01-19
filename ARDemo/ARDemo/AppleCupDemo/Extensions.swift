@@ -9,6 +9,49 @@
 import Foundation
 import SceneKit
 import ARKit
+import CoreLocation
+
+// MARK: arkit spitfire
+extension CLLocation {
+    func bearingToLocationRadian(_ destinationLocation: CLLocation) -> Double {
+        
+        let lat1 = self.coordinate.latitude.toRadians()
+        let lon1 = self.coordinate.longitude.toRadians()
+        
+        let lat2 = destinationLocation.coordinate.latitude.toRadians()
+        let lon2 = destinationLocation.coordinate.longitude.toRadians()
+        let dLon = lon2 - lon1
+        let y = sin(dLon) * cos(lat2);
+        let x = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(dLon);
+        let radiansBearing = atan2(y, x)
+        return radiansBearing
+    }
+}
+extension SCNVector3 {
+    static func positionFromTransform(_ transform: matrix_float4x4) -> SCNVector3 {
+        return SCNVector3Make(transform.columns.3.x, transform.columns.3.y, transform.columns.3.z)
+    }
+}
+extension Double {
+    
+    func metersToLatitude() -> Double {
+        return self / (6373000.0)
+    }
+    
+    func metersToLongitude() -> Double {
+        return self / (5602900.0)
+    }
+    
+    func toRadians() -> Double {
+        return self * .pi / 180.0
+    }
+    
+    func toDegrees() -> Double {
+        return self * 180.0 / .pi
+    }
+}
+
+// MARK: apple cup
 
 extension ARSCNView {
 	func averageColorFromEnvironment(at screenPos: SCNVector3) -> SCNVector3 {
@@ -77,4 +120,38 @@ extension UIImage {
 		}
 		return nil
 	}
+}
+
+// MARK: - Collection extensions
+
+extension Array where Iterator.Element == float3 {
+    var average: float3? {
+        guard !self.isEmpty else {
+            return nil
+        }
+        
+        let sum = self.reduce(float3(0)) { current, next in
+            return current + next
+        }
+        return sum / Float(self.count)
+    }
+}
+
+extension RangeReplaceableCollection where IndexDistance == Int {
+    mutating func keepLast(_ elementsToKeep: Int) {
+        if count > elementsToKeep {
+            self.removeFirst(count - elementsToKeep)
+        }
+    }
+}
+
+// MARK: - float4x4 extensions
+
+extension float4x4 {
+    /// Treats matrix as a (right-hand column-major convention) transform matrix
+    /// and factors out the translation component of the transform.
+    var translation: float3 {
+        let translation = self.columns.3
+        return float3(translation.x, translation.y, translation.z)
+    }
 }

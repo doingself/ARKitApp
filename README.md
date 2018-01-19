@@ -134,6 +134,15 @@ lighting Model有五种样式，分别是：
 + SCNLightingModelPhysicallyBased 基于物理的灯光和材质的现实抽象底纹。
 
 
+## CoreML
+
+ML是Machine Learning的简写，也就是机器学习的意思。Core ML其实就是将一些已经训练好的神经网络、支持向量机、线性分析等集成到一个框架里，供开发者来调用。苹果开发者网站上已经有几套训练好的模型可供使用，其中包含了脸部识别、图像识别、自然语言识别等。
+
+去 [苹果官方下载](https://developer.apple.com/machine-learning/) 一个已经训练好的模型
+
+
+
+
 #### 参考
 
 + https://github.com/GeekLiB/AR-Source
@@ -143,6 +152,10 @@ lighting Model有五种样式，分别是：
 + https://www.jianshu.com/p/16b11e50396c
 + 关于模型设置 https://www.jianshu.com/p/6a761a834ab9
 + 拖拽, 旋转 https://www.jianshu.com/p/16b11e50396c
++ 将模型移动到指定位置(定位) https://github.com/chriswebb09/ARKitSpitfire
++ CoreML https://www.jianshu.com/p/1c1d41d002f8
++ CoreML https://www.jianshu.com/p/872b3fc5c0b4
++ CoreML https://github.com/hanleyweng/CoreML-in-ARKit
 
 
 # TODO
