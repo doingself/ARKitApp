@@ -141,6 +141,56 @@ ML是Machine Learning的简写，也就是机器学习的意思。Core ML其实�
 去 [苹果官方下载](https://developer.apple.com/machine-learning/) 一个已经训练好的模型
 
 
+```
+import CoreML
+import Vision
+import SceneKit
+import ARKit
+
+// *.mlmodel
+let model = Inceptionv3()
+// core ml model
+guard let visionModel = try? VNCoreMLModel(for: model.model) else {
+    fatalError("Someone did a baddie")
+}
+// core ml request
+let request = VNCoreMLRequest(model: visionModel) { request, error in
+    if let observations = request.results as? [VNClassificationObservation] {
+        
+        // The observations appear to be sorted by confidence already, so we
+        // take the top 5 and map them to an array of (String, Double) tuples.
+        let results = observations.prefix(through: 4)
+            .map { ($0.identifier, Double($0.confidence)) }
+
+        var s: [String] = []
+        for (i, pred) in results.enumerated() {
+        	// 1   identifier     confidence*100 %
+            s.append(String(format: "%d: %@ (%3.2f%%)", i + 1, pred.0, pred.1 * 100))
+        }
+        txtView.text = s.joined(separator: "\n\n")
+
+    }
+}
+request.imageCropAndScaleOption = .centerCrop
+
+// 识别图片( UIImagePickerController )
+// image ---> cgImage
+var image: UIImage?
+// vn image request handler 
+let handler = VNImageRequestHandler(cgImage: image.cgImage!)
+
+// 识别图片( ARSCNView )
+// CVPixelBuffer ---> ciImage
+// ARSCNView.session.currentFrame.capturedImage
+let pixbuff : CVPixelBuffer? = sceneView.session.currentFrame?.capturedImage
+let ciImage = CIImage(cvPixelBuffer: pixbuff!)
+// vn image request handler
+let handler = VNImageRequestHandler(cgImage: image.cgImage!)
+
+try? handler.perform([request])
+```
+
+
 
 
 #### 参考

@@ -66,7 +66,8 @@ class ML_ImgViewController: UIViewController {
     }
     private func refresh(){
         guard let img = self.imgView.image else{ return }
-        predictUsingVision(image: img)
+        //predictUsingVision(image: img)
+        predictUsingCoreML(image: img)
     }
     private func predictUsingCoreML(image: UIImage) {
         guard let pixelBuffer = image.pixelBuffer(width: 224, height: 224) else{
