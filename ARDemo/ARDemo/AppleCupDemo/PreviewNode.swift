@@ -65,17 +65,24 @@ class PreviewNode: SCNNode {
     
     func moveFrom(location: CLLocation, to destination: CLLocation) {
         
+        DispatchQueue.main.async {
+            SCNTransaction.begin()
+            SCNTransaction.animationDuration = 5
+            // 移动
+            let translation = MatrixHelper.transformMatrix(for: matrix_identity_float4x4, originLocation: location, location: destination)
+            let position = SCNVector3.positionFromTransform(translation)
+            
+            for node in self.childNodes {
+                node.position = position
+            }
+            
+            SCNTransaction.commit()
+        }
+        // 旋转
 //        let bearing = location.bearingToLocationRadian(destination)
 //        for node in self.childNodes {
 //            let rotation = SCNMatrix4MakeRotation(Float(-1 * bearing), 0, 1, 0)
 //            node.transform = SCNMatrix4Mult(node.transform, rotation)
 //        }
-        
-        let translation = MatrixHelper.transformMatrix(for: matrix_identity_float4x4, originLocation: location, location: destination)
-        let position = SCNVector3.positionFromTransform(translation)
-        
-        for node in self.childNodes {
-            node.position = position
-        }
     }
 }

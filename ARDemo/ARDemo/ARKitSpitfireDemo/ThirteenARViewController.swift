@@ -120,10 +120,10 @@ class ThirteenARViewController: UIViewController {
         
         previewNode!.position = SCNVector3(x: 0, y: 0, z: -1)
         
-        // FIXME: test
+        // FIXME: 移动到指定位置
         hasPlaneOrGesture = true
-        let from: CLLocation = CLLocation(latitude: 116.422504487848, longitude: 39.8820245689312)
-        let to: CLLocation = CLLocation(latitude: 116.422556028615, longitude: 39.8820020246059)
+        let from: CLLocation = CLLocation(latitude: 116.4225172340665, longitude: 39.881984894921175)
+        let to: CLLocation = CLLocation(latitude: 116.4225172340665, longitude: 39.88199646)
         previewNode?.moveFrom(location: from, to: to)
     }
     
@@ -258,25 +258,14 @@ class ThirteenARViewController: UIViewController {
         guard let local = locationService.currentLocation else{ return }
         print("panGesture local \(local)")
         
-        // FIXME: test
-        let from: CLLocation = CLLocation(latitude: 116.422504487848, longitude: 39.8821245689312)
+        // FIXME: 移动到指定位置
+        let from: CLLocation = CLLocation(latitude: 116.4225172340665, longitude: 39.88199646)
         let to: CLLocation = local
         print("pangesture \(local)")
         previewNode?.moveFrom(location: from, to: to)
+        
     }
     @objc func panGesture2(sender: UIGestureRecognizer){
-        
-        guard let local = locationService.currentLocation else{ return }
-        print("panGesture local \(local)")
-        if locationService.currentLocation != nil {
-            // FIXME: test
-            let from: CLLocation = CLLocation(latitude: 116.422504487848, longitude: 39.8821245689312)
-            let to: CLLocation = local
-            print("pangesture \(local)")
-            previewNode?.moveFrom(location: from, to: to)
-            return
-        }
-        
         // 滑动的距离
         guard let pan = sender as? UIPanGestureRecognizer else {
             return
