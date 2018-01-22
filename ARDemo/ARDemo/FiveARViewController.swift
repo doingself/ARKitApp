@@ -20,7 +20,7 @@ class FiveARViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        self.navigationItem.title = "检测平面,添加飞机 点击屏幕添加3D 模型  gesture"
+        self.navigationItem.title = "检测平面ARPlaneAnchor添加SCNBox, 1s后添加飞机SCNScene.node 点击屏幕 tap 获取 ARHitTestResult 使用 hitResult.worldTransform.columns.3 添加 SCNNode(geometry: SCNBox()).position"
         self.view.backgroundColor = UIColor.white
         
         

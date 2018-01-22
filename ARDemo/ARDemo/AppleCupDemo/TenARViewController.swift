@@ -30,7 +30,7 @@ class TenARViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        self.navigationItem.title = "基于 Apple Demo 实现家具摆放"
+        self.navigationItem.title = "基于AudioinARKit 始终在平面中央 SCNSceneRenderer updateAtTime, 检测到地面后固定 SCNSceneRenderer didAdd, 添加 pan/pinch pan拖拽时改变模型样式material.diffuse.contents"
         self.view.backgroundColor = UIColor.white
         
         // pan 拖拽

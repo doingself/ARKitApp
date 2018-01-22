@@ -34,7 +34,7 @@ class MLDemoViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        self.navigationItem.title = "Core ML + ARSCNView"
+        self.navigationItem.title = "Core ML + ARSCNView 图像识别"
         self.view.backgroundColor = UIColor.white
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapGesture(sender:)))

@@ -34,7 +34,7 @@ class ElevenARViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        self.navigationItem.title = "基于 Apple Demo 实现家具摆放 + 复位/截图"
+        self.navigationItem.title = "基于上一个 item, 添加截图sceneView.snapshot(), 复位previewNode!.eulerAngles"
         self.view.backgroundColor = UIColor.white
         
         let save = UIBarButtonItem(title: "保存", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.saveBarBtnItemAction(sender:)))

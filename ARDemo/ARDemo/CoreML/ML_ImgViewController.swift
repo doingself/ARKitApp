@@ -21,7 +21,7 @@ class ML_ImgViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.navigationItem.title = "Core ML + image"
+        self.navigationItem.title = "Core ML + ImagePicker 图像识别"
         self.view.backgroundColor = UIColor.white
         
         imgView = UIImageView(frame: self.view.bounds)

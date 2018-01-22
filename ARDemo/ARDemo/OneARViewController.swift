@@ -21,7 +21,7 @@ class OneARViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.navigationItem.title = "点击屏幕添加飞机 touchesBegan"
+        self.navigationItem.title = "点击屏幕touchesBegan 添加飞机 SCNScene.node self.arSCNView.scene.rootNode.addChildNode(node)"
         self.view.backgroundColor = UIColor.white
         
         

@@ -1,20 +1,41 @@
 # ARDemo
 
-+ 点击屏幕添加飞机 touchesBegan
-+ 检测平面,添加飞机 tap拍照, long录制
-+ 物体跟随相机移动
-+ 类似地球公转",          
-+ 检测平面,添加飞机 点击屏幕添加3D 模型  gesture
-+ 手势 tap/pan 拖拽模型 HitTestResult
-+ 手势 pan拖拽/pinch缩放 SCNBox ARCamera
-+ 手势 tap/pan/pinch
-+ 摆放家具
-
-
-
-
-
 VR(虚拟现实) 是做梦, AR(增强现实) 是见鬼; VR是说谎, AR是吹牛.
+
+touch begin
+
++ 点击屏幕touchesBegan 添加飞机 SCNScene.node self.arSCNView.scene.rootNode.addChildNode(node)
++ 检测平面ARPlaneAnchor添加SCNPlane, 1s后添加飞机SCNScene.node tap截图arSCNView.snapshot(), long录制RPScreenRecorder
++ 检测平面ARPlaneAnchor添加SCNBox, 点击屏幕touchesBegan 添加飞机 SCNScene.node + 跟随相机移动 ARSessionDelegate.didUpdate position=frame.camera.transform.columns.3
++ 点击屏幕touchesBegan 添加飞机 SCNScene.node, 添加旋转动画CABasicAnimation 类似地球公转
+
+gesture
+
++ 检测平面ARPlaneAnchor添加SCNBox, 1s后添加飞机SCNScene.node 点击屏幕 tap 获取 ARHitTestResult 使用 hitResult.worldTransform.columns.3 添加 SCNNode(geometry: SCNBox()).position
++ 检测平面ARPlaneAnchor设置模型simdTransform=anchor.transform, tap/pan 设置 模型simdTransform = ARHitTestResult.worldTransform
++ pan 根据arSCNView.session.currentFrame!.camera.transform.columns.3 对 node 进行拖拽position 旋转eulerAngles, pinch 缩放CGAffineTransform
++ tap/pan/pinch, tap 设置 模型 position = ARHitTestResult.worldTransform.cloumn.3,  pan 根据arSCNView.session.currentFrame!.camera.transform.columns.3 对 node 进行拖拽position 旋转eulerAngles, pinch 缩放CGAffineTransform
++ 基于上一个 item 摆放家具 pan选中模型进行拖拽, 否则旋转
+
+apple demo
+
+1. AudioinARKit is 茶杯 始终在平面中央 SCNSceneRenderer updateAtTime, 检测到地面后固定 SCNSceneRenderer didAdd
+2. InteractiveContentwithARKit is 变色龙 点击变色+拖拽
+
++ 基于AudioinARKit 始终在平面中央 SCNSceneRenderer updateAtTime, 检测到地面后固定 SCNSceneRenderer didAdd, 添加 pan/pinch pan拖拽时改变模型样式material.diffuse.contents
++ 基于上一个 item, 添加截图sceneView.snapshot(), 复位previewNode!.eulerAngles
++ 基于上一个 item, 添加摄像ReplayKit.RPScreenRecorder
+
+ARKitSpitfire 使用 CLLocation 移动模型
+
++ 根据 location 移动模型
+
+CoreML
+
++ Core ML + ARSCNView 图像识别
++ Core ML + ImagePicker 图像识别
+
+
 
 ### ARKit
 
@@ -195,22 +216,29 @@ try? handler.perform([request])
 
 #### 参考
 
-+ https://github.com/GeekLiB/AR-Source
+博客
+
++ AR 开发资料汇总 https://github.com/GeekLiB/AR-Source
 + [坤小 ARKit 系列](http://blog.csdn.net/u013263917/article/details/72903174)
-+ https://www.jianshu.com/p/176e355555fe
-+ https://www.jianshu.com/p/7faa4a3af589
-+ https://www.jianshu.com/p/16b11e50396c
-+ 关于模型设置 https://www.jianshu.com/p/6a761a834ab9
-+ 拖拽, 旋转 https://www.jianshu.com/p/16b11e50396c
++ ARKit的每个类的作用和总结 https://www.jianshu.com/p/176e355555fe
++ ARKit总结 https://www.jianshu.com/p/7faa4a3af589
++ ARKit总结 https://www.jianshu.com/p/16b11e50396c
++ 关于模型设置(SceneKit) https://www.jianshu.com/p/6a761a834ab9
++ CoreML总结 https://www.jianshu.com/p/1c1d41d002f8
++ CoreML总结 https://www.jianshu.com/p/872b3fc5c0b4
+
+GitHub
+
 + 将模型移动到指定位置(定位) https://github.com/chriswebb09/ARKitSpitfire
-+ CoreML https://www.jianshu.com/p/1c1d41d002f8
-+ CoreML https://www.jianshu.com/p/872b3fc5c0b4
 + CoreML https://github.com/hanleyweng/CoreML-in-ARKit
 + CoreML https://github.com/hollance/MobileNet-CoreML
++ Findme https://github.com/mmoaay/Findme
 
 
 # TODO
 
 + ~~摆放家具, 旋转算法~~
 + ~~选中模型, 开始拖拽时改变模型样式, 结束拖拽恢复原始样式~~
-+ 恢复模型 `node.geometry?.materials` `material.diffuse.contents` 提示 `loading : <C3DImage ...>`
++ 拖拽模型后恢复模型样式 `node.geometry?.materials` `material.diffuse.contents` 提示 `loading : <C3DImage ...>`
++ ReplayKit 录屏(iPad 无法保存)
++ 保存模型位置, 再次打开时模型在最后放置的位置

@@ -21,7 +21,7 @@ class FourARViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        self.navigationItem.title = "类似地球公转"
+        self.navigationItem.title = "点击屏幕touchesBegan 添加飞机 SCNScene.node, 添加旋转动画CABasicAnimation 类似地球公转"
         self.view.backgroundColor = UIColor.white
         
         

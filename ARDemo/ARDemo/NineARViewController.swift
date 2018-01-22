@@ -21,7 +21,7 @@ class NineARViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.navigationItem.title = "摆放家具"
+        self.navigationItem.title = "基于上一个 item 摆放家具 pan选中模型进行拖拽, 否则旋转"
         self.view.backgroundColor = UIColor.white
         
         // gesture

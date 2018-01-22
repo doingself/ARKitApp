@@ -18,7 +18,7 @@ class SevenARViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.navigationItem.title = "手势拖拽/缩放 SCNBox"
+        self.navigationItem.title = "pan 根据arSCNView.session.currentFrame!.camera.transform.columns.3 对 node 进行拖拽position 旋转eulerAngles, pinch 缩放CGAffineTransform"
         self.view.backgroundColor = UIColor.white
         
         

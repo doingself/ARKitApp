@@ -21,7 +21,7 @@ class ThreeARViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        self.navigationItem.title = "物体跟随相机移动"
+        self.navigationItem.title = "检测平面ARPlaneAnchor添加SCNBox, 点击屏幕touchesBegan 添加飞机 SCNScene.node + 跟随相机移动 ARSessionDelegate.didUpdate position=frame.camera.transform.columns.3"
         self.view.backgroundColor = UIColor.white
         
         

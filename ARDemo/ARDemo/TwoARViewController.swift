@@ -26,7 +26,7 @@ class TwoARViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        self.navigationItem.title = "检测平面,添加飞机 tap拍照, long录制"
+        self.navigationItem.title = "检测平面ARPlaneAnchor添加SCNPlane, 1s后添加飞机SCNScene.node tap截图arSCNView.snapshot(), long录制RPScreenRecorder"
         self.view.backgroundColor = UIColor.white
         
         

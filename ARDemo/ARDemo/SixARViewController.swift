@@ -19,7 +19,7 @@ class SixARViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.navigationItem.title = "检测平面添加模型, 手势拖拽"
+        self.navigationItem.title = "检测平面ARPlaneAnchor设置模型simdTransform=anchor.transform, tap/pan 设置 模型simdTransform = ARHitTestResult.worldTransform"
         self.view.backgroundColor = UIColor.white
         
         arSCNView = ARSCNView(frame: self.view.bounds)
@@ -91,12 +91,13 @@ class SixARViewController: UIViewController {
         print("ar hit test result = \(arHitTestResult.count)")
         if let hit = arHitTestResult.first{
             
+            SCNTransaction.begin()
+            SCNTransaction.animationDuration = 1.5
+            
             print("self.node.simdTransform = \(self.contentRootNode.simdTransform)")
             print("hit.worldTransform = \(hit.worldTransform)")
             self.contentRootNode.simdTransform = hit.worldTransform
             
-            SCNTransaction.begin()
-            SCNTransaction.animationDuration = 1.5
             SCNTransaction.commit()
         }
         
@@ -108,12 +109,6 @@ class SixARViewController: UIViewController {
         if let hit: ARHitTestResult = arHitTestResult.first{
             
             self.contentRootNode.simdTransform = hit.worldTransform
-            
-            if sender.state == .ended{
-                SCNTransaction.begin()
-                SCNTransaction.animationDuration = 1.5
-                SCNTransaction.commit()
-            }
         }
         
     }

@@ -18,7 +18,7 @@ class EightARViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        self.navigationItem.title = "手势拖拽/缩放 SCNScene"
+        self.navigationItem.title = "tap/pan/pinch, tap 设置 模型 position = ARHitTestResult.worldTransform.cloumn.3,  pan 根据arSCNView.session.currentFrame!.camera.transform.columns.3 对 node 进行拖拽position 旋转eulerAngles, pinch 缩放CGAffineTransform"
         self.view.backgroundColor = UIColor.white
         
         // 创建模型场景

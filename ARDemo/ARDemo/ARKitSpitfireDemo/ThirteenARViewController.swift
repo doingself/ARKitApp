@@ -13,6 +13,7 @@ import Photos
 // ReplayKit不需要太大电量损耗和性能损耗就可以产出高清的视频记录。ReplayKit支持使用A7芯片以上，操作系统为iOS 9或更高版本的设备。
 import ReplayKit
 
+// 参考 https://github.com/chriswebb09/ARKitSpitfire
 class ThirteenARViewController: UIViewController {
     
     private lazy var locationService: LocationService = {

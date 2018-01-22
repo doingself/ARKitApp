@@ -14,26 +14,32 @@ class TabViewController: UIViewController {
     private let cellIdentifices = "cell"
     private lazy var datas: [String] = {
         let arr = [
-            "点击屏幕添加飞机 touchesBegan",
-            "检测平面,添加飞机 tap拍照, long录制",
-            "物体跟随相机移动",
-            "类似地球公转",
+            // touchbegin
+            "点击屏幕touchesBegan 添加飞机 SCNScene.node self.arSCNView.scene.rootNode.addChildNode(node)",
+            "检测平面ARPlaneAnchor添加SCNPlane, 1s后添加飞机SCNScene.node tap截图arSCNView.snapshot(), long录制RPScreenRecorder",
+            "检测平面ARPlaneAnchor添加SCNBox, 点击屏幕touchesBegan 添加飞机 SCNScene.node + 跟随相机移动 ARSessionDelegate.didUpdate position=frame.camera.transform.columns.3",
+            "点击屏幕touchesBegan 添加飞机 SCNScene.node, 添加旋转动画CABasicAnimation 类似地球公转",
             
-            "检测平面,添加飞机 点击屏幕添加3D 模型  gesture",
-            "手势 tap/pan 拖拽模型 HitTestResult",
-            "手势 pan拖拽/pinch缩放 SCNBox ARCamera",
+            // gesture
+            "检测平面ARPlaneAnchor添加SCNBox, 1s后添加飞机SCNScene.node 点击屏幕 tap 获取 ARHitTestResult 使用 hitResult.worldTransform.columns.3 添加 SCNNode(geometry: SCNBox()).position",
+            "检测平面ARPlaneAnchor设置模型simdTransform=anchor.transform, tap/pan 设置 模型simdTransform = ARHitTestResult.worldTransform",
+            "pan 根据arSCNView.session.currentFrame!.camera.transform.columns.3 对 node 进行拖拽position 旋转eulerAngles, pinch 缩放CGAffineTransform",
+            "tap/pan/pinch, tap 设置 模型 position = ARHitTestResult.worldTransform.cloumn.3,  pan 根据arSCNView.session.currentFrame!.camera.transform.columns.3 对 node 进行拖拽position 旋转eulerAngles, pinch 缩放CGAffineTransform",
+            "基于上一个 item 摆放家具 pan选中模型进行拖拽, 否则旋转",
             
-            "手势 tap/pan/pinch",
-            "摆放家具",
+            // apple demo
+            //1. AudioinARKit is 茶杯 始终在平面中央 SCNSceneRenderer updateAtTime, 检测到地面后固定 SCNSceneRenderer didAdd
+            //2. InteractiveContentwithARKit is 变色龙 点击变色+拖拽
+            "基于AudioinARKit 始终在平面中央 SCNSceneRenderer updateAtTime, 检测到地面后固定 SCNSceneRenderer didAdd, 添加 pan/pinch pan拖拽时改变模型样式material.diffuse.contents",
+            "基于上一个 item, 添加截图sceneView.snapshot(), 复位previewNode!.eulerAngles",
+            "基于上一个 item, 添加摄像ReplayKit.RPScreenRecorder",
             
-            "基于 Apple Demo 实现摆放家具",
-            "基于 Apple Demo 实现摆放家具 + 复位/截图",
-            "基于 Apple Demo 实现家具摆放 + 复位/截图 + 摄像",
-            
+            // 定位 https://github.com/chriswebb09/ARKitSpitfire
             "根据 location 移动模型",
             
-            "Core ML + ARSCNView",
-            "Core ML + ImagePicker"
+            // CoreML
+            "Core ML + ARSCNView 图像识别",
+            "Core ML + ImagePicker 图像识别"
         ]
         return arr
     }()
@@ -77,6 +83,7 @@ extension TabViewController: UITableViewDataSource{
         
         let data = self.datas[indexPath.row]
         cell.textLabel?.text = data
+        cell.textLabel?.numberOfLines = 0
         
         return cell
     }
@@ -92,6 +99,13 @@ extension TabViewController: UITableViewDelegate{
         var v: UIViewController?
         
         switch indexPath.row {
+            
+            // touchbegin
+            //"点击屏幕touchesBegan 添加飞机 SCNScene.node self.arSCNView.scene.rootNode.addChildNode(node)",
+            //"检测平面ARPlaneAnchor添加SCNPlane, 1s后添加飞机SCNScene.node tap截图arSCNView.snapshot(), long录制RPScreenRecorder",
+            //"检测平面ARPlaneAnchor添加SCNBox, 点击屏幕touchesBegan 添加飞机 SCNScene.node + 跟随相机移动 ARSessionDelegate.didUpdate position=frame.camera.transform.columns.3",
+            //"点击屏幕touchesBegan 添加飞机 SCNScene.node, 添加旋转动画CABasicAnimation 类似地球公转",
+            
         case 0:
             v = OneARViewController()
         case 1:
@@ -100,6 +114,14 @@ extension TabViewController: UITableViewDelegate{
             v = ThreeARViewController()
         case 3:
             v = FourARViewController()
+            
+            // gesture
+            //"检测平面ARPlaneAnchor添加SCNBox, 1s后添加飞机SCNScene.node 点击屏幕 tap 获取 ARHitTestResult 使用 hitResult.worldTransform.columns.3 添加 SCNNode(geometry: SCNBox()).position",
+            //"检测平面ARPlaneAnchor设置模型simdTransform=anchor.transform, tap/pan 设置 模型simdTransform = ARHitTestResult.worldTransform",
+            //"pan 根据arSCNView.session.currentFrame!.camera.transform.columns.3 对 node 进行拖拽position 旋转eulerAngles, pinch 缩放CGAffineTransform",
+            //"tap/pan/pinch, tap 设置 模型 position = ARHitTestResult.worldTransform.cloumn.3,  pan 根据arSCNView.session.currentFrame!.camera.transform.columns.3 对 node 进行拖拽position 旋转eulerAngles, pinch 缩放CGAffineTransform",
+            //"基于上一个 item 摆放家具 pan选中模型进行拖拽, 否则旋转",
+
         case 4:
             v = FiveARViewController()
         case 5:
@@ -110,17 +132,18 @@ extension TabViewController: UITableViewDelegate{
             v = EightARViewController()
         case 8:
             v = NineARViewController()
+            
+            // apple demo
+            //1. AudioinARKit is 茶杯 始终在平面中央 SCNSceneRenderer updateAtTime, 检测到地面后固定 SCNSceneRenderer didAdd
+            //2. InteractiveContentwithARKit is 变色龙 点击变色+拖拽
+            //"基于AudioinARKit 始终在平面中央 SCNSceneRenderer updateAtTime, 检测到地面后固定 SCNSceneRenderer didAdd, 添加 pan/pinch pan拖拽时改变模型样式material.diffuse.contents",
+            //"基于上一个 item, 添加截图sceneView.snapshot(), 复位previewNode!.eulerAngles",
+            //"基于上一个 item, 添加摄像ReplayKit.RPScreenRecorder",
         case 9:
-            // AudioinARKit = 茶杯 始终在平面中央, 检测到地面后固定
-            // InteractiveContentwithARKit = 变色龙 变色+拖拽
             v = TenARViewController()
         case 10:
-            // AudioinARKit = 茶杯 始终在平面中央, 检测到地面后固定
-            // InteractiveContentwithARKit = 变色龙 变色+拖拽
-            // 复位/截图
             v = ElevenARViewController()
         case 11:
-            //"基于 Apple Demo 实现家具摆放 + 复位/截图 + 摄像"
             v = TwelveARViewController()
             
         case 12:
