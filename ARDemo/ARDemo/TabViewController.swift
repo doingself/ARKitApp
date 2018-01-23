@@ -51,8 +51,8 @@ class TabViewController: UIViewController {
             "Core ML + ImagePicker 图像识别",
             
             // find me 保存设备运动轨迹并查看 https://github.com/mmoaay/Findme
-            "保存设备运动轨迹",
-            "查看设备运动轨迹"
+            "保存设备的运动轨迹 运动过程中 添加 node 到 ARSCNView.scene.rootNode.childeNodes 中, 将当前 ARSCNView.scene 保存到起来( SCNScene )",
+            "查看设备的运动轨迹 使用 ARSCNView.scene 加载已经保存的 SCNScene"
         ]
         return arr
     }()
@@ -175,8 +175,7 @@ extension TabViewController: UITableViewDelegate{
         case 15:
             v = SavemeViewController()
         case 16:
-            v = SavemeViewController()
-            //v = FindmeViewController()
+            v = FindmeViewController()
             
         default:
             break
