@@ -8,6 +8,15 @@
 
 import UIKit
 
+// 弧度 ＝ 度 × π / 180
+// 度 ＝ 弧度 × 180° / π
+// 180度 ＝ π弧度
+
+// 90°＝ 90 × π / 180 ＝ π/2 弧度
+// 60°＝ 60 × π / 180 ＝ π/3 弧度
+
+
+
 class TabViewController: UIViewController {
     
     private var tabView: UITableView!
@@ -39,7 +48,11 @@ class TabViewController: UIViewController {
             
             // CoreML
             "Core ML + ARSCNView 图像识别",
-            "Core ML + ImagePicker 图像识别"
+            "Core ML + ImagePicker 图像识别",
+            
+            // find me 保存设备运动轨迹并查看 https://github.com/mmoaay/Findme
+            "保存设备运动轨迹",
+            "查看设备运动轨迹"
         ]
         return arr
     }()
@@ -157,6 +170,13 @@ extension TabViewController: UITableViewDelegate{
         case 14:
             //"Core ML + ImagePicker"
             v = ML_ImgViewController()
+            
+            // find me
+        case 15:
+            v = SavemeViewController()
+        case 16:
+            v = SavemeViewController()
+            //v = FindmeViewController()
             
         default:
             break

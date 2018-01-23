@@ -212,8 +212,6 @@ try? handler.perform([request])
 ```
 
 
-
-
 #### 参考
 
 博客
@@ -226,6 +224,13 @@ try? handler.perform([request])
 + 关于模型设置(SceneKit) https://www.jianshu.com/p/6a761a834ab9
 + CoreML总结 https://www.jianshu.com/p/1c1d41d002f8
 + CoreML总结 https://www.jianshu.com/p/872b3fc5c0b4
++ 弧度与角度的关系 http://blog.csdn.net/diyagoanyhacker/article/details/6606147
+	+ 弧度 ＝ 度 × π / 180
+	+ 度 ＝ 弧度 × 180° / π
+	+ 180度 ＝ π弧度
+	+ 90°＝ 90 × π / 180 ＝ π/2 弧度
+	+ 60°＝ 60 × π / 180 ＝ π/3 弧度
+
 
 GitHub
 
