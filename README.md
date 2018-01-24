@@ -30,7 +30,7 @@ apple demo
 
 ARKitSpitfire 使用 CLLocation 移动模型
 
-+ 根据 location 移动模型
++ 根据 location 移动模型(角度+距离)
 
 CoreML
 
