@@ -9,10 +9,6 @@
 import UIKit
 import ARKit
 
-// 保存轨迹, 可以通过 key archive 归档
-var meScene: SCNScene!
-
-
 // find me 保存设备运动轨迹并查看 https://github.com/mmoaay/Findme
 // 思路: 运动过程中 添加 node 到 ARSCNView.scene.rootNode.childeNodes 中, 将当前 ARSCNView.scene 保存到起来( SCNScene ), 使用空白页面的 ARSCNView 加载已经保存的 SCNScene
 class SavemeViewController: UIViewController {
@@ -141,7 +137,7 @@ class SavemeViewController: UIViewController {
             
             // 使用 keyed archiver 归档
             // 这里使用全局变量保存 scene
-            meScene = self.sceneView.scene
+            singleScene = self.sceneView.scene
         }
     }
     @objc func saveBarBtnItemAction(sender: Any?){

@@ -17,6 +17,8 @@ gesture
 + tap/pan/pinch, tap 设置 模型 position = ARHitTestResult.worldTransform.cloumn.3,  pan 根据arSCNView.session.currentFrame!.camera.transform.columns.3 对 node 进行拖拽position 旋转eulerAngles, pinch 缩放CGAffineTransform
 + 基于上一个 item 摆放家具 pan选中模型进行拖拽, 否则旋转
 
+![image](https://github.com/doingself/ARDemo/blob/master/images/image0.jpg)
+
 apple demo
 
 1. AudioinARKit is 茶杯 始终在平面中央 SCNSceneRenderer updateAtTime, 检测到地面后固定 SCNSceneRenderer didAdd
@@ -39,6 +41,7 @@ CoreML
 + 保存设备的运动轨迹 运动过程中 添加 node 到 ARSCNView.scene.rootNode.childeNodes 中, 将当前 ARSCNView.scene 保存到起来( SCNScene )
 + 查看设备的运动轨迹 使用 ARSCNView.scene 加载已经保存的 SCNScene
 
+![image](https://github.com/doingself/ARDemo/blob/master/images/image1.jpg)
 
 ### ARKit
 

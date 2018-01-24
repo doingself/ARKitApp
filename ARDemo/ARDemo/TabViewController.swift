@@ -17,6 +17,15 @@ import UIKit
 
 
 
+import CoreLocation
+import ARKit
+
+// 保存轨迹, 可以通过 key archive 归档
+var singleScene: SCNScene!
+// 保存圆点的 GPS
+var lastLocation: CLLocation!
+
+
 class TabViewController: UIViewController {
     
     private var tabView: UITableView!

@@ -78,7 +78,7 @@ class FindmeViewController: UIViewController {
         
         if videoRecodeBtn.isSelected {
             // 开始
-            sceneView.scene = meScene
+            sceneView.scene = singleScene
             
             sessionRun()
         }else{
