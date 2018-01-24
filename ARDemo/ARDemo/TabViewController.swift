@@ -62,7 +62,8 @@ class TabViewController: UIViewController {
             // find me 保存设备运动轨迹并查看 https://github.com/mmoaay/Findme
             "保存设备的运动轨迹 运动过程中 添加 node 到 ARSCNView.scene.rootNode.childeNodes 中, 将当前 ARSCNView.scene 保存到起来( SCNScene )",
             "查看设备的运动轨迹 使用 ARSCNView.scene 加载已经保存的 SCNScene",
-            "find me + spitfire"
+            "保存 find me + spitfire",
+            "查看 find me + spitfire"
         ]
         return arr
     }()
@@ -187,6 +188,8 @@ extension TabViewController: UITableViewDelegate{
         case 16:
             v = FindmeViewController()
         case 17:
+            v = SavemeByLocationViewController()
+        case 18:
             v = FindmeByLocationViewController()
             
         default:
