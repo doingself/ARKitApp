@@ -24,6 +24,7 @@
 		1940D21C1FF34BC80018914F /* OneARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1940D21B1FF34BC80018914F /* OneARViewController.swift */; };
 		1940D2481FF369480018914F /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 1940D2471FF369480018914F /* art.scnassets */; };
 		1940D24A1FF378F60018914F /* TwoARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1940D2491FF378F60018914F /* TwoARViewController.swift */; };
+		19452D2C2019AFA200F9C095 /* MoveModuleByLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19452D2B2019AFA200F9C095 /* MoveModuleByLocationViewController.swift */; };
 		19483E4D1FFDBAB800ED72F9 /* NineARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19483E4C1FFDBAB800ED72F9 /* NineARViewController.swift */; };
 		194A10752011D8B900D83E8A /* Inceptionv3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 194A10742011D8B900D83E8A /* Inceptionv3.mlmodel */; };
 		194A10772011E72400D83E8A /* ML_ImgViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194A10762011E72400D83E8A /* ML_ImgViewController.swift */; };
@@ -76,6 +77,7 @@
 		1940D2401FF367730018914F /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = System/Library/Frameworks/SceneKit.framework; sourceTree = SDKROOT; };
 		1940D2471FF369480018914F /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		1940D2491FF378F60018914F /* TwoARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoARViewController.swift; sourceTree = "<group>"; };
+		19452D2B2019AFA200F9C095 /* MoveModuleByLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveModuleByLocationViewController.swift; sourceTree = "<group>"; };
 		19483E4C1FFDBAB800ED72F9 /* NineARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NineARViewController.swift; sourceTree = "<group>"; };
 		194A10742011D8B900D83E8A /* Inceptionv3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Inceptionv3.mlmodel; sourceTree = "<group>"; };
 		194A10762011E72400D83E8A /* ML_ImgViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ML_ImgViewController.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				19031185201073150001C25D /* LocationService.swift */,
 				1903118720107A8A0001C25D /* MatrixHelper.swift */,
 				19021BF8200F48B900B8DF4E /* ThirteenARViewController.swift */,
+				19452D2B2019AFA200F9C095 /* MoveModuleByLocationViewController.swift */,
 			);
 			path = ARKitSpitfireDemo;
 			sourceTree = "<group>";
@@ -328,6 +331,7 @@
 				1940D24A1FF378F60018914F /* TwoARViewController.swift in Sources */,
 				19021BF9200F48B900B8DF4E /* ThirteenARViewController.swift in Sources */,
 				19031186201073150001C25D /* LocationService.swift in Sources */,
+				19452D2C2019AFA200F9C095 /* MoveModuleByLocationViewController.swift in Sources */,
 				19E65CAB200746DC00E7B4BC /* ElevenARViewController.swift in Sources */,
 				194A10752011D8B900D83E8A /* Inceptionv3.mlmodel in Sources */,
 				1940D21C1FF34BC80018914F /* OneARViewController.swift in Sources */,

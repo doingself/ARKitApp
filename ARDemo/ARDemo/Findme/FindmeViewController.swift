@@ -25,8 +25,7 @@ class FindmeViewController: UIViewController {
         
         // 录像
         videoRecodeBtn = UIButton(type: UIButtonType.system)
-        videoRecodeBtn.setTitle("查询", for: UIControlState.normal)
-        videoRecodeBtn.setTitle("返回", for: UIControlState.selected)
+        videoRecodeBtn.setTitle("重写加载", for: UIControlState.normal)
         videoRecodeBtn.addTarget(self, action: #selector(self.recordBtnAction(sender:)), for: UIControlEvents.touchUpInside)
         let recordBarBtnItem = UIBarButtonItem(customView: videoRecodeBtn)
         self.navigationItem.rightBarButtonItem = recordBarBtnItem
@@ -41,6 +40,10 @@ class FindmeViewController: UIViewController {
         sceneView.showsStatistics = true
         sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin, ARSCNDebugOptions.showFeaturePoints]
         
+        if singleScene != nil{
+            // 加载已有场景
+            sceneView.scene = singleScene
+        }
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -74,17 +77,12 @@ class FindmeViewController: UIViewController {
     // MARK: action
     @objc func recordBtnAction(sender: Any?){
         
-        videoRecodeBtn.isSelected = !videoRecodeBtn.isSelected
-        
-        if videoRecodeBtn.isSelected {
-            // 开始
+        if singleScene != nil{
+            // 重新加载已有场景开始
             sceneView.scene = singleScene
-            
             sessionRun()
-        }else{
-            // 结束
-            sceneView.session.pause()
         }
+        
     }
 }
 extension FindmeViewController: ARSCNViewDelegate{

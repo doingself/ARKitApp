@@ -41,7 +41,7 @@ class ThirteenARViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        self.navigationItem.title = "根据 location 移动 模型"
+        self.navigationItem.title = "根据 location 移动模型 + 手势 复位 截图 录制"
         self.view.backgroundColor = UIColor.white
         
         let save = UIBarButtonItem(title: "保存", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.saveBarBtnItemAction(sender:)))

@@ -78,21 +78,18 @@ class SavemeByLocationViewController: UIViewController {
         
         UIApplication.shared.isIdleTimerDisabled = false
         
+        // session
+        sceneView.session.pause()
+        
         // 结束定位
         locationService.stopLocation()
         
         // 获取当前位置
-        guard let location = locationService.currentLocation else{
-            print("current location is nil")
-            return
+        if let location = locationService.currentLocation {
+            // 保存
+            lastLocation = location
+            singleScene = sceneView.scene
         }
-        
-        // 保存
-        lastLocation = location
-        singleScene = sceneView.scene
-    
-        // session
-        sceneView.session.pause()
     }
     private func sessionRun(){
         let configure = ARWorldTrackingConfiguration()

@@ -96,7 +96,10 @@ class TabViewController: UIViewController {
             //"location ARKitSpitfire",
             3:[
                 [vc: ThirteenARViewController(),
-                 navTitle: "根据 location 移动模型"],
+                 navTitle: "根据 location 移动模型 + 手势 复位 截图 录制"],
+                
+                [vc: MoveModuleByLocationViewController(),
+                 navTitle: "根据 location/SCNVector3 移动模型"],
             ],
             //"CoreML",
             4:[
