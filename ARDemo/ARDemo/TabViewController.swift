@@ -148,7 +148,19 @@ class TabViewController: UIViewController {
         tabView.estimatedRowHeight = 44.0
         
         self.view.addSubview(tabView)
-        
+     
+        if #available(iOS 11.0, *){
+            
+            // navigation bar 在整个APP中显示大标题
+            self.navigationController?.navigationBar.prefersLargeTitles = true
+            // 控制不同页面大标题的显示
+            //self.navigationItem.largeTitleDisplayMode = UINavigationItem.LargeTitleDisplayMode.always
+            
+            tabView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
+        }else{
+            self.automaticallyAdjustsScrollViewInsets = false
+            
+        }
     }
     
     override func didReceiveMemoryWarning() {
