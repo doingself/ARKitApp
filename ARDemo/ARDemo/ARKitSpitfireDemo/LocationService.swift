@@ -93,6 +93,28 @@ class LocationService: NSObject {
             }
         }
     }
+    static func printLocationInfo(location: CLLocation){
+        // 计算行走方向（北偏东，东偏南，南偏西，西偏北）
+        let courseAry = ["北偏东", "东偏南", "南偏西", "西偏北"]
+        // 将当前航向值/90度会得到相应的值（0，1，2，3）
+        let i = Int(location.course / 90.0)
+        // 取出对应航向
+        var courseStr = courseAry[i]
+        
+        // 计算偏移角度
+        let angle = Int(location.course)%90
+        // 判断是否为正方向
+        // 对角度取余，为0就表示正
+        if angle == 0 {
+            // 截取字符串第一个字
+            courseStr = (courseStr as NSString).substring(to: 1)
+        }
+        
+        print("水平方向精确度，值如果小于0，代表位置数据无效 horizontalAccuracy = \(location.horizontalAccuracy)")
+        print("航向 course = \(location.course)")
+        print("方向 location.course / 90.0 = \(courseStr)")
+        print("角度 location.course % 90.0 = \(angle)")
+    }
     // location 转 string
     private func convertLocation(location: CLLocation) -> String{
         var str = ""

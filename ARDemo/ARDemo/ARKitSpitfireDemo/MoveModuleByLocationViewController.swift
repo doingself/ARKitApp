@@ -89,9 +89,7 @@ class MoveModuleByLocationViewController: UIViewController {
             endLocation = location
             return
         }
-        print("endLocation \t\t= \(endLocation!)")
-        print("currentLocation \t= \(location)")
-        print("distance = \(endLocation.distance(from: location))")
+        
         previewNode.moveFrom(location: endLocation, to: location)
         endLocation = location
     }

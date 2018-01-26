@@ -30,6 +30,7 @@ apple demo
 
 ARKitSpitfire 使用 CLLocation 移动模型
 
++ 根据 location 移动模型 + 手势 复位 截图 录制
 + 根据 location 移动模型(角度+距离)
 
 CoreML
@@ -236,7 +237,9 @@ try? handler.perform([request])
 	+ 180度 ＝ π弧度
 	+ 90°＝ 90 × π / 180 ＝ π/2 弧度
 	+ 60°＝ 60 × π / 180 ＝ π/3 弧度
-
++ CoreLocation http://blog.csdn.net/yeshaojian/article/details/51523284
++ iOS 计算两点距离、点间角度、线间角度 http://blog.csdn.net/jason_chen13/article/details/51093900
++ https://stackoverflow.com/questions/3925942/cllocation-category-for-calculating-bearing-w-haversine-function
 
 GitHub
 

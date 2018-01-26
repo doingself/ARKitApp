@@ -42,8 +42,19 @@ class MatrixHelper {
     }
     
     static func transformMatrix(for matrix: simd_float4x4, originLocation: CLLocation, location: CLLocation) -> simd_float4x4 {
+        
         let distance = Float(location.distance(from: originLocation))
         let bearing = originLocation.bearingToLocationRadian(location)
+        
+        print("originLocation \t= \(originLocation)")
+        LocationService.printLocationInfo(location: originLocation)
+        print("currentLocation \t= \(location)")
+        LocationService.printLocationInfo(location: location)
+        print("distance = \(distance)")
+        print("bearing = \(bearing)")
+        print("bearing = \(bearing.toDegrees())")
+        
+        
         let position = vector_float4(0.0, 0.0, -distance, 0.0)
         let translationMatrix = MatrixHelper.translationMatrix(with: matrix_identity_float4x4, for: position)
         let rotationMatrix = MatrixHelper.rotateAroundY(with: matrix_identity_float4x4, for: Float(bearing))
