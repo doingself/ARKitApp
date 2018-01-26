@@ -44,7 +44,9 @@ class TabViewController: UIViewController {
             "location ARKitSpitfire",
             "CoreML",
             // find me 保存设备运动轨迹并查看 https://github.com/mmoaay/Findme
-            "保存查看 SCNScene , Findme"
+            "保存查看SCNScene Findme",
+            // ARKit+CoreLocation https://github.com/ProjectDent/ARKit-CoreLocation
+            "ARKit+CoreLocation"
         ]
         return arr
     }()
@@ -122,6 +124,12 @@ class TabViewController: UIViewController {
                 
                 [vc: FindmeByLocationViewController(),
                  navTitle: "查看 find me + spitfire"],
+            ],
+            
+            // ARKit+CoreLocation https://github.com/ProjectDent/ARKit-CoreLocation
+            6:[
+                [vc: ARLocationDemoViewController(),
+                 navTitle: "ARKit+CoreLocation"]                
             ],
         ]
         return dict

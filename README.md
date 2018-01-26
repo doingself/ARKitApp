@@ -239,7 +239,8 @@ try? handler.perform([request])
 	+ 60°＝ 60 × π / 180 ＝ π/3 弧度
 + CoreLocation http://blog.csdn.net/yeshaojian/article/details/51523284
 + iOS 计算两点距离、点间角度、线间角度 http://blog.csdn.net/jason_chen13/article/details/51093900
-+ https://stackoverflow.com/questions/3925942/cllocation-category-for-calculating-bearing-w-haversine-function
++ 角度计算 http://blog.sina.com.cn/s/blog_658a93570101hynw.html
++ 角度计算 https://stackoverflow.com/questions/3925942/cllocation-category-for-calculating-bearing-w-haversine-function
 
 GitHub
 
@@ -247,6 +248,7 @@ GitHub
 + CoreML https://github.com/hanleyweng/CoreML-in-ARKit
 + CoreML https://github.com/hollance/MobileNet-CoreML
 + Findme https://github.com/mmoaay/Findme
++ ARKit + CoreLocation https://github.com/ProjectDent/ARKit-CoreLocation
 
 
 # TODO

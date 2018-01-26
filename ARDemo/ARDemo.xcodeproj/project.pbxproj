@@ -15,6 +15,7 @@
 		1903118A20109AB60001C25D /* CoreML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1903118920109AB60001C25D /* CoreML.framework */; };
 		1903118C20109AC50001C25D /* Vision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1903118B20109AC50001C25D /* Vision.framework */; };
 		1903118E20109AEB0001C25D /* MLDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1903118D20109AEB0001C25D /* MLDemoViewController.swift */; };
+		19163B8F201B00DC00465198 /* ARLocationDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19163B8E201B00DC00465198 /* ARLocationDemoViewController.swift */; };
 		1940D2081FF34AF10018914F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1940D2071FF34AF10018914F /* AppDelegate.swift */; };
 		1940D20A1FF34AF10018914F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1940D2091FF34AF10018914F /* ViewController.swift */; };
 		1940D20D1FF34AF20018914F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1940D20B1FF34AF20018914F /* Main.storyboard */; };
@@ -63,6 +64,7 @@
 		1903118920109AB60001C25D /* CoreML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreML.framework; path = System/Library/Frameworks/CoreML.framework; sourceTree = SDKROOT; };
 		1903118B20109AC50001C25D /* Vision.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Vision.framework; path = System/Library/Frameworks/Vision.framework; sourceTree = SDKROOT; };
 		1903118D20109AEB0001C25D /* MLDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLDemoViewController.swift; sourceTree = "<group>"; };
+		19163B8E201B00DC00465198 /* ARLocationDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARLocationDemoViewController.swift; sourceTree = "<group>"; };
 		1940D2041FF34AF10018914F /* ARDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1940D2071FF34AF10018914F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1940D2091FF34AF10018914F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -144,6 +146,14 @@
 			path = CoreML;
 			sourceTree = "<group>";
 		};
+		19163B8D201AFFA200465198 /* ARKit+CoreLocation */ = {
+			isa = PBXGroup;
+			children = (
+				19163B8E201B00DC00465198 /* ARLocationDemoViewController.swift */,
+			);
+			path = "ARKit+CoreLocation";
+			sourceTree = "<group>";
+		};
 		1940D1FB1FF34AF10018914F = {
 			isa = PBXGroup;
 			children = (
@@ -166,6 +176,7 @@
 			children = (
 				1940D2071FF34AF10018914F /* AppDelegate.swift */,
 				1940D2191FF34B570018914F /* TabViewController.swift */,
+				19163B8D201AFFA200465198 /* ARKit+CoreLocation */,
 				19EE03162016CD640078ED25 /* Findme */,
 				1903118F20109FA60001C25D /* CoreML */,
 				19021BFA200F48D500B8DF4E /* ARKitSpitfireDemo */,
@@ -326,6 +337,7 @@
 				19E1FD6720036C2600F6165F /* ARSCNView+HitTests.swift in Sources */,
 				19E1FD6120036BC700F6165F /* TenARViewController.swift in Sources */,
 				194A10772011E72400D83E8A /* ML_ImgViewController.swift in Sources */,
+				19163B8F201B00DC00465198 /* ARLocationDemoViewController.swift in Sources */,
 				19E1FD6620036C2600F6165F /* Utilities.swift in Sources */,
 				19E1FD6820036C2600F6165F /* PreviewNode.swift in Sources */,
 				1940D24A1FF378F60018914F /* TwoARViewController.swift in Sources */,

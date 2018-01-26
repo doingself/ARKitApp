@@ -10,8 +10,11 @@ import UIKit
 import CoreLocation
 
 class LocationService: NSObject {
-    
+
     var currentLocation: CLLocation?
+    var currentHeadingAccuracy: CLLocationDirection?
+    var heading: CLLocationDirection?
+    
     private var locationManager: CLLocationManager!
     
     override init() {
@@ -186,6 +189,26 @@ extension LocationService: CLLocationManagerDelegate{
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
         //did update heading newHeading=magneticHeading 17.63 trueHeading -1.00 accuracy 25.00 x -5.680 y +18.537 z -28.310 @ 2018-01-18 03:32:35 +0000
         ////print("did update heading newHeading=\(newHeading)")
+        
+        // headingAccuracy : 如果是负数,代表当前设备朝向不可用
+        // 方向的精度
+        if newHeading.headingAccuracy >= 0{
+            // trueHeading : 真北
+            // 真实方向（真北始终指向地理北极点）
+            self.heading = newHeading.trueHeading
+        }else{
+            // magneticHeading : 距离磁北方向的角度
+            // 磁极方向（磁北对应于随时间变化的地球磁场极点）
+            self.heading = newHeading.magneticHeading
+        }
+        
+        
+        self.currentHeadingAccuracy = newHeading.headingAccuracy
+        
+        // 角度
+        //CLLocationDirection angle = newHeading.magneticHeading;
+        // 角度-> 弧度
+        //double radius = angle / 180.0 * M_PI;
     }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         //print("did update locations \(locations.count) \(locations)")
