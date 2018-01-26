@@ -20,6 +20,9 @@ class MoveModuleByLocationViewController: UIViewController {
     private var previewNode: PreviewNode!
     private var endLocation: CLLocation!
     
+    var infoLab: UILabel!
+    var updateInfoLabelTimer: Timer!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -57,6 +60,25 @@ class MoveModuleByLocationViewController: UIViewController {
         previewNode.position = SCNVector3(x: 0, y: 0, z: 0)
         
         sceneView.scene.rootNode.addChildNode(previewNode)
+        
+        infoLab = UILabel()
+        infoLab.backgroundColor = UIColor(white: 0.3, alpha: 0.3)
+        infoLab.frame = CGRect(x: 6, y: 200, width: self.view.frame.size.width - 12, height: 14 * 4)
+        
+        infoLab.font = UIFont.systemFont(ofSize: 10)
+        infoLab.textAlignment = .left
+        infoLab.textColor = UIColor.white
+        infoLab.numberOfLines = 0
+        sceneView.addSubview(infoLab)
+        
+        updateInfoLabelTimer = Timer.scheduledTimer(
+            timeInterval: 0.1,
+            target: self,
+            selector: #selector(self.updateInfoLabel),
+            userInfo: nil,
+            repeats: true)
+        
+        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -72,6 +94,11 @@ class MoveModuleByLocationViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
+        if updateInfoLabelTimer != nil{
+            updateInfoLabelTimer.invalidate()
+            updateInfoLabelTimer = nil
+        }
+        
         locationService.stopLocation()
         
         sceneView.session.pause()
@@ -82,6 +109,27 @@ class MoveModuleByLocationViewController: UIViewController {
         let config = ARWorldTrackingConfiguration()
         config.worldAlignment = .gravityAndHeading
         sceneView.session.run(config)
+    }
+    @objc func updateInfoLabel() {
+        // 摄像头 相对于 previewNode 的 position
+        let position = sceneView.scene.rootNode.convertPosition(sceneView.pointOfView!.position, to: previewNode)
+        infoLab.text = "x: \(String(format: "%.2f", position.x)), y: \(String(format: "%.2f", position.y)), z: \(String(format: "%.2f", position.z))\n"
+        
+        if let eulerAngles = sceneView.pointOfView?.eulerAngles {
+            infoLab.text!.append("Euler x: \(String(format: "%.2f", eulerAngles.x)), y: \(String(format: "%.2f", eulerAngles.y)), z: \(String(format: "%.2f", eulerAngles.z))\n")
+        }
+        
+        if let heading = locationService.heading,
+            let accuracy = locationService.currentHeadingAccuracy{
+            infoLab.text!.append("Heading: \(heading)º, accuracy: \(Int(round(accuracy)))º\n")
+        }
+        
+        let date = Date()
+        let comp = Calendar.current.dateComponents([.hour, .minute, .second, .nanosecond], from: date)
+        
+        if let hour = comp.hour, let minute = comp.minute, let second = comp.second, let nanosecond = comp.nanosecond {
+            infoLab.text!.append("\(String(format: "%02d", hour)):\(String(format: "%02d", minute)):\(String(format: "%02d", second)):\(String(format: "%03d", nanosecond / 1000000))")
+        }
     }
     @objc func move(sender: Any?){
         guard let location = locationService.currentLocation else { return }
