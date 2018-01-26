@@ -4,6 +4,8 @@
 
 .DS_Store
 */.DS_Store
+
+*.mlmodel
 */*.mlmodel
 
 ## Build generated
