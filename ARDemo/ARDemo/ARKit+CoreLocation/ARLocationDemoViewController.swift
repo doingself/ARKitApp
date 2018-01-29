@@ -12,62 +12,68 @@ import CoreLocation
 
 class ARLocationDemoViewController: UIViewController {
     
-    private lazy var locationService: LocationService = {
-        return LocationService()
-    }()
+    private var sceneLocationView: SceneLocationView!
     
-    private var sceneView: ARSCNView!
-    private var previewNode: PreviewNode!
-    private var endLocation: CLLocation!
-    
-    var infoLab: UILabel!
-    var updateInfoLabelTimer: Timer!
+    private var infoLabel: UILabel!
+    private var updateInfoLabelTimer: Timer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        self.navigationItem.title = "ar + location"
+        self.navigationItem.title = "ARKit+CoreLocation"
         self.view.backgroundColor = UIColor.white
         
+        sceneLocationView = SceneLocationView(frame: self.view.bounds)
         
-        let move = UIBarButtonItem(title: "move", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.move(sender:)))
-        let addZ = UIBarButtonItem(title: "addZ", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.addZ(sender:)))
-        let reset = UIBarButtonItem(title: "reset", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.reset(sender:)))
-        self.navigationItem.rightBarButtonItems = [move, addZ, reset]
+        self.view.addSubview(sceneLocationView)
+        sceneLocationView.automaticallyUpdatesLighting = true
+        sceneLocationView.autoenablesDefaultLighting = true
+        sceneLocationView.showsStatistics = true
+        sceneLocationView.debugOptions = [ARSCNDebugOptions.showWorldOrigin, ARSCNDebugOptions.showFeaturePoints]
         
-        // 获取位置信息
-        locationService.startLocation()
+        sceneLocationView.locationDelegate = self
+        sceneLocationView.showAxesNode = true
+        sceneLocationView.showFeaturePoints = true
+        //sceneLocationView.orientToTrueNorth = false
+        //sceneLocationView.locationEstimateMethod = .coreLocationDataOnly
         
-        // ar kit
-        sceneView = ARSCNView(frame: self.view.bounds)
-        self.view.addSubview(sceneView)
-        sceneView.delegate = self
-        sceneView.automaticallyUpdatesLighting = true
-        sceneView.autoenablesDefaultLighting = true
-        sceneView.showsStatistics = true
-        sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin, ARSCNDebugOptions.showFeaturePoints]
         
+        // 使用指定坐标添加 LocationNode
+        let coordinate = CLLocationCoordinate2D(latitude: 39.881969601674015, longitude: 116.42249838655647)
+        let location = CLLocation(coordinate: coordinate, altitude: 40)
         
         // scn scene
         let modelScene = SCNScene(named: "art.scnassets/cup/cup.scn")!
         let cup = modelScene.rootNode.childNodes[0]
-        previewNode = PreviewNode(node: cup)
         
-        previewNode.scale = SCNVector3(x: 0.1, y: 0.1, z: 0.1)
-        previewNode.position = SCNVector3(x: 0, y: 0, z: 0)
+        let billboardConstraint = SCNBillboardConstraint()
+        billboardConstraint.freeAxes = SCNBillboardAxis.Y
         
-        sceneView.scene.rootNode.addChildNode(previewNode)
+        let locationNode = LocationNode(location: location)
+        locationNode.addChildNode(cup)
+        locationNode.constraints = [billboardConstraint]
+        sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: locationNode)
         
-        infoLab = UILabel()
-        infoLab.backgroundColor = UIColor(white: 0.3, alpha: 0.3)
-        infoLab.frame = CGRect(x: 6, y: 200, width: self.view.frame.size.width - 12, height: 14 * 4)
+        // 使用指定坐标添加 LocationAnnotationNode
+        //Currently set to Canary Wharf
+        //let from: CLLocation = CLLocation(latitude: 116.4225172340665, longitude: 39.88199646)
+        let pinCoordinate = CLLocationCoordinate2D(latitude: 39.881967024287711, longitude: 116.42248145989811)
+        let pinLocation = CLLocation(coordinate: pinCoordinate, altitude: 236)
+        let pinImage = UIImage(named: "grass.jpg")!
+        let pinLocationNode = LocationAnnotationNode(location: pinLocation, image: pinImage)
+        sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: pinLocationNode)
         
-        infoLab.font = UIFont.systemFont(ofSize: 10)
-        infoLab.textAlignment = .left
-        infoLab.textColor = UIColor.white
-        infoLab.numberOfLines = 0
-        sceneView.addSubview(infoLab)
+        
+        infoLabel = UILabel()
+        infoLabel.backgroundColor = UIColor(white: 0.3, alpha: 0.3)
+        infoLabel.frame = CGRect(x: 6, y: 200, width: self.view.frame.size.width - 12, height: 14 * 4)
+        
+        infoLabel.font = UIFont.systemFont(ofSize: 10)
+        infoLabel.textAlignment = .left
+        infoLabel.textColor = UIColor.white
+        infoLabel.numberOfLines = 0
+        sceneLocationView.addSubview(infoLabel)
         
         updateInfoLabelTimer = Timer.scheduledTimer(
             timeInterval: 0.1,
@@ -85,7 +91,7 @@ class ARLocationDemoViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        sessionRun()
+        sceneLocationView.run()
         
         UIApplication.shared.isIdleTimerDisabled = true
     }
@@ -97,78 +103,80 @@ class ARLocationDemoViewController: UIViewController {
             updateInfoLabelTimer = nil
         }
         
-        locationService.stopLocation()
-        
-        sceneView.session.pause()
+        sceneLocationView.pause()
         
         UIApplication.shared.isIdleTimerDisabled = false
     }
-    func sessionRun(){
-        let config = ARWorldTrackingConfiguration()
-        config.worldAlignment = .gravityAndHeading
-        sceneView.session.run(config)
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        print("view did layout subviews")
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        
+//        // 使用当前位置添加 LocationAnnotationNode
+//        let image = UIImage(named: "grass.jpg")!
+//        let annotationNode = LocationAnnotationNode(location: nil, image: image)
+//        annotationNode.scaleRelativeToDistance = true
+//        sceneLocationView.addLocationNodeForCurrentPosition(locationNode: annotationNode)
+        
+        
+        // 使用当前位置添加 LocationNode
+        let modelScene = SCNScene(named: "art.scnassets/cup/cup.scn")!
+        let cup = modelScene.rootNode.childNodes[0]
+        
+        let billboardConstraint = SCNBillboardConstraint()
+        billboardConstraint.freeAxes = SCNBillboardAxis.Y
+        
+        let annotationNode = LocationNode(location: nil)
+        annotationNode.constraints = [billboardConstraint]
+        annotationNode.addChildNode(cup)
+        
+        sceneLocationView.addLocationNodeForCurrentPosition(locationNode: annotationNode)        
     }
     @objc func updateInfoLabel() {
-        // 摄像头 相对于 previewNode 的 position
-        let position = sceneView.scene.rootNode.convertPosition(sceneView.pointOfView!.position, to: previewNode)
-        infoLab.text = "x: \(String(format: "%.2f", position.x)), y: \(String(format: "%.2f", position.y)), z: \(String(format: "%.2f", position.z))\n"
-        
-        if let eulerAngles = sceneView.pointOfView?.eulerAngles {
-            infoLab.text!.append("Euler x: \(String(format: "%.2f", eulerAngles.x)), y: \(String(format: "%.2f", eulerAngles.y)), z: \(String(format: "%.2f", eulerAngles.z))\n")
+        if let position = sceneLocationView.currentScenePosition() {
+            infoLabel.text = "x: \(String(format: "%.2f", position.x)), y: \(String(format: "%.2f", position.y)), z: \(String(format: "%.2f", position.z))\n"
         }
         
-        if let heading = locationService.heading,
-            let accuracy = locationService.currentHeadingAccuracy{
-            infoLab.text!.append("Heading: \(heading)º, accuracy: \(Int(round(accuracy)))º\n")
+        if let eulerAngles = sceneLocationView.currentEulerAngles() {
+            infoLabel.text!.append("Euler x: \(String(format: "%.2f", eulerAngles.x)), y: \(String(format: "%.2f", eulerAngles.y)), z: \(String(format: "%.2f", eulerAngles.z))\n")
+        }
+        
+        if let heading = sceneLocationView.locationManager.heading,
+            let accuracy = sceneLocationView.locationManager.headingAccuracy {
+            infoLabel.text!.append("Heading: \(heading)º, accuracy: \(Int(round(accuracy)))º\n")
         }
         
         let date = Date()
         let comp = Calendar.current.dateComponents([.hour, .minute, .second, .nanosecond], from: date)
         
         if let hour = comp.hour, let minute = comp.minute, let second = comp.second, let nanosecond = comp.nanosecond {
-            infoLab.text!.append("\(String(format: "%02d", hour)):\(String(format: "%02d", minute)):\(String(format: "%02d", second)):\(String(format: "%03d", nanosecond / 1000000))")
+            infoLabel.text!.append("\(String(format: "%02d", hour)):\(String(format: "%02d", minute)):\(String(format: "%02d", second)):\(String(format: "%03d", nanosecond / 1000000))")
         }
     }
-    @objc func move(sender: Any?){
-        guard let location = locationService.currentLocation else { return }
-        if endLocation == nil {
-            endLocation = location
-            return
-        }
-        
-        previewNode.moveFrom(location: endLocation, to: location)
-        endLocation = location
-    }
-    @objc func addZ(sender: Any?){
-        
-        //print("previewNode = \(previewNode)")
-        //print("position = \(previewNode.position)")
-        //print("simdPosition = \(previewNode.simdPosition)")
-        //print("worldPosition = \(previewNode.worldPosition)")
-        //print("simdWorldPosition = \(previewNode.simdWorldPosition)")
-        //print("transform = \(previewNode.transform)")
-        //print("simdTransform = \(previewNode.simdTransform)")
-        //print("worldTransform = \(previewNode.worldTransform)")
-        //print("simdWorldTransform = \(previewNode.simdWorldTransform)")
-        
-        SCNTransaction.begin()
-        SCNTransaction.animationDuration = 5
-        
-        let position: SCNVector3 = previewNode.position
-        previewNode.position = SCNVector3(x: position.x, y: position.y, z: position.z - 0.1)
-        
-        SCNTransaction.commit()
-    }
-    @objc func reset(sender: Any?){
-        SCNTransaction.begin()
-        SCNTransaction.animationDuration = 5
-        
-        previewNode.position = SCNVector3(x: 0, y: 0, z: 0)
-        
-        SCNTransaction.commit()
-    }
-    
 }
-extension ARLocationDemoViewController: ARSCNViewDelegate{
+extension ARLocationDemoViewController: SceneLocationViewDelegate{
     
+    //MARK: SceneLocationViewDelegate
+    
+    func sceneLocationViewDidAddSceneLocationEstimate(sceneLocationView: SceneLocationView, position: SCNVector3, location: CLLocation) {
+        print("SceneLocationViewDelegate + add scene location estimate, position: \(position), location: \(location.coordinate), accuracy: \(location.horizontalAccuracy), date: \(location.timestamp)")
+    }
+    
+    func sceneLocationViewDidRemoveSceneLocationEstimate(sceneLocationView: SceneLocationView, position: SCNVector3, location: CLLocation) {
+        print("SceneLocationViewDelegate + remove scene location estimate, position: \(position), location: \(location.coordinate), accuracy: \(location.horizontalAccuracy), date: \(location.timestamp)")
+    }
+    
+    func sceneLocationViewDidConfirmLocationOfNode(sceneLocationView: SceneLocationView, node: LocationNode) {
+        print("SceneLocationViewDelegate + did confirm location of node = \(node)")
+    }
+    
+    func sceneLocationViewDidSetupSceneNode(sceneLocationView: SceneLocationView, sceneNode: SCNNode) {
+        print("SceneLocationViewDelegate + did setup scene node = \(sceneNode)")
+    }
+    
+    func sceneLocationViewDidUpdateLocationAndScaleOfLocationNode(sceneLocationView: SceneLocationView, locationNode: LocationNode) {
+        //print("SceneLocationViewDelegate + did update location and scale of location node")
+    }
 }
