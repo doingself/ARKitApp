@@ -13,7 +13,7 @@ import CoreLocation
 class ARLocationDemoViewController: UIViewController {
     
     private var sceneLocationView: SceneLocationView!
-    
+    private var annotationNode: LocationNode!
     private var infoLabel: UILabel!
     private var updateInfoLabelTimer: Timer!
     
@@ -120,19 +120,26 @@ class ARLocationDemoViewController: UIViewController {
 //        annotationNode.scaleRelativeToDistance = true
 //        sceneLocationView.addLocationNodeForCurrentPosition(locationNode: annotationNode)
         
-        
-        // 使用当前位置添加 LocationNode
-        let modelScene = SCNScene(named: "art.scnassets/cup/cup.scn")!
-        let cup = modelScene.rootNode.childNodes[0]
-        
-        let billboardConstraint = SCNBillboardConstraint()
-        billboardConstraint.freeAxes = SCNBillboardAxis.Y
-        
-        let annotationNode = LocationNode(location: nil)
-        annotationNode.constraints = [billboardConstraint]
-        annotationNode.addChildNode(cup)
-        
-        sceneLocationView.addLocationNodeForCurrentPosition(locationNode: annotationNode)        
+        if annotationNode == nil{
+            // 使用当前位置添加 LocationNode
+            let modelScene = SCNScene(named: "art.scnassets/cup/cup.scn")!
+            let cup = modelScene.rootNode.childNodes[0]
+            
+            let billboardConstraint = SCNBillboardConstraint()
+            billboardConstraint.freeAxes = SCNBillboardAxis.Y
+            
+            annotationNode = LocationNode(location: nil)
+            annotationNode.constraints = [billboardConstraint]
+            annotationNode.addChildNode(cup)
+            
+            sceneLocationView.addLocationNodeForCurrentPosition(locationNode: annotationNode)
+        }else{
+            // 移动到当前位置
+            guard let location = sceneLocationView.currentLocation() else {return}
+            annotationNode.location = location
+            annotationNode.locationConfirmed = true
+            sceneLocationView.updatePositionAndScaleOfLocationNode(locationNode: annotationNode, initialSetup: true, animated: true)
+        }
     }
     @objc func updateInfoLabel() {
         if let position = sceneLocationView.currentScenePosition() {

@@ -129,7 +129,7 @@ class TabViewController: UIViewController {
             // ARKit+CoreLocation https://github.com/ProjectDent/ARKit-CoreLocation
             6:[
                 [vc: ARLocationDemoViewController(),
-                 navTitle: "ARKit+CoreLocation"]                
+                 navTitle: "ARKit+CoreLocation"]
             ],
         ]
         return dict
