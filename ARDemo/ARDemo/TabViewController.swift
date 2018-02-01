@@ -129,6 +129,9 @@ class TabViewController: UIViewController {
             // ARKit+CoreLocation https://github.com/ProjectDent/ARKit-CoreLocation
             6:[
                 [vc: ARLocationDemoViewController(),
+                 navTitle: "SceneLocationView(ARKit+CoreLocation) Demo"],
+                
+                [vc: ARLocationViewController(),
                  navTitle: "ARKit+CoreLocation"]
             ],
         ]

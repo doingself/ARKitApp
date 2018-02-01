@@ -1,5 +1,5 @@
 //
-//  ARLocationDemoViewController.swift
+//  SceneLocationViewDemoViewController.swift
 //  ARDemo
 //
 //  Created by 623971951 on 2018/1/26.
@@ -10,7 +10,7 @@ import UIKit
 import ARKit
 import CoreLocation
 
-class ARLocationDemoViewController: UIViewController {
+class SceneLocationViewDemoViewController: UIViewController {
     
     private var sceneLocationView: SceneLocationView!
     private var annotationNode: LocationNode!
@@ -21,7 +21,7 @@ class ARLocationDemoViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        self.navigationItem.title = "ARKit+CoreLocation"
+        self.navigationItem.title = "SceneLocationView(ARKit+CoreLocation) Demo"
         self.view.backgroundColor = UIColor.white
         
         sceneLocationView = SceneLocationView(frame: self.view.bounds)
@@ -163,7 +163,7 @@ class ARLocationDemoViewController: UIViewController {
         }
     }
 }
-extension ARLocationDemoViewController: SceneLocationViewDelegate{
+extension SceneLocationViewDemoViewController: SceneLocationViewDelegate{
     
     //MARK: SceneLocationViewDelegate
     

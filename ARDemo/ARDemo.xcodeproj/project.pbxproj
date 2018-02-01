@@ -15,7 +15,7 @@
 		1903118A20109AB60001C25D /* CoreML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1903118920109AB60001C25D /* CoreML.framework */; };
 		1903118C20109AC50001C25D /* Vision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1903118B20109AC50001C25D /* Vision.framework */; };
 		1903118E20109AEB0001C25D /* MLDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1903118D20109AEB0001C25D /* MLDemoViewController.swift */; };
-		19163B8F201B00DC00465198 /* ARLocationDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19163B8E201B00DC00465198 /* ARLocationDemoViewController.swift */; };
+		19163B8F201B00DC00465198 /* SceneLocationViewDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19163B8E201B00DC00465198 /* SceneLocationViewDemoViewController.swift */; };
 		19163B9B201B2EE300465198 /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19163B91201B2EE300465198 /* CGPoint+Extensions.swift */; };
 		19163B9C201B2EE300465198 /* CLLocation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19163B92201B2EE300465198 /* CLLocation+Extensions.swift */; };
 		19163B9D201B2EE300465198 /* FloatingPoint+Radians.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19163B93201B2EE300465198 /* FloatingPoint+Radians.swift */; };
@@ -35,6 +35,7 @@
 		1940D21C1FF34BC80018914F /* OneARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1940D21B1FF34BC80018914F /* OneARViewController.swift */; };
 		1940D2481FF369480018914F /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 1940D2471FF369480018914F /* art.scnassets */; };
 		1940D24A1FF378F60018914F /* TwoARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1940D2491FF378F60018914F /* TwoARViewController.swift */; };
+		1941A2E22022E7650071D2AC /* ARLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1941A2E12022E7650071D2AC /* ARLocationViewController.swift */; };
 		19452D2C2019AFA200F9C095 /* MoveModuleByLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19452D2B2019AFA200F9C095 /* MoveModuleByLocationViewController.swift */; };
 		19483E4D1FFDBAB800ED72F9 /* NineARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19483E4C1FFDBAB800ED72F9 /* NineARViewController.swift */; };
 		194A10752011D8B900D83E8A /* Inceptionv3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 194A10742011D8B900D83E8A /* Inceptionv3.mlmodel */; };
@@ -74,7 +75,7 @@
 		1903118920109AB60001C25D /* CoreML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreML.framework; path = System/Library/Frameworks/CoreML.framework; sourceTree = SDKROOT; };
 		1903118B20109AC50001C25D /* Vision.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Vision.framework; path = System/Library/Frameworks/Vision.framework; sourceTree = SDKROOT; };
 		1903118D20109AEB0001C25D /* MLDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLDemoViewController.swift; sourceTree = "<group>"; };
-		19163B8E201B00DC00465198 /* ARLocationDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARLocationDemoViewController.swift; sourceTree = "<group>"; };
+		19163B8E201B00DC00465198 /* SceneLocationViewDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneLocationViewDemoViewController.swift; sourceTree = "<group>"; };
 		19163B91201B2EE300465198 /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extensions.swift"; sourceTree = "<group>"; };
 		19163B92201B2EE300465198 /* CLLocation+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CLLocation+Extensions.swift"; sourceTree = "<group>"; };
 		19163B93201B2EE300465198 /* FloatingPoint+Radians.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FloatingPoint+Radians.swift"; sourceTree = "<group>"; };
@@ -99,6 +100,7 @@
 		1940D2401FF367730018914F /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = System/Library/Frameworks/SceneKit.framework; sourceTree = SDKROOT; };
 		1940D2471FF369480018914F /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		1940D2491FF378F60018914F /* TwoARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoARViewController.swift; sourceTree = "<group>"; };
+		1941A2E12022E7650071D2AC /* ARLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARLocationViewController.swift; sourceTree = "<group>"; };
 		19452D2B2019AFA200F9C095 /* MoveModuleByLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveModuleByLocationViewController.swift; sourceTree = "<group>"; };
 		19483E4C1FFDBAB800ED72F9 /* NineARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NineARViewController.swift; sourceTree = "<group>"; };
 		194A10742011D8B900D83E8A /* Inceptionv3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Inceptionv3.mlmodel; sourceTree = "<group>"; };
@@ -170,7 +172,8 @@
 			isa = PBXGroup;
 			children = (
 				19163B90201B2EE300465198 /* Source */,
-				19163B8E201B00DC00465198 /* ARLocationDemoViewController.swift */,
+				19163B8E201B00DC00465198 /* SceneLocationViewDemoViewController.swift */,
+				1941A2E12022E7650071D2AC /* ARLocationViewController.swift */,
 			);
 			path = "ARKit+CoreLocation";
 			sourceTree = "<group>";
@@ -379,7 +382,7 @@
 				19E1FD6720036C2600F6165F /* ARSCNView+HitTests.swift in Sources */,
 				19E1FD6120036BC700F6165F /* TenARViewController.swift in Sources */,
 				194A10772011E72400D83E8A /* ML_ImgViewController.swift in Sources */,
-				19163B8F201B00DC00465198 /* ARLocationDemoViewController.swift in Sources */,
+				19163B8F201B00DC00465198 /* SceneLocationViewDemoViewController.swift in Sources */,
 				19163BA0201B2EE300465198 /* SceneLocationEstimate+Extensions.swift in Sources */,
 				19E1FD6620036C2600F6165F /* Utilities.swift in Sources */,
 				19E1FD6820036C2600F6165F /* PreviewNode.swift in Sources */,
@@ -401,6 +404,7 @@
 				19B68B271FFCCC360027EDFC /* EightARViewController.swift in Sources */,
 				1903118E20109AEB0001C25D /* MLDemoViewController.swift in Sources */,
 				196B0AC2200C860E00B144EF /* TwelveARViewController.swift in Sources */,
+				1941A2E22022E7650071D2AC /* ARLocationViewController.swift in Sources */,
 				19F9656720187AF400F042AF /* SavemeByLocationViewController.swift in Sources */,
 				197F5B931FF39BDF00F693B7 /* FourARViewController.swift in Sources */,
 				19EE03272016FD4A0078ED25 /* UIImageExtension.swift in Sources */,
