@@ -42,6 +42,8 @@ class LocationService: NSObject {
         locationManager.pausesLocationUpdatesAutomatically = false
         //发送授权申请
         locationManager.requestWhenInUseAuthorization()
+        
+        self.currentLocation = self.locationManager.location
     }
     // 开始定位
     func startLocation(){
@@ -214,6 +216,11 @@ extension LocationService: CLLocationManagerDelegate{
         //print("did update locations \(locations.count) \(locations)")
         
         //获取坐标
+        guard let managerLocation:CLLocation = manager.location else{ return }
+        currentLocation = managerLocation
+        print("\(#function) current location = \(currentLocation!.coordinate)")
+        /*
+        //获取坐标
         guard let currLoca:CLLocation = locations.last else{ return }
         currentLocation = currLoca
         //打印经纬度
@@ -231,5 +238,6 @@ extension LocationService: CLLocationManagerDelegate{
         locationToPlacemark(location: managerLocation)
         // 根据 地名 获取 经纬度
         cityToPlacemark(addressStr: "北京体育馆")
+        */
     }
 }

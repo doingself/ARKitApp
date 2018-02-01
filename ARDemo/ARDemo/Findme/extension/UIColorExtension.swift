@@ -10,8 +10,13 @@ import Foundation
 import UIKit
 
 extension UIColor {
-    func randomColor() -> UIColor {
-        return UIColor.white
+    // 随机颜色
+    class func randomColor() -> UIColor{
+        let r = CGFloat(arc4random_uniform(256))/255
+        let g = CGFloat(arc4random_uniform(256))/255
+        let b = CGFloat(arc4random_uniform(256))/255
+        
+        return UIColor(red: r, green: g, blue: b, alpha: 1.0)
     }
 }
 
