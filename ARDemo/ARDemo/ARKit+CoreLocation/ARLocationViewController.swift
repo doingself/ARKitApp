@@ -51,6 +51,46 @@ class ARLocationViewController: UIViewController {
         configure.planeDetection = .horizontal
         configure.worldAlignment = .gravityAndHeading
         sceneView.session.run(configure, options: [])
+        
+        // x
+        let x = getxyz(text: "x", position: SCNVector3(0.2, 0, 0))
+        let y = getxyz(text: "y", position: SCNVector3(0, 0.2, 0))
+        let z = getxyz(text: "z", position: SCNVector3(0, 0, 0.2))
+        
+        sceneNode.addChildNode(x)
+        sceneNode.addChildNode(y)
+        sceneNode.addChildNode(z)
+    }
+    private func getxyz(text: String, position: SCNVector3) -> SCNNode{
+        
+        let sphereMaterial = SCNMaterial()
+        sphereMaterial.diffuse.contents = UIColor.red //整個小球都是橘色的
+        
+        let sphere = SCNSphere(radius: 0.05) // 1 cm 的小球幾何形狀
+        sphere.firstMaterial = sphereMaterial
+        
+        let sphereNode = SCNNode(geometry: sphere) // 創建了一個球狀的節點
+        
+        // 文字
+        let textGeo = SCNText(string: text, extrusionDepth: 0)
+        textGeo.alignmentMode = kCAAlignmentCenter
+        textGeo.firstMaterial?.diffuse.contents = UIColor.black
+        textGeo.firstMaterial?.specular.contents = UIColor.white
+        textGeo.firstMaterial?.isDoubleSided = true
+        textGeo.font = UIFont(name: "Futura", size: 1)
+        
+        let textNode = SCNNode(geometry: textGeo)
+        textNode.scale = SCNVector3Make(0.2, 0.2, 0.2)
+        
+        let constraint = SCNBillboardConstraint()
+        constraint.freeAxes = .Y
+        
+        let parentNode = SCNNode()
+        parentNode.constraints = [constraint]
+        parentNode.addChildNode(sphereNode)
+        parentNode.addChildNode(textNode)
+        parentNode.position = position
+        return parentNode
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -65,9 +105,10 @@ class ARLocationViewController: UIViewController {
     
     // MARK: setup ui
     private func setupBarBtnItem(){
-        let save = UIBarButtonItem(title: "暂存", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.barBtnItemAction(sender:)))
-        let update = UIBarButtonItem(title: "放置", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.barBtnItemAction2(sender:)))
-        self.navigationItem.rightBarButtonItems = [save, update]
+        let save = UIBarButtonItem(title: "暂存", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.saveLocation(sender:)))
+        let update = UIBarButtonItem(title: "放置", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.moveToLocation(sender:)))
+        let remove = UIBarButtonItem(title: "移除", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.removeNode(sender:)))
+        self.navigationItem.rightBarButtonItems = [save, update, remove]
     }
     private func setupGesture(){
         // tap
@@ -126,6 +167,12 @@ class ARLocationViewController: UIViewController {
         if let position = currentScenePosition(){
             infoLabel.text?.append("\n current position = \(position)")
         }
+        
+        if cupNode != nil {
+            infoLabel.text?.append("\n cupNode location = \(cupNode.location.coordinate)")
+            infoLabel.text?.append("\n cupNode position = \(cupNode.position)")
+        }
+        
         if let eulerAngles = sceneView.pointOfView?.eulerAngles{
             infoLabel.text?.append("\n euler angles = \(eulerAngles)")
         }
@@ -142,14 +189,32 @@ class ARLocationViewController: UIViewController {
             infoLabel.text!.append("\(String(format: "%02d", hour)):\(String(format: "%02d", minute)):\(String(format: "%02d", second)):\(String(format: "%03d", nanosecond / 1000000))\n")
         }
     }
+    
     // MARK: bar button item
-    @objc func barBtnItemAction(sender: Any?){
+    @objc func removeNode(sender: Any?){
+        for node in sceneNode.childNodes{
+            if node is LocationNode{
+                node.removeFromParentNode()
+            }
+        }
+        cupNode = nil
+    }
+    @objc func saveLocation(sender: Any?){
         if let location = locationService.currentLocation {
             tempLocation = location
         }
     }
-    @objc func barBtnItemAction2(sender: Any?){
+    @objc func moveToLocation(sender: Any?){
         if tempLocation != nil {
+//            let modelScene = SCNScene(named: "art.scnassets/cup/cup.scn")!
+//            let cup = modelScene.rootNode.childNodes[0]
+//            // 添加到指定位置
+//            let locationNode = LocationNode(location: tempLocation)
+//            locationNode.addChildNode(cup)
+//            addLocationNodeWithConfirmedLocation(locationNode: locationNode)
+            
+            
+            // 移动到指定位置
             cupNode.location = tempLocation
             updatePositionAndScaleOfLocationNode(locationNode: cupNode, animated: true, duration: 10)
         }

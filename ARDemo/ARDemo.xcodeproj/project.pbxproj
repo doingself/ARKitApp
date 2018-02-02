@@ -21,7 +21,6 @@
 		19163B9D201B2EE300465198 /* FloatingPoint+Radians.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19163B93201B2EE300465198 /* FloatingPoint+Radians.swift */; };
 		19163B9E201B2EE300465198 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19163B94201B2EE300465198 /* LocationManager.swift */; };
 		19163B9F201B2EE300465198 /* LocationNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19163B95201B2EE300465198 /* LocationNode.swift */; };
-		19163BA0201B2EE300465198 /* SceneLocationEstimate+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19163B96201B2EE300465198 /* SceneLocationEstimate+Extensions.swift */; };
 		19163BA1201B2EE300465198 /* SceneLocationEstimate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19163B97201B2EE300465198 /* SceneLocationEstimate.swift */; };
 		19163BA2201B2EE300465198 /* SceneLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19163B98201B2EE300465198 /* SceneLocationView.swift */; };
 		19163BA3201B2EE300465198 /* SCNNode+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19163B99201B2EE300465198 /* SCNNode+Extensions.swift */; };
@@ -81,7 +80,6 @@
 		19163B93201B2EE300465198 /* FloatingPoint+Radians.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FloatingPoint+Radians.swift"; sourceTree = "<group>"; };
 		19163B94201B2EE300465198 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		19163B95201B2EE300465198 /* LocationNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationNode.swift; sourceTree = "<group>"; };
-		19163B96201B2EE300465198 /* SceneLocationEstimate+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SceneLocationEstimate+Extensions.swift"; sourceTree = "<group>"; };
 		19163B97201B2EE300465198 /* SceneLocationEstimate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneLocationEstimate.swift; sourceTree = "<group>"; };
 		19163B98201B2EE300465198 /* SceneLocationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneLocationView.swift; sourceTree = "<group>"; };
 		19163B99201B2EE300465198 /* SCNNode+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SCNNode+Extensions.swift"; sourceTree = "<group>"; };
@@ -186,7 +184,6 @@
 				19163B93201B2EE300465198 /* FloatingPoint+Radians.swift */,
 				19163B94201B2EE300465198 /* LocationManager.swift */,
 				19163B95201B2EE300465198 /* LocationNode.swift */,
-				19163B96201B2EE300465198 /* SceneLocationEstimate+Extensions.swift */,
 				19163B97201B2EE300465198 /* SceneLocationEstimate.swift */,
 				19163B98201B2EE300465198 /* SceneLocationView.swift */,
 				19163B99201B2EE300465198 /* SCNNode+Extensions.swift */,
@@ -383,7 +380,6 @@
 				19E1FD6120036BC700F6165F /* TenARViewController.swift in Sources */,
 				194A10772011E72400D83E8A /* ML_ImgViewController.swift in Sources */,
 				19163B8F201B00DC00465198 /* SceneLocationViewDemoViewController.swift in Sources */,
-				19163BA0201B2EE300465198 /* SceneLocationEstimate+Extensions.swift in Sources */,
 				19E1FD6620036C2600F6165F /* Utilities.swift in Sources */,
 				19E1FD6820036C2600F6165F /* PreviewNode.swift in Sources */,
 				1940D24A1FF378F60018914F /* TwoARViewController.swift in Sources */,
