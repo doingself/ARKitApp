@@ -31,12 +31,13 @@ class MoveModuleByLocationViewController: UIViewController {
         self.view.backgroundColor = UIColor.white
         
         
-        let move = UIBarButtonItem(title: "move", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.move(sender:)))
+        let save = UIBarButtonItem(title: "保存当前坐标", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.save(sender:)))
+        let move = UIBarButtonItem(title: "移动到保存的坐标", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.move(sender:)))
         let addX = UIBarButtonItem(title: "addX", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.addX(sender:)))
         let addY = UIBarButtonItem(title: "addY", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.addY(sender:)))
         let addZ = UIBarButtonItem(title: "addZ", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.addZ(sender:)))
         let reset = UIBarButtonItem(title: "reset", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.reset(sender:)))
-        self.navigationItem.rightBarButtonItems = [move, addX, addY, addZ, reset]
+        self.navigationItem.rightBarButtonItems = [save, move, addX, addY, addZ, reset]
         
         // 获取位置信息
         locationService.startLocation()
@@ -63,7 +64,7 @@ class MoveModuleByLocationViewController: UIViewController {
         
         infoLab = UILabel()
         infoLab.backgroundColor = UIColor(white: 0.3, alpha: 0.3)
-        infoLab.frame = CGRect(x: 6, y: 200, width: self.view.frame.size.width - 12, height: 14 * 4)
+        infoLab.frame = CGRect(x: 6, y: 200, width: self.view.frame.size.width - 12, height: 14 * 10)
         
         infoLab.font = UIFont.systemFont(ofSize: 10)
         infoLab.textAlignment = .left
@@ -107,6 +108,7 @@ class MoveModuleByLocationViewController: UIViewController {
     }
     func sessionRun(){
         let config = ARWorldTrackingConfiguration()
+        config.planeDetection = .horizontal
         config.worldAlignment = .gravityAndHeading
         sceneView.session.run(config)
     }
@@ -124,6 +126,13 @@ class MoveModuleByLocationViewController: UIViewController {
             infoLab.text!.append("Heading: \(heading)º, accuracy: \(Int(round(accuracy)))º\n")
         }
         
+        if let location = locationService.currentLocation {
+            infoLab.text!.append("f location = \(location.coordinate)\n")
+        }
+        if endLocation != nil {
+            infoLab.text!.append("t location = \(endLocation.coordinate)\n")
+        }
+        
         let date = Date()
         let comp = Calendar.current.dateComponents([.hour, .minute, .second, .nanosecond], from: date)
         
@@ -131,15 +140,15 @@ class MoveModuleByLocationViewController: UIViewController {
             infoLab.text!.append("\(String(format: "%02d", hour)):\(String(format: "%02d", minute)):\(String(format: "%02d", second)):\(String(format: "%03d", nanosecond / 1000000))")
         }
     }
+    @objc func save(sender: Any?){
+        guard let location = locationService.currentLocation else { return }
+        endLocation = location
+    }
     @objc func move(sender: Any?){
         guard let location = locationService.currentLocation else { return }
-        if endLocation == nil {
-            endLocation = location
-            return
+        if endLocation != nil {
+            previewNode.moveFrom(location: endLocation, to: location)
         }
-        
-        previewNode.moveFrom(location: endLocation, to: location)
-        endLocation = location
     }
     @objc func addX(sender: Any?){
         

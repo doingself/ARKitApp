@@ -160,11 +160,12 @@ class ARLocationViewController: UIViewController {
             // scn scene
             let modelScene = SCNScene(named: "art.scnassets/cup/cup.scn")!
             let cup = modelScene.rootNode.childNodes[0]
-            
+            // 添加到当前位置
             cupNode = LocationNode(location: nil)
             cupNode.addChildNode(cup)
             addLocationNodeForCurrentPosition(locationNode: cupNode)
         }else{
+            // 移动到当前位置
             cupNode.location = currentLocation()
             updatePositionAndScaleOfLocationNode(locationNode: cupNode, animated: true, duration: 10)
         }
@@ -183,6 +184,9 @@ class ARLocationViewController: UIViewController {
         let arHitTestResult = sceneView.hitTest(locationPoint, types: [ARHitTestResult.ResultType.featurePoint, .estimatedHorizontalPlane, .existingPlane, .existingPlaneUsingExtent])
         if let hit = arHitTestResult.first{
             cupNode.simdPosition = hit.worldTransform.translation
+            
+            let location = locationOfLocationNode(cupNode)
+            cupNode.location = location
             //updatePositionAndScaleOfLocationNode(locationNode: cupNode, animated: true, duration: 10)
         }
     }
@@ -220,6 +224,7 @@ extension ARLocationViewController{
         
         locationNode.location = currentLocation
         locationNode.position = currentPosition
+        
         sceneNode.addChildNode(locationNode)
     }
     private func addLocationNodeWithConfirmedLocation(locationNode: LocationNode) {
@@ -238,45 +243,32 @@ extension ARLocationViewController{
                 return
         }
         
-        
+        let locationNodePostion: SCNVector3 = locationNode.position
         //let locationNodeLocation = locationOfLocationNode(locationNode)
         let locationNodeLocation: CLLocation = locationNode.location!
         let locationTranslation: LocationTranslation = currentLocation.translation(toLocation: locationNodeLocation)
         
-        let distance = locationNodeLocation.distance(from: currentLocation)
+        let position = SCNVector3(
+            x: currentPosition.x + Float(locationTranslation.longitudeTranslation),
+            y: currentPosition.y + Float(locationTranslation.altitudeTranslation),
+            z: currentPosition.z - Float(locationTranslation.latitudeTranslation))
         
-        if distance > 100 {
-            //If the item is too far away, bring it closer and scale it down
-            let scale = 100 / Float(distance)
-            
-            let adjustedTranslation = SCNVector3(
-                x: Float(locationTranslation.longitudeTranslation) * scale,
-                y: Float(locationTranslation.altitudeTranslation) * scale,
-                z: Float(locationTranslation.latitudeTranslation) * scale)
-            
-            let position = SCNVector3(
-                x: currentPosition.x + adjustedTranslation.x,
-                y: currentPosition.y + adjustedTranslation.y,
-                z: currentPosition.z - adjustedTranslation.z)
-            
-            SCNTransaction.begin()
-            SCNTransaction.animationDuration = 10
-            locationNode.position = position
-            locationNode.scale = SCNVector3(x: scale, y: scale, z: scale)
-            SCNTransaction.commit()
-            
-        }else{
-            let position = SCNVector3(
-                x: currentPosition.x + Float(locationTranslation.longitudeTranslation),
-                y: currentPosition.y + Float(locationTranslation.altitudeTranslation),
-                z: currentPosition.z - Float(locationTranslation.latitudeTranslation))
-            
-            SCNTransaction.begin()
-            SCNTransaction.animationDuration = 10
-            locationNode.position = position
-            locationNode.scale = SCNVector3(x: 1, y: 1, z: 1)
-            SCNTransaction.commit()
-        }
+        let position2 = SCNVector3(
+            x: position.x + locationNodePostion.x,
+            y: position.y + locationNodePostion.y,
+            z: position.z + locationNodePostion.z)
+        
+        
+        print("locationNodeLocation \(locationNodeLocation.coordinate)")
+        print("locationTranslation \(locationTranslation)")
+        print("position \(position)")
+        
+        SCNTransaction.begin()
+        SCNTransaction.animationDuration = 5
+        locationNode.position = position2
+        //locationNode.position = position
+        //locationNode.scale = SCNVector3(x: 1, y: 1, z: 1)
+        SCNTransaction.commit()
     }
     private func locationOfLocationNode(_ locationNode: LocationNode) -> CLLocation{
         // FIXME: locationOfLocationNode
