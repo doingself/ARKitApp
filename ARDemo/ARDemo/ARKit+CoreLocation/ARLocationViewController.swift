@@ -26,7 +26,7 @@ class ARLocationViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.navigationItem.title = "提取 ARKit+Location 中的 ARSCNView"
+        self.navigationItem.title = "提取 ARKit+Location 中的 ARSCNView, 无法放置在指定location,(没有提取sceneLocationEstimates)"
         self.view.backgroundColor = UIColor.white
         
         if locationService == nil{
@@ -64,7 +64,7 @@ class ARLocationViewController: UIViewController {
     private func getxyz(text: String, position: SCNVector3) -> SCNNode{
         
         let sphereMaterial = SCNMaterial()
-        sphereMaterial.diffuse.contents = UIColor.red //整個小球都是橘色的
+        sphereMaterial.diffuse.contents = UIColor.orange //整個小球都是橘色的
         
         let sphere = SCNSphere(radius: 0.05) // 1 cm 的小球幾何形狀
         sphere.firstMaterial = sphereMaterial
@@ -105,10 +105,10 @@ class ARLocationViewController: UIViewController {
     
     // MARK: setup ui
     private func setupBarBtnItem(){
-        let save = UIBarButtonItem(title: "暂存", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.saveLocation(sender:)))
-        let update = UIBarButtonItem(title: "放置", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.moveToLocation(sender:)))
-        let remove = UIBarButtonItem(title: "移除", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.removeNode(sender:)))
-        self.navigationItem.rightBarButtonItems = [save, update, remove]
+        let curr = UIBarButtonItem(title: "放置当前位置", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.onCurrent))
+        let temp = UIBarButtonItem(title: "放置temp位置", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.onTemp))
+        let save = UIBarButtonItem(title: "保存temp位置", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.saveTemp))
+        self.navigationItem.rightBarButtonItems = [curr, temp, save].reversed()
     }
     private func setupGesture(){
         // tap
@@ -191,33 +191,23 @@ class ARLocationViewController: UIViewController {
     }
     
     // MARK: bar button item
-    @objc func removeNode(sender: Any?){
-        for node in sceneNode.childNodes{
-            if node is LocationNode{
-                node.removeFromParentNode()
-            }
-        }
-        cupNode = nil
+    @objc func onCurrent(){
+        // 使用当前位置添加 node
+        let annotationNode = LocationTextAnnotationNode(location: nil, color: UIColor.blue, text: "当前")
+        addLocationNodeForCurrentPosition(locationNode: annotationNode)
     }
-    @objc func saveLocation(sender: Any?){
-        if let location = locationService.currentLocation {
-            tempLocation = location
-        }
+    @objc func onTemp(){
+        // 使用保存的位置添加 node
+        guard let location = tempLocation else { return }
+        let annotationNode = LocationTextAnnotationNode(location: location, color: UIColor.red, text: "temp")
+        addLocationNodeWithConfirmedLocation(locationNode: annotationNode)
     }
-    @objc func moveToLocation(sender: Any?){
-        if tempLocation != nil {
-//            let modelScene = SCNScene(named: "art.scnassets/cup/cup.scn")!
-//            let cup = modelScene.rootNode.childNodes[0]
-//            // 添加到指定位置
-//            let locationNode = LocationNode(location: tempLocation)
-//            locationNode.addChildNode(cup)
-//            addLocationNodeWithConfirmedLocation(locationNode: locationNode)
-            
-            
-            // 移动到指定位置
-            cupNode.location = tempLocation
-            updatePositionAndScaleOfLocationNode(locationNode: cupNode, animated: true, duration: 10)
-        }
+    @objc func saveTemp(){
+        // 保存当前位置
+        print("\(#function)")
+        print("\t\t currentLocation = \(currentLocation()!.coordinate)")
+        print("\t\t locationService = \(locationService.currentLocation!.coordinate)")
+        tempLocation = currentLocation()
     }
     // MARK: gesture
     @objc func tapGesture(sender: Any?){
@@ -308,7 +298,7 @@ extension ARLocationViewController{
                 return
         }
         
-        let locationNodePostion: SCNVector3 = locationNode.position
+        //let locationNodePostion: SCNVector3 = locationNode.position
         //let locationNodeLocation = locationOfLocationNode(locationNode)
         let locationNodeLocation: CLLocation = locationNode.location!
         let locationTranslation: LocationTranslation = currentLocation.translation(toLocation: locationNodeLocation)
@@ -318,10 +308,10 @@ extension ARLocationViewController{
             y: currentPosition.y + Float(locationTranslation.altitudeTranslation),
             z: currentPosition.z - Float(locationTranslation.latitudeTranslation))
         
-        let position2 = SCNVector3(
-            x: position.x + locationNodePostion.x,
-            y: position.y + locationNodePostion.y,
-            z: position.z + locationNodePostion.z)
+//        let position2 = SCNVector3(
+//            x: position.x + locationNodePostion.x,
+//            y: position.y + locationNodePostion.y,
+//            z: position.z + locationNodePostion.z)
         
         
         print("locationNodeLocation \(locationNodeLocation.coordinate)")
@@ -330,8 +320,8 @@ extension ARLocationViewController{
         
         SCNTransaction.begin()
         SCNTransaction.animationDuration = 5
-        locationNode.position = position2
-        //locationNode.position = position
+//        locationNode.position = position2
+        locationNode.position = position
         //locationNode.scale = SCNVector3(x: 1, y: 1, z: 1)
         SCNTransaction.commit()
     }

@@ -38,11 +38,15 @@ CoreML
 + Core ML + ARSCNView 图像识别
 + Core ML + ImagePicker 图像识别
 
+![image](https://github.com/doingself/ARDemo/blob/master/images/image1.jpg)
+
 [Findme](https://github.com/mmoaay/Findme)
 + 保存设备的运动轨迹 运动过程中 添加 node 到 ARSCNView.scene.rootNode.childeNodes 中, 将当前 ARSCNView.scene 保存到起来( SCNScene )
 + 查看设备的运动轨迹 使用 ARSCNView.scene 加载已经保存的 SCNScene
 
-![image](https://github.com/doingself/ARDemo/blob/master/images/image1.jpg)
+[ARKit+CoreLocation](https://github.com/ProjectDent/ARKit-CoreLocation)
++ SceneLocationView(ARKit+CoreLocation) 根据location放置 node
++ 提取 ARKit+Location 中的 ARSCNView, 无法放置在指定location,(没有提取sceneLocationEstimates)
 
 ### ARKit
 

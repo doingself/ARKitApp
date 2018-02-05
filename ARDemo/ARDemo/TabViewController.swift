@@ -129,10 +129,10 @@ class TabViewController: UIViewController {
             // ARKit+CoreLocation https://github.com/ProjectDent/ARKit-CoreLocation
             6:[
                 [vc: SceneLocationViewDemoViewController(),
-                 navTitle: "SceneLocationView(ARKit+CoreLocation) Demo"],
+                 navTitle: "SceneLocationView(ARKit+CoreLocation) 根据location放置node"],
                 
                 [vc: ARLocationViewController(),
-                 navTitle: "提取 ARKit+Location 中的 ARSCNView"]
+                 navTitle: "提取 ARKit+Location 中的 ARSCNView, 无法放置在指定location,(没有提取sceneLocationEstimates)"]
             ],
         ]
         return dict

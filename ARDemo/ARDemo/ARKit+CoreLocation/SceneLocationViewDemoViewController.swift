@@ -21,7 +21,7 @@ class SceneLocationViewDemoViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        self.navigationItem.title = "SceneLocationView(ARKit+CoreLocation) Demo"
+        self.navigationItem.title = "SceneLocationView(ARKit+CoreLocation) 根据location放置node"
         self.view.backgroundColor = UIColor.white
         
         let curr = UIBarButtonItem(title: "放置当前位置", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.onCurrent))
@@ -49,7 +49,7 @@ class SceneLocationViewDemoViewController: UIViewController {
         
         infoLabel = UILabel()
         infoLabel.backgroundColor = UIColor(white: 0.3, alpha: 0.3)
-        infoLabel.frame = CGRect(x: 6, y: 200, width: self.view.frame.size.width - 12, height: 14 * 4)
+        infoLabel.frame = CGRect(x: 6, y: 200, width: self.view.frame.size.width - 12, height: 14 * 10)
         
         infoLabel.font = UIFont.systemFont(ofSize: 10)
         infoLabel.textAlignment = .left
