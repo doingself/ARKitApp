@@ -13,7 +13,7 @@ import CoreLocation
 class SceneLocationViewDemoViewController: UIViewController {
     
     private var sceneLocationView: SceneLocationView!
-    private var annotationNode: LocationNode!
+    private var tempLocation: CLLocation?
     private var infoLabel: UILabel!
     private var updateInfoLabelTimer: Timer!
     
@@ -23,6 +23,12 @@ class SceneLocationViewDemoViewController: UIViewController {
         // Do any additional setup after loading the view.
         self.navigationItem.title = "SceneLocationView(ARKit+CoreLocation) Demo"
         self.view.backgroundColor = UIColor.white
+        
+        let curr = UIBarButtonItem(title: "放置当前位置", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.onCurrent))
+        let temp = UIBarButtonItem(title: "放置temp位置", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.onTemp))
+        let save = UIBarButtonItem(title: "保存temp位置", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.saveTemp))
+        self.navigationItem.rightBarButtonItems = [curr, temp, save].reversed()
+        
         
         sceneLocationView = SceneLocationView(frame: self.view.bounds)
         
@@ -38,32 +44,8 @@ class SceneLocationViewDemoViewController: UIViewController {
         //sceneLocationView.orientToTrueNorth = false
         //sceneLocationView.locationEstimateMethod = .coreLocationDataOnly
         
-        
-        // 使用指定坐标添加 LocationNode
-        let coordinate = CLLocationCoordinate2D(latitude: 39.881969601674015, longitude: 116.42249838655647)
-        let location = CLLocation(coordinate: coordinate, altitude: 40)
-        
-        // scn scene
-        let modelScene = SCNScene(named: "art.scnassets/cup/cup.scn")!
-        let cup = modelScene.rootNode.childNodes[0]
-        
-        let billboardConstraint = SCNBillboardConstraint()
-        billboardConstraint.freeAxes = SCNBillboardAxis.Y
-        
-        let locationNode = LocationNode(location: location)
-        locationNode.addChildNode(cup)
-        locationNode.constraints = [billboardConstraint]
-        sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: locationNode)
-        
-        // 使用指定坐标添加 LocationAnnotationNode
-        //Currently set to Canary Wharf
-        //let from: CLLocation = CLLocation(latitude: 116.4225172340665, longitude: 39.88199646)
-        let pinCoordinate = CLLocationCoordinate2D(latitude: 39.881967024287711, longitude: 116.42248145989811)
-        let pinLocation = CLLocation(coordinate: pinCoordinate, altitude: 236)
-        let pinImage = UIImage(named: "grass.jpg")!
-        let pinLocationNode = LocationAnnotationNode(location: pinLocation, image: pinImage)
-        sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: pinLocationNode)
-        
+        //let coordinate = CLLocationCoordinate2D(latitude: 39.881969601674015, longitude: 116.42249838655647)
+        //let location = CLLocation(coordinate: coordinate, altitude: 40)
         
         infoLabel = UILabel()
         infoLabel.backgroundColor = UIColor(white: 0.3, alpha: 0.3)
@@ -81,8 +63,6 @@ class SceneLocationViewDemoViewController: UIViewController {
             selector: #selector(self.updateInfoLabel),
             userInfo: nil,
             repeats: true)
-        
-        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -111,35 +91,23 @@ class SceneLocationViewDemoViewController: UIViewController {
         super.viewDidLayoutSubviews()
         print("view did layout subviews")
     }
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        
-//        // 使用当前位置添加 LocationAnnotationNode
-//        let image = UIImage(named: "grass.jpg")!
-//        let annotationNode = LocationAnnotationNode(location: nil, image: image)
-//        annotationNode.scaleRelativeToDistance = true
-//        sceneLocationView.addLocationNodeForCurrentPosition(locationNode: annotationNode)
-        
-        if annotationNode == nil{
-            // 使用当前位置添加 LocationNode
-            let modelScene = SCNScene(named: "art.scnassets/cup/cup.scn")!
-            let cup = modelScene.rootNode.childNodes[0]
-            
-            let billboardConstraint = SCNBillboardConstraint()
-            billboardConstraint.freeAxes = SCNBillboardAxis.Y
-            
-            annotationNode = LocationNode(location: nil)
-            annotationNode.constraints = [billboardConstraint]
-            annotationNode.addChildNode(cup)
-            
-            sceneLocationView.addLocationNodeForCurrentPosition(locationNode: annotationNode)
-        }else{
-            // 移动到当前位置
-            guard let location = sceneLocationView.currentLocation() else {return}
-            annotationNode.location = location
-            annotationNode.locationConfirmed = true
-            sceneLocationView.updatePositionAndScaleOfLocationNode(locationNode: annotationNode, initialSetup: true, animated: true)
-        }
+    @objc func onCurrent(){
+        // 使用当前位置添加 node
+        let annotationNode = LocationTextAnnotationNode(location: nil, color: UIColor.blue, text: "当前")
+        sceneLocationView.addLocationNodeForCurrentPosition(locationNode: annotationNode)
+    }
+    @objc func onTemp(){
+        // 使用保存的位置添加 node
+        guard let location = tempLocation else { return }
+        let annotationNode = LocationTextAnnotationNode(location: location, color: UIColor.red, text: "temp")
+        sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: annotationNode)
+    }
+    @objc func saveTemp(){
+        // 保存当前位置
+        print("\(#function)")
+        print("\t\t currentLocation = \(sceneLocationView.currentLocation()!.coordinate)")
+        print("\t\t locationManager = \(sceneLocationView.locationManager.currentLocation!.coordinate)")
+        tempLocation = sceneLocationView.currentLocation()
     }
     @objc func updateInfoLabel() {
         if let position = sceneLocationView.currentScenePosition() {
@@ -148,6 +116,10 @@ class SceneLocationViewDemoViewController: UIViewController {
         
         if let eulerAngles = sceneLocationView.currentEulerAngles() {
             infoLabel.text!.append("Euler x: \(String(format: "%.2f", eulerAngles.x)), y: \(String(format: "%.2f", eulerAngles.y)), z: \(String(format: "%.2f", eulerAngles.z))\n")
+        }
+        
+        if let location = tempLocation {
+            infoLabel.text!.append("tempLocation: \(location.coordinate)\n")
         }
         
         if let heading = sceneLocationView.locationManager.heading,

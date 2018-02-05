@@ -44,6 +44,7 @@
 		196B0AC2200C860E00B144EF /* TwelveARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196B0AC1200C860E00B144EF /* TwelveARViewController.swift */; };
 		197F5B911FF38EC800F693B7 /* ThreeARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197F5B901FF38EC800F693B7 /* ThreeARViewController.swift */; };
 		197F5B931FF39BDF00F693B7 /* FourARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197F5B921FF39BDF00F693B7 /* FourARViewController.swift */; };
+		1986F8462027FCA700E4A6A9 /* LocationTextAnnotationNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1986F8452027FCA700E4A6A9 /* LocationTextAnnotationNode.swift */; };
 		19B68B251FFC7A350027EDFC /* SevenARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B68B241FFC7A350027EDFC /* SevenARViewController.swift */; };
 		19B68B271FFCCC360027EDFC /* EightARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B68B261FFCCC360027EDFC /* EightARViewController.swift */; };
 		19CB6EB91FFB2FAC00CEF2F8 /* SixARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CB6EB81FFB2FAC00CEF2F8 /* SixARViewController.swift */; };
@@ -108,6 +109,7 @@
 		196B0AC1200C860E00B144EF /* TwelveARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwelveARViewController.swift; sourceTree = "<group>"; };
 		197F5B901FF38EC800F693B7 /* ThreeARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeARViewController.swift; sourceTree = "<group>"; };
 		197F5B921FF39BDF00F693B7 /* FourARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourARViewController.swift; sourceTree = "<group>"; };
+		1986F8452027FCA700E4A6A9 /* LocationTextAnnotationNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTextAnnotationNode.swift; sourceTree = "<group>"; };
 		19B68B241FFC7A350027EDFC /* SevenARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SevenARViewController.swift; sourceTree = "<group>"; };
 		19B68B261FFCCC360027EDFC /* EightARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EightARViewController.swift; sourceTree = "<group>"; };
 		19CB6EB81FFB2FAC00CEF2F8 /* SixARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SixARViewController.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 			children = (
 				19163B90201B2EE300465198 /* Source */,
 				19163B8E201B00DC00465198 /* SceneLocationViewDemoViewController.swift */,
+				1986F8452027FCA700E4A6A9 /* LocationTextAnnotationNode.swift */,
 				1941A2E12022E7650071D2AC /* ARLocationViewController.swift */,
 			);
 			path = "ARKit+CoreLocation";
@@ -401,6 +404,7 @@
 				1903118E20109AEB0001C25D /* MLDemoViewController.swift in Sources */,
 				196B0AC2200C860E00B144EF /* TwelveARViewController.swift in Sources */,
 				1941A2E22022E7650071D2AC /* ARLocationViewController.swift in Sources */,
+				1986F8462027FCA700E4A6A9 /* LocationTextAnnotationNode.swift in Sources */,
 				19F9656720187AF400F042AF /* SavemeByLocationViewController.swift in Sources */,
 				197F5B931FF39BDF00F693B7 /* FourARViewController.swift in Sources */,
 				19EE03272016FD4A0078ED25 /* UIImageExtension.swift in Sources */,

@@ -144,9 +144,9 @@ public class SceneLocationView: ARSCNView, ARSCNViewDelegate {
     }
     
     @objc private func updateLocationData() {
-        removeOldLocationEstimates()
-        confirmLocationOfDistantLocationNodes()
-        updatePositionAndScaleOfLocationNodes()
+//        removeOldLocationEstimates()
+//        confirmLocationOfDistantLocationNodes()
+//        updatePositionAndScaleOfLocationNodes()
     }
     
     //MARK: True North
