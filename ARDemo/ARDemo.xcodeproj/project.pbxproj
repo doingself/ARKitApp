@@ -45,6 +45,8 @@
 		197F5B911FF38EC800F693B7 /* ThreeARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197F5B901FF38EC800F693B7 /* ThreeARViewController.swift */; };
 		197F5B931FF39BDF00F693B7 /* FourARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197F5B921FF39BDF00F693B7 /* FourARViewController.swift */; };
 		1986F8462027FCA700E4A6A9 /* LocationTextAnnotationNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1986F8452027FCA700E4A6A9 /* LocationTextAnnotationNode.swift */; };
+		1986F8482028057D00E4A6A9 /* ARLocationGestureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1986F8472028057D00E4A6A9 /* ARLocationGestureViewController.swift */; };
+		1986F84A2028070800E4A6A9 /* AudioinARKitLocationNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1986F8492028070800E4A6A9 /* AudioinARKitLocationNode.swift */; };
 		19B68B251FFC7A350027EDFC /* SevenARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B68B241FFC7A350027EDFC /* SevenARViewController.swift */; };
 		19B68B271FFCCC360027EDFC /* EightARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B68B261FFCCC360027EDFC /* EightARViewController.swift */; };
 		19CB6EB91FFB2FAC00CEF2F8 /* SixARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CB6EB81FFB2FAC00CEF2F8 /* SixARViewController.swift */; };
@@ -110,6 +112,8 @@
 		197F5B901FF38EC800F693B7 /* ThreeARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeARViewController.swift; sourceTree = "<group>"; };
 		197F5B921FF39BDF00F693B7 /* FourARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourARViewController.swift; sourceTree = "<group>"; };
 		1986F8452027FCA700E4A6A9 /* LocationTextAnnotationNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTextAnnotationNode.swift; sourceTree = "<group>"; };
+		1986F8472028057D00E4A6A9 /* ARLocationGestureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARLocationGestureViewController.swift; sourceTree = "<group>"; };
+		1986F8492028070800E4A6A9 /* AudioinARKitLocationNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioinARKitLocationNode.swift; sourceTree = "<group>"; };
 		19B68B241FFC7A350027EDFC /* SevenARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SevenARViewController.swift; sourceTree = "<group>"; };
 		19B68B261FFCCC360027EDFC /* EightARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EightARViewController.swift; sourceTree = "<group>"; };
 		19CB6EB81FFB2FAC00CEF2F8 /* SixARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SixARViewController.swift; sourceTree = "<group>"; };
@@ -175,6 +179,8 @@
 				19163B8E201B00DC00465198 /* SceneLocationViewDemoViewController.swift */,
 				1986F8452027FCA700E4A6A9 /* LocationTextAnnotationNode.swift */,
 				1941A2E12022E7650071D2AC /* ARLocationViewController.swift */,
+				1986F8472028057D00E4A6A9 /* ARLocationGestureViewController.swift */,
+				1986F8492028070800E4A6A9 /* AudioinARKitLocationNode.swift */,
 			);
 			path = "ARKit+CoreLocation";
 			sourceTree = "<group>";
@@ -382,6 +388,7 @@
 				19E1FD6720036C2600F6165F /* ARSCNView+HitTests.swift in Sources */,
 				19E1FD6120036BC700F6165F /* TenARViewController.swift in Sources */,
 				194A10772011E72400D83E8A /* ML_ImgViewController.swift in Sources */,
+				1986F84A2028070800E4A6A9 /* AudioinARKitLocationNode.swift in Sources */,
 				19163B8F201B00DC00465198 /* SceneLocationViewDemoViewController.swift in Sources */,
 				19E1FD6620036C2600F6165F /* Utilities.swift in Sources */,
 				19E1FD6820036C2600F6165F /* PreviewNode.swift in Sources */,
@@ -415,6 +422,7 @@
 				19E1FD6A20036C9800F6165F /* Extensions.swift in Sources */,
 				1940D2081FF34AF10018914F /* AppDelegate.swift in Sources */,
 				1903118820107A8A0001C25D /* MatrixHelper.swift in Sources */,
+				1986F8482028057D00E4A6A9 /* ARLocationGestureViewController.swift in Sources */,
 				19B68B251FFC7A350027EDFC /* SevenARViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

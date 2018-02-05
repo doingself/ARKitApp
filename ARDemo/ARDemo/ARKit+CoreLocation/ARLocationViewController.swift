@@ -10,8 +10,6 @@ import UIKit
 import ARKit
 import CoreLocation
 
-var locationService: LocationService!
-
 class ARLocationViewController: UIViewController {
     
     private var sceneView: ARSCNView!

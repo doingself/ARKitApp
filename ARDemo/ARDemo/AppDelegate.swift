@@ -7,6 +7,16 @@
 //
 
 import UIKit
+import SceneKit
+import CoreLocation
+
+// 全局变量
+var locationService: LocationService!
+// 保存轨迹, 可以通过 key archive 归档
+var singleScene: SCNScene!
+// 保存圆点的 GPS
+var lastLocation: CLLocation!
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +26,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // get last locatin
+        if let latitude = UserDefaults.standard.value(forKey: "latitude") as? Double,
+            let longitude = UserDefaults.standard.value(forKey: "longitude") as? Double,
+            let altitude = UserDefaults.standard.value(forKey: "altitude") as? Double{
+            
+            let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+            lastLocation = CLLocation(coordinate: coordinate, altitude: altitude)
+        }
+        //UserDefaults.standard.set(location.coordinate.latitude, forKey: "latitude")
+        //UserDefaults.standard.set(location.coordinate.longitude, forKey: "longitude")
         
         let v = TabViewController()
         let nav = UINavigationController(rootViewController: v)

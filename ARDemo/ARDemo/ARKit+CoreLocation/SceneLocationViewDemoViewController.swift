@@ -158,4 +158,9 @@ extension SceneLocationViewDemoViewController: SceneLocationViewDelegate{
     func sceneLocationViewDidUpdateLocationAndScaleOfLocationNode(sceneLocationView: SceneLocationView, locationNode: LocationNode) {
         //print("SceneLocationViewDelegate + did update location and scale of location node")
     }
+    
+    /// ARSCNViewDelegate SCNSceneRendererDelegate
+    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval){
+        
+    }
 }

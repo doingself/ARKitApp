@@ -24,6 +24,9 @@ public protocol SceneLocationViewDelegate: class {
     func sceneLocationViewDidSetupSceneNode(sceneLocationView: SceneLocationView, sceneNode: SCNNode)
     
     func sceneLocationViewDidUpdateLocationAndScaleOfLocationNode(sceneLocationView: SceneLocationView, locationNode: LocationNode)
+    
+    /// ARSCNViewDelegate SCNSceneRendererDelegate
+    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval)
 }
 
 ///Different methods which can be used when determining locations (such as the user's location).
@@ -330,6 +333,15 @@ public class SceneLocationView: ARSCNView, ARSCNViewDelegate {
         }
     }
     
+    func getLocationByPosition(_ locationNode: LocationNode) -> CLLocation {
+        if let bestLocationEstimate = bestLocationEstimate() {
+            let translatedLocation = bestLocationEstimate.translatedLocation(to: locationNode.position)
+            return translatedLocation
+        } else {
+            return locationNode.location!
+        }
+    }
+    
     private func confirmLocationOfLocationNode(_ locationNode: LocationNode) {
         locationNode.location = locationOfLocationNode(locationNode)
         
@@ -439,7 +451,9 @@ public class SceneLocationView: ARSCNView, ARSCNViewDelegate {
     }
     
     //MARK: ARSCNViewDelegate
-    
+    public func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
+        locationDelegate?.renderer(renderer, updateAtTime: time)
+    }
     public func renderer(_ renderer: SCNSceneRenderer, didRenderScene scene: SCNScene, atTime time: TimeInterval) {
         if sceneNode == nil {
             sceneNode = SCNNode()
