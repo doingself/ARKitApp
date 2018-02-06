@@ -32,24 +32,6 @@ extension SCNVector3 {
         return SCNVector3Make(transform.columns.3.x, transform.columns.3.y, transform.columns.3.z)
     }
 }
-extension Double {
-    
-    func metersToLatitude() -> Double {
-        return self / (6373000.0)
-    }
-    
-    func metersToLongitude() -> Double {
-        return self / (5602900.0)
-    }
-    /// 弧度
-    func toRadians() -> Double {
-        return self * .pi / 180.0
-    }
-    /// 度
-    func toDegrees() -> Double {
-        return self * 180.0 / .pi
-    }
-}
 
 // MARK: apple cup
 

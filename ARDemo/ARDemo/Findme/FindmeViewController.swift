@@ -25,7 +25,7 @@ class FindmeViewController: UIViewController {
         
         // 录像
         videoRecodeBtn = UIButton(type: UIButtonType.system)
-        videoRecodeBtn.setTitle("重写加载", for: UIControlState.normal)
+        videoRecodeBtn.setTitle("重新加载", for: UIControlState.normal)
         videoRecodeBtn.addTarget(self, action: #selector(self.recordBtnAction(sender:)), for: UIControlEvents.touchUpInside)
         let recordBarBtnItem = UIBarButtonItem(customView: videoRecodeBtn)
         self.navigationItem.rightBarButtonItem = recordBarBtnItem

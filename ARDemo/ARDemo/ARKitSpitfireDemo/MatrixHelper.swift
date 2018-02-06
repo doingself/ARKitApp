@@ -10,6 +10,25 @@ import UIKit
 import SceneKit
 import CoreLocation
 
+extension Double {
+    
+    func metersToLatitude() -> Double {
+        return self / (6373000.0)
+    }
+    
+    func metersToLongitude() -> Double {
+        return self / (5602900.0)
+    }
+    /// 弧度
+    func toRadians() -> Double {
+        return self * .pi / 180.0
+    }
+    /// 度
+    func toDegrees() -> Double {
+        return self * 180.0 / .pi
+    }
+}
+
 class MatrixHelper {
     
     //     column 0  column 1  column 2  column 3

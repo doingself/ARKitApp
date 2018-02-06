@@ -75,6 +75,18 @@ public extension CLLocation {
     }
 }
 
+/*
+// 与 Spitfire MatrixHelper.swift 重复
+extension Double {
+    func metersToLatitude() -> Double {
+        return self / (6360500.0)
+    }
+    
+    func metersToLongitude() -> Double {
+        return self / (5602900.0)
+    }
+}
+*/
 
 public extension CLLocationCoordinate2D {
     public func coordinateWithBearing(bearing:Double, distanceMeters:Double) -> CLLocationCoordinate2D {

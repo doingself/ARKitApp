@@ -332,10 +332,13 @@ class ARLocationGestureViewController: UIViewController {
         }
         
         if let location = sceneLocationView.currentLocation(){
-            infoLabel.text!.append("currLocation: \(location.coordinate)\n")
+            infoLabel.text!.append("currLocation: \(location.coordinate.latitude) \t \(location.coordinate.longitude)\n")
         }
         if let location = lastLocation {
-            infoLabel.text!.append("tempLocation: \(location.coordinate)\n")
+            infoLabel.text!.append("tempLocation: \(location.coordinate.latitude) \t \(location.coordinate.longitude)\n")
+        }
+        if let location = sceneLocationView.currentLocation(), let location2 = lastLocation {
+            infoLabel.text!.append("distance: \(location2.distance(from: location))\n")
         }
         
         if let heading = sceneLocationView.locationManager.heading,

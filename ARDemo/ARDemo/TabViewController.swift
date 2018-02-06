@@ -135,12 +135,22 @@ class TabViewController: UIViewController {
         return dict
     }()
     
+    @objc func resetScene(sender: Any?){
+        singleScene = nil
+    }
+    @objc func resetLocation(sender: Any?){
+        lastLocation = nil
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
         self.view.backgroundColor = UIColor.white
         self.navigationItem.title = "AR Demo"
+        
+        let resetSceneBtn = UIBarButtonItem(title: "重置SCNScene", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.resetScene(sender:)))
+        let resetLocation = UIBarButtonItem(title: "重置Location", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.resetLocation(sender:)))
+        self.navigationItem.rightBarButtonItems = [resetSceneBtn, resetLocation]
         
         tabView = UITableView(frame: self.view.bounds, style: UITableViewStyle.grouped)
         tabView.delegate = self
