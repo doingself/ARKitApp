@@ -8,6 +8,10 @@
 *.mlmodel
 */*.mlmodel
 
+# app
+ARKitApp/ARKitApp/images/
+ARKitApp/ARKitApp/art.scnassets/
+
 ## Build generated
 build/
 DerivedData/
