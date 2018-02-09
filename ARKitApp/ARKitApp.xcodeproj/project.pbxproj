@@ -39,6 +39,13 @@
 		1988D7B5202D676A00E34F6A /* AudioinARKitLocationNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1988D7B3202D676A00E34F6A /* AudioinARKitLocationNode.swift */; };
 		1988D7B6202D676A00E34F6A /* LocationTextAnnotationNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1988D7B4202D676A00E34F6A /* LocationTextAnnotationNode.swift */; };
 		1988D7B8202D681800E34F6A /* ScnModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1988D7B7202D681800E34F6A /* ScnModel.swift */; };
+		1988D7D4202D6E1800E34F6A /* cup.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1988D7CD202D6E1800E34F6A /* cup.jpg */; };
+		1988D7D5202D6E1800E34F6A /* GMPlutonePrev.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1988D7CE202D6E1800E34F6A /* GMPlutonePrev.jpg */; };
+		1988D7D6202D6E1800E34F6A /* Lotus_HW1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1988D7CF202D6E1800E34F6A /* Lotus_HW1.jpg */; };
+		1988D7D8202D6E1800E34F6A /* Sofacollection01.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1988D7D1202D6E1800E34F6A /* Sofacollection01.jpg */; };
+		1988D7D9202D6E1800E34F6A /* table_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1988D7D2202D6E1800E34F6A /* table_1.jpg */; };
+		1988D7DA202D6E1800E34F6A /* TV.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1988D7D3202D6E1800E34F6A /* TV.jpg */; };
+		1988D7DE202D6FA600E34F6A /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 1988D7DD202D6FA600E34F6A /* art.scnassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +83,13 @@
 		1988D7B3202D676A00E34F6A /* AudioinARKitLocationNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioinARKitLocationNode.swift; sourceTree = "<group>"; };
 		1988D7B4202D676A00E34F6A /* LocationTextAnnotationNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTextAnnotationNode.swift; sourceTree = "<group>"; };
 		1988D7B7202D681800E34F6A /* ScnModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScnModel.swift; sourceTree = "<group>"; };
+		1988D7CD202D6E1800E34F6A /* cup.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cup.jpg; sourceTree = "<group>"; };
+		1988D7CE202D6E1800E34F6A /* GMPlutonePrev.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = GMPlutonePrev.jpg; sourceTree = "<group>"; };
+		1988D7CF202D6E1800E34F6A /* Lotus_HW1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Lotus_HW1.jpg; sourceTree = "<group>"; };
+		1988D7D1202D6E1800E34F6A /* Sofacollection01.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Sofacollection01.jpg; sourceTree = "<group>"; };
+		1988D7D2202D6E1800E34F6A /* table_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = table_1.jpg; sourceTree = "<group>"; };
+		1988D7D3202D6E1800E34F6A /* TV.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = TV.jpg; sourceTree = "<group>"; };
+		1988D7DD202D6FA600E34F6A /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,7 +135,9 @@
 				1988D776202D64F900E34F6A /* ScnTableViewCell.xib */,
 				1988D761202D64A700E34F6A /* ViewController.swift */,
 				1988D763202D64A700E34F6A /* Main.storyboard */,
+				1988D7CC202D6E1800E34F6A /* images */,
 				1988D766202D64A800E34F6A /* Assets.xcassets */,
+				1988D7DD202D6FA600E34F6A /* art.scnassets */,
 				1988D768202D64A800E34F6A /* LaunchScreen.storyboard */,
 				1988D76B202D64A800E34F6A /* Info.plist */,
 			);
@@ -178,6 +194,19 @@
 			);
 			name = AppleCupDemo;
 			path = ../../ARDemo/ARDemo/AppleCupDemo;
+			sourceTree = "<group>";
+		};
+		1988D7CC202D6E1800E34F6A /* images */ = {
+			isa = PBXGroup;
+			children = (
+				1988D7CD202D6E1800E34F6A /* cup.jpg */,
+				1988D7CE202D6E1800E34F6A /* GMPlutonePrev.jpg */,
+				1988D7CF202D6E1800E34F6A /* Lotus_HW1.jpg */,
+				1988D7D1202D6E1800E34F6A /* Sofacollection01.jpg */,
+				1988D7D2202D6E1800E34F6A /* table_1.jpg */,
+				1988D7D3202D6E1800E34F6A /* TV.jpg */,
+			);
+			path = images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -239,9 +268,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1988D7D5202D6E1800E34F6A /* GMPlutonePrev.jpg in Resources */,
+				1988D7DE202D6FA600E34F6A /* art.scnassets in Resources */,
+				1988D7D4202D6E1800E34F6A /* cup.jpg in Resources */,
+				1988D7D6202D6E1800E34F6A /* Lotus_HW1.jpg in Resources */,
+				1988D7D8202D6E1800E34F6A /* Sofacollection01.jpg in Resources */,
 				1988D77C202D64F900E34F6A /* ScnTableViewCell.xib in Resources */,
 				1988D76A202D64A800E34F6A /* LaunchScreen.storyboard in Resources */,
+				1988D7DA202D6E1800E34F6A /* TV.jpg in Resources */,
 				1988D767202D64A800E34F6A /* Assets.xcassets in Resources */,
+				1988D7D9202D6E1800E34F6A /* table_1.jpg in Resources */,
 				1988D765202D64A700E34F6A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

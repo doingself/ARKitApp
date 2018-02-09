@@ -1,3 +1,11 @@
+
+# ARKitApp
+
+对 ARDemo 进一步完善
+
+![image](https://github.com/doingself/ARDemo/blob/master/images/image2.jpg)
+
+
 # ARDemo
 
 VR(虚拟现实) 是做梦, AR(增强现实) 是见鬼; VR是说谎, AR是吹牛.

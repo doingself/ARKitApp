@@ -11,6 +11,7 @@ import UIKit
 protocol RootViewControllerDelegate {
     func refreshModel()
     func selectModelByPop(index: Int)
+    func deleteModelByPop(model: ScnModel, index: Int)
 }
 class RootViewController: UIViewController {
 
@@ -123,6 +124,14 @@ class RootViewController: UIViewController {
             // 避免重复添加同一个模型
             self.selectModel.append(model)
             self.closeLeft()
+            delegate?.refreshModel()
+        }
+    }
+    func deleteModelByPop(index: Int, selectIndex: Int){
+        let model = self.selectModel.remove(at: index)
+        delegate?.deleteModelByPop(model: model, index: index)
+        if index == selectIndex{
+            // 删除了当前选中的模型,node=last
             delegate?.refreshModel()
         }
     }

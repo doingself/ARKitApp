@@ -32,7 +32,7 @@ class IndexViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        self.navigationItem.title = "drawer"
+        self.navigationItem.title = "ARKit App"
         self.view.backgroundColor = UIColor.white
         
         let left = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(self.leftItemAction(sender:)))
@@ -124,7 +124,9 @@ extension IndexViewController{
         popVC.modalPresentationStyle = .popover
         popVC.popoverPresentationController?.barButtonItem = sender as? UIBarButtonItem
         popVC.popoverPresentationController?.delegate = self
-        popVC.selectModel = locationPreviewNode.name
+        if locationPreviewNode != nil{
+            popVC.selectModel = locationPreviewNode.name
+        }
         self.present(popVC, animated: true, completion: nil)
     }
 }
@@ -149,6 +151,16 @@ extension IndexViewController: RootViewControllerDelegate{
     func selectModelByPop(index: Int) {
         if let node = sceneLocationView.locationNodes[index] as? AudioinARKitLocationNode{
             locationPreviewNode = node
+            if locationPreviewNode.location == nil{
+                hasPlaneOrGesture = false
+            }else{                
+                hasPlaneOrGesture = true
+            }
+        }
+    }
+    func deleteModelByPop(model: ScnModel, index: Int) {
+        if let node = sceneLocationView.locationNodes[index] as? AudioinARKitLocationNode, node.name == model.scnName{
+            node.removeFromParentNode()
         }
     }
 }

@@ -19,7 +19,7 @@ class LeftViewController: UIViewController {
             ScnModel(img: "TV.jpg", scn: "art.scnassets/Samsung_LED_TV/Samsung_LED_TV.obj"),
             ScnModel(img: "Sofacollection01.jpg", scn: "art.scnassets/Sofa_collection/Sofa_collection.obj"),
             ScnModel(img: "GMPlutonePrev.jpg", scn: "art.scnassets/Sofa_GM_Plutone_OBJ/Sofa_GM_Plutone_OBJ.obj"),
-            ScnModel(img: "meridiani.jpg", scn: "art.scnassets/meridiani_obj/meridiani_obj.obj"),
+            ScnModel(img: "table_1.jpg", scn: "art.scnassets/other/CoffeeTablewithChairs_v2.obj"),
         ]
         return arr
     }()
