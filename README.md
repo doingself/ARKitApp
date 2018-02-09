@@ -166,6 +166,36 @@ lighting Model有五种样式，分别是：
 + SCNLightingModelPhysicallyBased 基于物理的灯光和材质的现实抽象底纹。
 
 
+### 其他问题
+
+#### 初始化模型控制模型大小
+
+初始化模型,位置为 `SCNVector3(0, -1, -2)`, 对于大的模型, 初始化后不容易被用户找到, 所以初始化时让模型全貌的显示在屏幕前方
+```
+lazy var node: AudioinARKitLocationNode = {
+    
+    let modelScene = SCNScene(named: scnName)!
+    let cup = modelScene.rootNode.childNodes[0]
+    let node = AudioinARKitLocationNode(location: location, node: cup)
+    node.name = scnName
+    let boundingBox = node.boundingBox
+    let distance = boundingBox.max.distance(to: boundingBox.min)
+    let base: Float = 0.8
+    if distance > base {
+        // 缩放模型, 初始化时,不超出屏幕大小
+        let scale = base / distance
+        node.scale = SCNVector3(scale, scale, scale)
+    }
+    return node
+    
+}()
+extension SCNVector3 {
+    func distance(to anotherVector: SCNVector3) -> Float {
+        return sqrt(pow(anotherVector.x - x, 2) + pow(anotherVector.z - z, 2))
+    }    
+}
+```
+
 ## CoreML
 
 ML是Machine Learning的简写，也就是机器学习的意思。Core ML其实就是将一些已经训练好的神经网络、支持向量机、线性分析等集成到一个框架里，供开发者来调用。苹果开发者网站上已经有几套训练好的模型可供使用，其中包含了脸部识别、图像识别、自然语言识别等。
@@ -262,3 +292,4 @@ GitHub
 + 拖拽模型后恢复模型样式 `node.geometry?.materials` `material.diffuse.contents` 提示 `loading : <C3DImage ...>`
 + ReplayKit 录屏(iPad 无法保存)
 + 保存模型位置, 再次打开时模型在最后放置的位置
++ ~~初始化模型, 调整模型大小, 不能超出屏幕显示, 容易使用户找不到模型~~
