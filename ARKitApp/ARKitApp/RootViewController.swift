@@ -121,6 +121,9 @@ class RootViewController: UIViewController {
             }
         }
         if has == false{
+            // 添加模型, 重置定位
+            model.location = nil
+            model.node.location = nil
             // 避免重复添加同一个模型
             self.selectModel.append(model)
             self.closeLeft()

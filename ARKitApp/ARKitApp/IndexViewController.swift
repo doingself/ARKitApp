@@ -160,7 +160,9 @@ extension IndexViewController: RootViewControllerDelegate{
     }
     func deleteModelByPop(model: ScnModel, index: Int) {
         if let node = sceneLocationView.locationNodes[index] as? AudioinARKitLocationNode, node.name == model.scnName{
-            node.removeFromParentNode()
+            // remove node
+            // remove array
+            sceneLocationView.removeLocationNode(locationNode: node)
         }
     }
 }
