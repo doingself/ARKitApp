@@ -141,4 +141,64 @@ class RootViewController: UIViewController {
     func selectModelByPop(index: Int){
         delegate?.selectModelByPop(index: index)
     }
+    func saveModels(){
+        // 获取 catch 地址
+        let cachePaths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
+        guard let cachePath = cachePaths.first else{ return }
+        let filePath = cachePath + "/scnmodel"
+        
+        let fileManage = FileManager.default
+        // 删除目录(删除现有对象)
+        try? fileManage.removeItem(atPath: filePath)
+        // 创建目录
+        try? fileManage.createDirectory(atPath: filePath, withIntermediateDirectories: true, attributes: nil)
+        
+        // 将现有对象全部保存
+        for (i,model) in  selectModel.enumerated(){
+            model.location = model.node.location
+            let fileName = "model\(i).data"
+            // 归档
+            NSKeyedArchiver.archiveRootObject(model, toFile: filePath + "/" + fileName)
+        }
+    }
+    func loadModels(){
+        // 获取 catch 地址
+        let cachePaths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
+        guard let cachePath = cachePaths.first else{ return }
+        let filePath = cachePath + "/scnmodel"
+        
+        let fileManage = FileManager.default
+        let exis = fileManage.fileExists(atPath: filePath)
+        if exis == false {
+            return
+        }
+        // 所有已经保存的对象
+        guard let fileArr = fileManage.subpaths(atPath: filePath) else { return }
+        
+        for path in fileArr{
+            // 解档
+            if let model = NSKeyedUnarchiver.unarchiveObject(withFile: filePath + "/" + path) as? ScnModel{
+                //self.addModelAndCloseLeft(model: model)// 会清空位置信息
+                
+                // 以下代码来着 self.addModelAndCloseLeft()                
+                var has = false
+                for m in selectModel {
+                    // 避免重复添加
+                    if m.scnName == model.scnName{
+                        has = true
+                        break
+                    }
+                }
+                if has == false{
+                    // 添加模型, 重置定位
+                    //model.location = nil
+                    //model.node.location = nil
+                    //self.closeLeft()
+                    
+                    self.selectModel.append(model)
+                    delegate?.refreshModel()
+                }
+            }
+        }
+    }
 }

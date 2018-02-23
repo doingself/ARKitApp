@@ -13,7 +13,7 @@ import CoreLocation
 // 当使用lazy属性时，struct对象必须声明为var
 // Cannot use mutating getter on immutable value: 'model' is a 'let' constant
 
-class ScnModel {
+class ScnModel: NSObject, NSCoding {
     var imgName: String!
     var scnName: String!
     var location: CLLocation?
@@ -45,8 +45,32 @@ class ScnModel {
     
     // "art.scnassets/cup/cup.scn"
     init(img: String, scn: String) {
+        
         self.imgName = img
         self.scnName = scn
+    }
+    
+    // 归档
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(imgName, forKey: "imgName")
+        aCoder.encode(scnName, forKey: "scnName")
+        aCoder.encode(location, forKey: "location")
+//        aCoder.encode(node, forKey: "node")
+    }
+    // 解档
+    required init?(coder aDecoder: NSCoder) {
+        if let imgName = aDecoder.decodeObject(forKey: "imgName") as? String{
+            self.imgName = imgName
+        }
+        if let v = aDecoder.decodeObject(forKey: "scnName") as? String{
+            scnName = v
+        }
+        if let v = aDecoder.decodeObject(forKey: "location") as? CLLocation{
+            location = v
+        }
+//        if let v = aDecoder.decodeObject(forKey: "node") as? AudioinARKitLocationNode{
+//            node = v
+//        }
     }
 }
 

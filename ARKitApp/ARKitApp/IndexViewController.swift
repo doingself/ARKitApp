@@ -36,7 +36,8 @@ class IndexViewController: UIViewController {
         self.view.backgroundColor = UIColor.white
         
         let left = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(self.leftItemAction(sender:)))
-        self.navigationItem.leftBarButtonItem = left
+        let load = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(self.loadItemAction(sender:)))
+        self.navigationItem.leftBarButtonItems = [left,load]
         
         let right = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(self.rightItemAction(sender:)))
         
@@ -115,6 +116,9 @@ class IndexViewController: UIViewController {
 extension IndexViewController{
     @objc func leftItemAction(sender: Any?){
         RootViewController.shared?.openLeft()
+    }
+    @objc func loadItemAction(sender: Any?){
+        RootViewController.shared?.loadModels()
     }
     @objc func rightItemAction(sender: Any?){
         popVC.datas = RootViewController.shared!.selectModel

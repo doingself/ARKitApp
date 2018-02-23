@@ -29,6 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        print("\(#function)")
+        
         let left = LeftViewController()
         let v = IndexViewController()
         let nav = UINavigationController(rootViewController: v)
@@ -49,7 +51,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         print("\(#function)")
         
-        // save node
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
@@ -57,6 +58,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         
         print("\(#function)")
+        
+        // save node
+        RootViewController.shared!.saveModels()
+        
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -70,7 +75,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         print("\(#function)")
         
-        // load node
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
