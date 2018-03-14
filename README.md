@@ -293,6 +293,11 @@ GitHub
 + ARKit + CoreLocation https://github.com/ProjectDent/ARKit-CoreLocation
 
 
+# Requirements
++ Swift 4
++ iOS 11+
++ Xcode 9+
+
 # TODO
 
 + ~~摆放家具, 旋转算法~~
