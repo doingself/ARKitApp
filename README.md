@@ -295,7 +295,7 @@ GitHub
 
 # Requirements
 + Swift 4
-+ iOS 11+
++ iOS 8+
 + Xcode 9+
 
 # TODO
